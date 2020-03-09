@@ -1,0 +1,28 @@
+@mixin flexCentered {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about {
+    height: 100vh;
+    width: 100%;
+    @include flexCentered();
+
+    &_heroContent {
+        @include flexCentered();
+        align-items: flex-start;
+
+        h2,
+        div {
+            width: 45%;
+        }
+
+        div {
+            p {
+                line-height: 1.7em;
+                margin-bottom: 30px;
+            }
+        }
+    }
+}
