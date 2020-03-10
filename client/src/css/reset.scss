@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;0,900;1,400&display=swap");
 
 * {
     margin: 0;
@@ -24,7 +24,7 @@
 
 /* Handle */
 *::-webkit-scrollbar-thumb {
-    background: var(--grey);
+    background: var(--mediumBlue);
 }
 
 body {
@@ -139,5 +139,5 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 700;
+    font-weight: 900;
 }

@@ -1,32 +1,4 @@
-@mixin flexAlignCenter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-@mixin flex {
-    display: flex;
-}
-
-@mixin primaryBtn($color, $hoveredColor) {
-    display: block;
-    width: max-content;
-    height: 50px;
-    line-height: 50px;
-    color: $color !important;
-    padding: 0 2em;
-    font-weight: 700;
-    border: 2px solid $color !important;
-    background-color: transparent !important;
-    transition: 0.4s ease-in-out !important;
-    text-transform: capitalize;
-
-    &:hover {
-        background-color: $color !important;
-        border: 2px solid $color !important;
-        color: $hoveredColor !important;
-    }
-}
+@import "./mixins.scss";
 
 nav {
     width: 100%;
@@ -42,12 +14,12 @@ nav {
         width: 80%;
         height: 100%;
         margin: 0 auto;
-        @include flexAlignCenter();
+        @include flexAlignCenterSpaceBetween();
 
         a {
             display: block;
             height: 100%;
-            @include flexAlignCenter();
+            @include flexAlignCenterSpaceBetween();
         }
 
         &_links {
@@ -61,7 +33,7 @@ nav {
                 display: block;
                 height: 100%;
                 padding: 0 2em;
-                @include flexAlignCenter();
+                @include flexAlignCenterSpaceBetween();
                 transition: 0.4s all;
                 color: var(--grey);
 
@@ -83,12 +55,15 @@ nav {
             padding: 0 4em;
             font-size: 0.8em;
             text-transform: capitalize;
-            @include flexAlignCenter();
+            @include flexAlignCenterSpaceBetween();
 
             a {
                 &:first-child {
                     margin-right: 40px;
-                    @include primaryBtn(var(--white), var(--black));
+                    height: 50px;
+                    padding: 0 2em;
+                    background-color: var(--white);
+                    color: var(--black);
                 }
             }
         }

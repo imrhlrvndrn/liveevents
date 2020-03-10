@@ -1,9 +1,10 @@
 :root {
-    --mediumBlue: #7101e3;
+    --mediumBlue: #15f4ee;
     --black: #000000;
     --lightBlack: #111111;
-    --white: #e6f1ff;
-    --grey: #999;
+    --white: #fff;
+    --grey: #999999;
+    --lightGrey: #eeeeee;
     --yellow: rgb(255, 192, 0);
     --DarkRed: #9c0710;
 }

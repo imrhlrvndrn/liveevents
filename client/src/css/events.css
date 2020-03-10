@@ -1,0 +1,158 @@
+.events {
+  width: 100%;
+  height: 60vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.eventsList {
+  width: 100%;
+  height: auto;
+  background-color: var(--white);
+  padding: 6em 0;
+}
+
+.eventsList * {
+  color: var(--black);
+}
+
+.eventsList h2 {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.eventsList form {
+  width: 60%;
+  margin: 0 auto;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.eventsList form input {
+  padding: 0 1em;
+  width: 20%;
+  height: 100%;
+  background-color: transparent;
+  border: 2px solid var(--lightGrey);
+  color: var(--black);
+  -webkit-transition: 0.4s all;
+  transition: 0.4s all;
+}
+
+.eventsList form input:focus {
+  border: 2px solid var(--white);
+  -webkit-box-shadow: 5px 5px 5px 0 var(--grey);
+          box-shadow: 5px 5px 5px 0 var(--grey);
+}
+
+.eventsList form label {
+  display: block;
+  height: 100%;
+  line-height: 60px;
+}
+
+.eventsList form button {
+  height: 100%;
+  padding: 1em 2em;
+  color: var(--black);
+  background-color: var(--mediumBlue);
+}
+
+.eventsList_eventsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 60%;
+  height: 400px;
+  margin: 60px auto 0 auto;
+  padding-right: 20px;
+  overflow-y: scroll;
+}
+
+.eventsList_eventsContainer_event {
+  width: 100%;
+  height: auto;
+  padding: 3em 0;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 120px 170px 1fr 170px;
+      grid-template-columns: 120px 170px 1fr 170px;
+  grid-gap: 20px;
+}
+
+.eventsList_eventsContainer_event_date {
+  text-transform: capitalize;
+  color: var(--black);
+  font-size: 1.2em;
+  padding: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-weight: 700;
+  background-color: var(--mediumBlue);
+}
+
+.eventsList_eventsContainer_event_details h4 {
+  margin-bottom: 10px;
+}
+
+.eventsList_eventsContainer_event_details span {
+  font-size: 0.8em;
+  margin-bottom: 30px;
+  display: block;
+}
+
+.eventsList_eventsContainer_event_details span strong,
+.eventsList_eventsContainer_event_details span .country {
+  font-size: 1em;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.eventsList_eventsContainer_event_details span .country {
+  display: inline;
+  margin-left: 20px;
+}
+
+.eventsList_eventsContainer_event_CTA a {
+  display: block;
+  padding: 1em 2em;
+  text-transform: uppercase;
+  background-color: var(--mediumBlue);
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--black);
+  text-align: center;
+}
+
+.eventsList_eventsContainer_event_CTA a:nth-child(2) {
+  margin-top: 20px;
+  background-color: transparent;
+  color: var(--black);
+}
+/*# sourceMappingURL=events.css.map */

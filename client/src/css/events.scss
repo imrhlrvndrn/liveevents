@@ -1,0 +1,130 @@
+@import "./mixins.scss";
+
+.events {
+    width: 100%;
+    height: 60vh;
+    @include flexCentered();
+}
+
+.eventsList {
+    width: 100%;
+    height: auto;
+    background-color: var(--white);
+    padding: 6em 0;
+
+    * {
+        color: var(--black);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    form {
+        width: 60%;
+        margin: 0 auto;
+        height: 50px;
+        @include flexAlignCenterSpaceBetween();
+
+        input {
+            padding: 0 1em;
+            width: 20%;
+            height: 100%;
+            background-color: transparent;
+            border: 2px solid var(--lightGrey);
+            color: var(--black);
+            transition: 0.4s all;
+
+            &:focus {
+                border: 2px solid var(--white);
+                box-shadow: 5px 5px 5px 0 var(--grey);
+            }
+        }
+
+        label {
+            display: block;
+            height: 100%;
+            line-height: 60px;
+        }
+
+        button {
+            height: 100%;
+            padding: 1em 2em;
+            color: var(--black);
+            background-color: var(--mediumBlue);
+        }
+    }
+
+    &_eventsContainer {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        height: 400px;
+        margin: 60px auto 0 auto;
+        padding-right: 20px;
+        overflow-y: scroll;
+
+        &_event {
+            width: 100%;
+            height: auto;
+            padding: 3em 0;
+            display: grid;
+            grid-template-columns: 120px 170px 1fr 170px;
+            grid-gap: 20px;
+
+            &_date {
+                text-transform: capitalize;
+                color: var(--black);
+                font-size: 1.2em;
+                padding: 1em;
+                @include flexCentered();
+                font-weight: 700;
+                background-color: var(--mediumBlue);
+            }
+
+            &_details {
+                h4 {
+                    margin-bottom: 10px;
+                }
+
+                span {
+                    font-size: 0.8em;
+                    margin-bottom: 30px;
+                    display: block;
+
+                    strong,
+                    .country {
+                        font-size: 1em;
+                        text-transform: capitalize;
+                        font-weight: 700;
+                    }
+
+                    .country {
+                        display: inline;
+                        margin-left: 20px;
+                    }
+                }
+            }
+
+            &_CTA {
+                a {
+                    display: block;
+                    padding: 1em 2em;
+                    text-transform: uppercase;
+                    background-color: var(--mediumBlue);
+                    font-size: 0.9em;
+                    font-weight: 700;
+                    color: var(--black);
+                    text-align: center;
+
+                    &:nth-child(2) {
+                        margin-top: 20px;
+                        background-color: transparent;
+                        color: var(--black);
+                    }
+                }
+            }
+        }
+    }
+}

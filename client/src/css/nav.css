@@ -100,25 +100,9 @@ nav .nav_auth {
 
 nav .nav_auth a:first-child {
   margin-right: 40px;
-  display: block;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
   height: 50px;
-  line-height: 50px;
-  color: var(--white) !important;
   padding: 0 2em;
-  font-weight: 700;
-  border: 2px solid var(--white) !important;
-  background-color: transparent !important;
-  -webkit-transition: 0.4s ease-in-out !important;
-  transition: 0.4s ease-in-out !important;
-  text-transform: capitalize;
-}
-
-nav .nav_auth a:first-child:hover {
-  background-color: var(--white) !important;
-  border: 2px solid var(--white) !important;
-  color: var(--black) !important;
+  background-color: var(--white);
+  color: var(--black);
 }
 /*# sourceMappingURL=nav.css.map */

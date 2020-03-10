@@ -1,8 +1,4 @@
-@mixin flexCentered {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+@import "./mixins.scss";
 
 .about {
     height: 100vh;
@@ -10,7 +6,7 @@
     @include flexCentered();
 
     &_heroContent {
-        @include flexCentered();
+        @include flexAlignCenterSpaceBetween();
         align-items: flex-start;
 
         h2,
