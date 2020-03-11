@@ -1,0 +1,106 @@
+.auth {
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.auth_login, .auth_register {
+  padding: 4em;
+  width: 40%;
+  height: 100%;
+  background-color: var(--white);
+  overflow-y: scroll;
+}
+
+.auth_login h3, .auth_register h3 {
+  color: var(--black);
+  margin-bottom: 40px;
+}
+
+.auth_login h3 a, .auth_register h3 a {
+  color: var(--mediumBlue);
+  font-weight: 900;
+}
+
+.auth_login_form, .auth_register_form {
+  width: 100%;
+  height: auto;
+}
+
+.auth_login_form *, .auth_register_form * {
+  color: var(--black);
+}
+
+.auth_login_form .labelInputWrapper, .auth_register_form .labelInputWrapper {
+  width: 100%;
+  height: auto;
+  padding: 0.5em 2em;
+  background-color: var(--lightGrey);
+  margin-bottom: 4px;
+}
+
+.auth_login_form .labelInputWrapper label,
+.auth_login_form .labelInputWrapper input, .auth_register_form .labelInputWrapper label,
+.auth_register_form .labelInputWrapper input {
+  font-weight: 400;
+  width: 100%;
+  display: block;
+  color: var(--black);
+}
+
+.auth_login_form .labelInputWrapper input, .auth_register_form .labelInputWrapper input {
+  padding: 1em 0;
+  color: var(--mediumBlue);
+}
+
+.auth_login_form_authOptions, .auth_register_form_authOptions {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.auth_login_form_CTA, .auth_register_form_CTA {
+  margin-top: 40px;
+}
+
+.auth_login_form_CTA button[type="submit"], .auth_register_form_CTA button[type="submit"] {
+  background-color: var(--mediumBlue);
+  color: var(--white);
+  margin-right: 20px;
+}
+
+.auth_login_form_CTA button, .auth_register_form_CTA button {
+  padding: 1em 2em;
+  border: 2px solid var(--mediumBlue);
+}
+
+.auth_login_form_CTA button:nth-child(2), .auth_register_form_CTA button:nth-child(2) {
+  display: block;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  color: var(--mediumBlue) !important;
+  padding: 1em 2em;
+  font-weight: 700;
+  border: 2px solid var(--mediumBlue) !important;
+  background-color: transparent !important;
+  -webkit-transition: 0.4s ease-in-out !important;
+  transition: 0.4s ease-in-out !important;
+  text-transform: capitalize;
+  display: inline;
+}
+
+.auth .img {
+  width: 60%;
+  height: 100%;
+}
+/*# sourceMappingURL=auth.css.map */

@@ -3,6 +3,7 @@
 .homepage_hero {
     height: 100vh;
     padding-top: 100px;
+    @include lowerCut();
     background-position: center;
     background-attachment: fixed;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0.1)),

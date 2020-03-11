@@ -14,6 +14,11 @@
     display: flex;
 }
 
+@mixin lowerCut {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
+}
+
 @mixin primaryBtn($color, $hoveredColor) {
     display: block;
     width: max-content;
@@ -25,10 +30,10 @@
     transition: 0.4s ease-in-out !important;
     text-transform: capitalize;
 
-    &:hover {
-        background-color: $hoveredColor !important;
-        border: 2px solid $hoveredColor !important;
-    }
+    // &:hover {
+    //     background-color: $hoveredColor !important;
+    //     border: 2px solid $hoveredColor !important;
+    // }
 }
 
 @mixin gridContainer($minWidth, $rowHeight) {

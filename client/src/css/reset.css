@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;0,900;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700;900&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +7,7 @@
   text-decoration: none;
   color: whitesmoke;
   font-size: 1em;
-  font-weight: 400;
+  font-weight: 300;
   font-family: "Raleway", sans-serif;
   scroll-behavior: smooth;
 }
@@ -49,6 +49,10 @@ button:focus {
 
 button {
   cursor: pointer;
+}
+
+label {
+  font-weight: 700 !important;
 }
 
 img {

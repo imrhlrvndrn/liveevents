@@ -1,6 +1,8 @@
 .homepage_hero {
   height: 100vh;
   padding-top: 100px;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
   background-position: center;
   background-attachment: fixed;
   background-image: -webkit-gradient(linear, left top, right top, from(black), to(rgba(255, 255, 255, 0.1))), url(https://images.pexels.com/photos/3473085/pexels-photo-3473085.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
@@ -47,11 +49,6 @@
   -webkit-transition: 0.4s ease-in-out !important;
   transition: 0.4s ease-in-out !important;
   text-transform: capitalize;
-}
-
-.homepage_hero_heroContent_CTA a.primaryBtn:hover {
-  background-color: var(--black) !important;
-  border: 2px solid var(--black) !important;
 }
 
 .homepage_steps {

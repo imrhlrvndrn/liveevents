@@ -4,6 +4,7 @@
     width: 100%;
     height: 60vh;
     @include flexCentered();
+    @include lowerCut();
 }
 
 .eventsList {
@@ -51,7 +52,7 @@
         button {
             height: 100%;
             padding: 1em 2em;
-            color: var(--black);
+            color: var(--white);
             background-color: var(--mediumBlue);
         }
     }
@@ -75,12 +76,13 @@
 
             &_date {
                 text-transform: capitalize;
-                color: var(--black);
+                color: var(--white);
                 font-size: 1.2em;
                 padding: 1em;
                 @include flexCentered();
                 font-weight: 700;
                 background-color: var(--mediumBlue);
+                @include lowerCut();
             }
 
             &_details {
@@ -115,7 +117,7 @@
                     background-color: var(--mediumBlue);
                     font-size: 0.9em;
                     font-weight: 700;
-                    color: var(--black);
+                    color: var(--white);
                     text-align: center;
 
                     &:nth-child(2) {

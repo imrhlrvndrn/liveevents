@@ -10,6 +10,8 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
 }
 
 .eventsList {
@@ -69,7 +71,7 @@
 .eventsList form button {
   height: 100%;
   padding: 1em 2em;
-  color: var(--black);
+  color: var(--white);
   background-color: var(--mediumBlue);
 }
 
@@ -101,7 +103,7 @@
 
 .eventsList_eventsContainer_event_date {
   text-transform: capitalize;
-  color: var(--black);
+  color: var(--white);
   font-size: 1.2em;
   padding: 1em;
   display: -webkit-box;
@@ -115,6 +117,8 @@
           justify-content: center;
   font-weight: 700;
   background-color: var(--mediumBlue);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
 }
 
 .eventsList_eventsContainer_event_details h4 {
@@ -146,7 +150,7 @@
   background-color: var(--mediumBlue);
   font-size: 0.9em;
   font-weight: 700;
-  color: var(--black);
+  color: var(--white);
   text-align: center;
 }
 
