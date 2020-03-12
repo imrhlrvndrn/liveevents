@@ -7,7 +7,7 @@ const Register = ({ setisLogin }) => {
             <h3>
                 <Link to="/">EventsLive</Link>
             </h3>
-            <h3>Welcome Back, Please login to your account</h3>
+            <h3>Join us, Create your account</h3>
             <form className="auth_register_form">
                 <div className="labelInputWrapper">
                     <label htmlFor="registerUsername">Username</label>

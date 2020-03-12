@@ -1,0 +1,40 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const eventsSchema = new Schema(
+    {
+        entity: { type: String, required: true },
+        slugUri: { type: String },
+        userId: { type: Schema.Types.ObjectId, ref: "Users" },
+        title: { type: String, required: true },
+        description: { type: String, required: true },
+        category: { type: String, required: true },
+        location: { type: String, required: true },
+        country: { type: String, required: true },
+        // schedule: {
+
+        // },
+        heroImages: [
+            {
+                imgUrl: { type: String, required: true },
+                alt: { type: String, required: true },
+                thumbnail: { type: String, required: true }
+            }
+        ],
+        startDate: { type: Date, required: true },
+        endDate: { type: Date, required: true },
+        speakers: [{ type: Schema.Types.ObjectId, ref: "Users" }],
+        bookedBy: [{ type: Schema.Types.ObjectId, ref: "Users" }],
+        pricing: [
+            {
+                tier: { type: String, required: true },
+                amount: { type: Number, required: true },
+                deliverables: [String],
+                isBestSeller: Boolean
+            }
+        ]
+    },
+    { timestamps: true }
+);
+
+module.exports = mongoose.model("Events", eventsSchema);
