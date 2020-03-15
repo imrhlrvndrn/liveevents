@@ -5,11 +5,13 @@ module.exports = buildSchema(`
         _id: ID!
         entity: String!
         username: String!
-        name: Name!
+        fullName: String!
+        companyName: String
+        designation: String
         email: String!
         password: String!
         profileImg: String
-        location: String!
+        location: String
         country: String!
         createdEvents: [Event!]
         bookedEvents: [Event!]
@@ -20,35 +22,17 @@ module.exports = buildSchema(`
     input UserInput{
         entity: String!
         username: String!
-        name: Name!
+        fullName: String!
+        companyName: String
         email: String!
         password: String!
         profileImg: String
-        location: String!
         country: String!
-        createdEvents: [Event!]
-        bookedEvents: [Event!]
-        techStack: [String]
-        links: Links
-    }
-
-    type Name {
-        firstname: String!
-        lastname: String!
     }
 
     type Links {
-        email: String
-        website: String
-        linkedin: String
-        facebook: String
-        instagram: String
-        twitter: String
-        github: String
-        tiktok: String
-        telegram: String
-        discord: String
-        pinterest: String
+        _linkType: String!
+        linkURI: String!
     }
 
     type Event{
@@ -61,6 +45,7 @@ module.exports = buildSchema(`
         category: String!
         location: String!
         country: String!
+        isPublished: Boolean!
         heroImages: [HeroImages!]!
         startDate: String!
         endDate: String!
@@ -71,18 +56,13 @@ module.exports = buildSchema(`
 
     input EventInput {
         entity: String!
-        slugUri: String!
         title: String!
         description: String!
         category: String!
-        location: String!
+        location: String
         country: String!
-        heroImages: [HeroImages!]!
         startDate: String!
         endDate: String!
-        speakers: [User!]
-        bookedBy: [User!]
-        pricing: [Pricing!]!
     }
 
     type HeroImages {
@@ -91,10 +71,23 @@ module.exports = buildSchema(`
         thumbnail: String!
     }
 
+    input HeroImagesInput {
+        imgUrl: String!
+        alt: String!
+        thumbnail: String!
+    }
+
     type Pricing {
         tier: String!
         amount: Float!
-        deliverables: [String!],
+        deliverables: [String!]
+        isBestSeller: Boolean
+    }
+
+    input PricingInput{
+        tier: String!
+        amount: Float!
+        deliverables: [String!]
         isBestSeller: Boolean
     }
 
@@ -105,7 +98,15 @@ module.exports = buildSchema(`
     }
 
     type RootMutation {
-        createEvent(eventInput: EventInput): Event!
+        createEvent(eventInput: EventInput): String!
         createUser(userInput: UserInput): User!
+        addPricing(pricingInput: PricingInput): String!
+        addHeroImages(heroImagesInput: HeroImagesInput): String!
+        addSpeaker(id: ID!):String!
+    }
+
+    schema {
+        query: RootQuery
+        mutation: RootMutation
     }
 `);

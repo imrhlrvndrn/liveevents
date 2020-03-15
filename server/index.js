@@ -1,21 +1,22 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
-const CookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
+require("dotenv").config();
 const graphqlHTTP = require("express-graphql");
 
 // GraphQL imports
-const graphQLSchema = require("./graphql/schema/index.js");
-const graphQLResolver = require("./graphql/resolvers/index.js");
+const graphQLSchema = require("./graphql/schema/index");
+const graphQLResolver = require("./graphql/resolvers/index");
 
-const port = process.env.PORT || 5000;
 const app = express();
+const port = process.env.PORT || 4000;
 
 // Middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(
     "/graphql",
     graphqlHTTP({

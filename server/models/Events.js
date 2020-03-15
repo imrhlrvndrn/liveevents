@@ -11,9 +11,7 @@ const eventsSchema = new Schema(
         category: { type: String, required: true },
         location: { type: String, required: true },
         country: { type: String, required: true },
-        // schedule: {
-
-        // },
+        isPublished: { type: Boolean, required: true },
         heroImages: [
             {
                 imgUrl: { type: String, required: true },

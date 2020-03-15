@@ -3,32 +3,20 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
     {
+        entity: { type: String, required: true },
         username: { type: String, required: true, unique: true },
-        name: {
-            firstname: { type: String, required: true },
-            lastname: { type: String, required: true }
-        },
+        fullName: { type: String, required: true },
+        companyName: { type: String },
+        designation: { type: String },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
         profileImg: { type: String },
         location: { type: String },
-        country: { type: String },
+        country: { type: String, required: true },
         createdEvents: [{ type: Schema.Types.ObjectId, ref: "Events" }],
         bookedEvents: [{ type: Schema.Types.ObjectId, ref: "Events" }],
         techStack: [String],
-        links: {
-            email: String,
-            website: String,
-            linkedin: String,
-            facebook: String,
-            instagram: String,
-            twitter: String,
-            github: String,
-            tiktok: String,
-            telegram: String,
-            discord: String,
-            pinterest: String
-        }
+        links: [{ _linkType: { type: String }, linkURI: { type: String } }]
     },
     { timestamps: true }
 );
