@@ -9,24 +9,25 @@ module.exports = buildSchema(`
         companyName: String
         designation: String
         email: String!
-        password: String!
+        password: String
         profileImg: String
         location: String
         country: String!
-        createdEvents: [Event!]
-        bookedEvents: [Event!]
+        createdEvents: [Event!]!
+        bookedEvents: [Event!]!
         techStack: [String]
-        links: Links
+        links: [Links]
+        createdAt: String!
+        updatedAt: String!
     }
     
     input UserInput{
-        entity: String!
         username: String!
         fullName: String!
         companyName: String
+        desgination: String
         email: String!
         password: String!
-        profileImg: String
         country: String!
     }
 
@@ -43,19 +44,21 @@ module.exports = buildSchema(`
         title: String!
         description: String!
         category: String!
-        location: String!
+        location: String
         country: String!
         isPublished: Boolean!
         heroImages: [HeroImages!]!
         startDate: String!
         endDate: String!
-        speakers: [User!]
-        bookedBy: [User!]
+        speakers: [User!]!
+        bookedBy: [User!]!
         pricing: [Pricing!]!
+        createdAt: String!
+        updatedAt: String!
+
     }
 
     input EventInput {
-        entity: String!
         title: String!
         description: String!
         category: String!
@@ -95,10 +98,11 @@ module.exports = buildSchema(`
         events: [Event!]!
         event(title: String!): Event!
         user(id: ID!): User!
+        users: [User!]!
     }
 
     type RootMutation {
-        createEvent(eventInput: EventInput): String!
+        createEvent(eventInput: EventInput): Event!
         createUser(userInput: UserInput): User!
         addPricing(pricingInput: PricingInput): String!
         addHeroImages(heroImagesInput: HeroImagesInput): String!
