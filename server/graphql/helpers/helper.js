@@ -28,9 +28,9 @@ const transformUser = async user => {
 };
 
 const getUserById = async userId => {
-    const returnedUser = await Users.findById(userId);
+    const returnedSingleUser = await Users.findById(userId);
 
-    return transformUser(returnedUser);
+    return transformUser(returnedSingleUser);
 };
 
 const getSpeakersOfEvent = async speakerIds => {
@@ -52,17 +52,23 @@ const getBookedByUsersOfEvent = async bookedByIds => {
 const getAllBookedEventsOfUser = async bookedEvents => {
     const returnedBookedEvents = await Events.find({ _id: { $in: bookedEvents } });
 
-    return returnedBookedEvents.map(bookeEvent => {
-        return transformEvent(bookeEvent);
-    });
+    if (returnedBookedEvents.length > 0) {
+        return returnedBookedEvents.map(singleBookedEvent => {
+            return transformEvent(singleBookedEvent);
+        });
+    } else {
+        return [];
+    }
 };
 
 const getAllCreatedEventsOfUser = async createdEvents => {
     const returnedCreatedEvents = await Events.find({ _id: { $in: createdEvents } });
 
-    return returnedCreatedEvents.map(createdEvent => {
-        return transformEvent(createdEvent);
-    });
+    if (returnedCreatedEvents.length > 0) {
+        return returnedCreatedEvents.map(createdEvent => {
+            return transformEvent(createdEvent);
+        });
+    }
 };
 
 module.exports = {

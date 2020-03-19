@@ -5,7 +5,7 @@ const eventsSchema = new Schema(
     {
         entity: { type: String, required: true },
         slugUri: { type: String },
-        userId: { type: Schema.Types.ObjectId, ref: "Users" },
+        creator: { type: Schema.Types.ObjectId, ref: "Users" },
         title: { type: String, required: true },
         description: { type: String, required: true },
         category: { type: String, required: true },
@@ -22,12 +22,13 @@ const eventsSchema = new Schema(
         startDate: { type: Date, required: true },
         endDate: { type: Date, required: true },
         speakers: [{ type: Schema.Types.ObjectId, ref: "Users" }],
-        bookedBy: [{ type: Schema.Types.ObjectId, ref: "Users" }],
+        attendees: [{ type: Schema.Types.ObjectId, ref: "Users" }],
         pricing: [
             {
                 tier: { type: String, required: true },
                 amount: { type: Number, required: true },
                 deliverables: [String],
+                isSelected: { type: Boolean, required: true },
                 isBestSeller: Boolean
             }
         ]

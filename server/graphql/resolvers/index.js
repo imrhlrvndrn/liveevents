@@ -16,13 +16,13 @@ module.exports = {
         const events = await Events.find({});
 
         return events.map(savedEvent => {
-            return transformEvent(event);
+            return transformEvent(savedEvent);
         });
     },
     users: async () => {
         const returnedUsers = await Users.find({});
-        return returnedUsers.map(user => {
-            return transformUser(user);
+        return returnedUsers.map(singleUser => {
+            return transformUser(singleUser);
         });
     },
     createEvent: async args => {
@@ -44,16 +44,18 @@ module.exports = {
         });
 
         try {
-            const savedEvent = await newEvent.save();
+            const savedNewEvent = await newEvent.save();
+            console.log(savedNewEvent);
 
             const eventUser = await Users.findById("5e6f8375e24e551aa0d1b12d");
 
-            eventUser.createdEvents.push(savedEvent._id);
+            eventUser.createdEvents.push(savedNewEvent._id);
             eventUser.save();
 
-            return transformEvent(savedEvent);
-            // return "savedEvent";
+            return transformEvent(savedNewEvent);
+            // return "savedNewEvent";
         } catch (error) {
+            console.log(error);
             throw error;
         }
     },
@@ -77,7 +79,7 @@ module.exports = {
             const hashedPassword = await bcrypt.hash(args.userInput.password, salt);
 
             // Create the user
-            const user = new Users({
+            const newUser = new Users({
                 entity: "user",
                 username: args.userInput.username,
                 email: args.userInput.email,
@@ -89,8 +91,8 @@ module.exports = {
             });
 
             // Save the user in the database
-            const savedUser = await user.save();
-            return transformUser(savedUser);
+            const savedNewUser = await newUser.save();
+            return transformUser(savedNewUser);
         } catch (error) {
             throw error;
         }

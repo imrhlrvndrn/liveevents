@@ -181,6 +181,12 @@ const Events = () => {
                         </div>
                     </div>
                 </div>
+
+                <img
+                    style={{width: "20%"}}
+                    src="https://qrtag.net/api/qr_transparent_1.svg?url=https://2020.teamtanay.jobchallenge.dev"
+                    alt=""
+                />
             </section>
         </>
     );
