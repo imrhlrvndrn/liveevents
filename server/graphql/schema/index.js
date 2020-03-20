@@ -9,27 +9,20 @@ module.exports = buildSchema(`
         password: String
         fullName: String
         gender: String!
-        age: Integer
+        age: Float
         birthDate: String!
         companyName: String
         designation: String
         profileImg: String
         location: String
         country: String
-        createdEvents: [Event!]
-        bookedEvents: [Event!]
-        refundId: [Refund!]
-        techStack: [String]
-        links: [Links]
+        createdEvents: [Event!]!
+        bookedEvents: [Booking!]!
+        refundId: [Refund!]!
+        techStack: [String]!
+        links: [Links]!
         createdAt: String!
         updatedAt: String!
-    }
-
-    type Emails {
-        _id: ID!
-        isVerified: Boolean!
-        isPrimary: Boolean!
-        email: String!
     }
     
     input UserInput {
@@ -40,6 +33,13 @@ module.exports = buildSchema(`
         email: String!
         password: String!
         country: String!
+    }
+
+    type Emails {
+        _id: ID!
+        isVerified: Boolean!
+        isPrimary: Boolean!
+        email: String!
     }
 
     type Links {
@@ -54,15 +54,14 @@ module.exports = buildSchema(`
         emails: Emails!
         fullName: String
         gender: String!
-        age: Integer
+        age: Float
         birthDate: String!
         companyName: String
         designation: String
         profileImg: String
         booking: Booking!
-        refundId: [Refund!]
-        links: [Links]
-
+        refundId: [Refund!]!
+        links: [Links]!
         createdAt: String!
         updatedAt: String!
     }
@@ -81,14 +80,14 @@ module.exports = buildSchema(`
         heroImages: [HeroImages!]
         startDate: String!
         endDate: String!
-        speakers: [User!]
-        attendees: [User!]
-        pricing: [Pricing!]
+        speakers: [User!]!
+        attendees: [Attendee!]!
+        pricing: [Pricing!]!
         isPublished: Boolean!
         isListed: Boolean!
-        inviteOnly: Boolean!
+        isInviteOnly: Boolean!
         password: String
-        capacity: Integer!
+        capacity: Float!
         createdAt: String!
         updatedAt: String!
     }
@@ -118,30 +117,31 @@ module.exports = buildSchema(`
     type Pricing {
         tier: String!
         amount: Float!
-        deliverables: [String!]
+        deliverables: [String!]!
         isSelected: Boolean!
         isBestSeller: Boolean
-        totalTickets: Integer!
-        soldTickets: Integer!
-        pendingTickets: Integer!
+        totalTickets: Float!
+        soldTickets: Float!
+        pendingTickets: Float!
     }
 
     input PricingInput{
         tier: String!
         amount: Float!
-        deliverables: [String!]
+        deliverables: [String!]!
         isBestSeller: Boolean
     }
 
     type Booking{
         _id: ID!
+        entity: String!
         eventId: Event!
         attendeeId: Attendee!
         promoCode: String
-        quantityOfTickets: Integer!
-        team: [Team!]
+        quantityOfTickets: Float!
+        team: [Team!]!
         bookingStatus: String
-        orderAmountInfo: OrderAmountInfo!
+        eventAmountInfo: EventAmountInfo!
         isFree: Boolean!
     }
 
@@ -151,14 +151,14 @@ module.exports = buildSchema(`
         emails: String!
         fullName: String
         gender: String!
-        age: Integer
+        age: Float
         birthDate: String!
         companyName: String
         designation: String
         profileImg: String
     }
 
-    type OrderAmountInfo {
+    type EventAmountInfo {
         baseAmount: Float!
         taxInfo: [TaxInfo!]!
         totalAmount: Float!
@@ -178,8 +178,8 @@ module.exports = buildSchema(`
         itemType: String!
         status: String!
         reason: String
-        quantityRequested: Integer! // Refund item quantity. If the itemType field value is order, quantityRequested is always 1. if the itemType field value is attendee or merchandise, then the quantityRequested value displays the number of items requested for a refund.
-        amountToBeRefunded: Float! // rupees to be refunded
+        quantityRequested: Float! 
+        amountToBeRefunded: Float!
     }
 
     type RootQuery {
