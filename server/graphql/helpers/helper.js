@@ -1,4 +1,5 @@
 const Events = require("../../models/Events");
+const Booking = require("../../models/Booking");
 const Users = require("../../models/Users");
 
 const transformEvent = async event => {
@@ -7,7 +8,7 @@ const transformEvent = async event => {
         _id: event.id,
         userId: getUserById.bind(this, event._doc.userId),
         speakers: getSpeakersOfEvent.bind(this, event._doc.speakers),
-        bookedBy: getBookedByUsersOfEvent.bind(this, event._doc.bookedBy),
+        attendees: getAttendeesOfEvent.bind(this, event._doc.attendees),
         startDate: new Date(event._doc.startDate).toString(),
         endDate: new Date(event._doc.endDate).toString(),
         createdAt: new Date(user._doc.createdAt).toString(),
@@ -22,6 +23,7 @@ const transformUser = async user => {
         password: null,
         bookedEvents: getAllBookedEventsOfUser.bind(this, user._doc.bookedEvents),
         createdEvents: getAllCreatedEventsOfUser.bind(this, user._doc.createdEvents),
+        birthDate: new Date(user._doc.birthDate).toString(),
         createdAt: new Date(user._doc.createdAt).toString(),
         updatedAt: new Date(user._doc.updatedAt).toString()
     };
@@ -41,8 +43,8 @@ const getSpeakersOfEvent = async speakerIds => {
     });
 };
 
-const getBookedByUsersOfEvent = async bookedByIds => {
-    const returnedBookedByUsers = await Users.find({ _id: { $in: bookedByIds } });
+const getAttendeesOfEvent = async bookedByIds => {
+    const returnedBookedByUsers = await Booking.find({ _id: { $in: bookedByIds } });
 
     return returnedBookedByUsers.map(user => {
         return transformUser(user);
@@ -64,11 +66,9 @@ const getAllBookedEventsOfUser = async bookedEvents => {
 const getAllCreatedEventsOfUser = async createdEvents => {
     const returnedCreatedEvents = await Events.find({ _id: { $in: createdEvents } });
 
-    if (returnedCreatedEvents.length > 0) {
-        return returnedCreatedEvents.map(createdEvent => {
-            return transformEvent(createdEvent);
-        });
-    }
+    return returnedCreatedEvents.map(createdEvent => {
+        return transformEvent(createdEvent);
+    });
 };
 
 module.exports = {
@@ -76,7 +76,7 @@ module.exports = {
     transformUser: transformUser,
     getUserById: getUserById,
     getSpeakersOfEvent: getSpeakersOfEvent,
-    getBookedByUsersOfEvent: getBookedByUsersOfEvent,
+    getAttendeesOfEvent: getAttendeesOfEvent,
     getAllBookedEventsOfUser: getAllBookedEventsOfUser,
     getAllCreatedEventsOfUser: getAllCreatedEventsOfUser
 };

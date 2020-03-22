@@ -3,8 +3,8 @@ const Users = require("../../models/Users");
 const bcrypt = require("bcryptjs");
 
 // All the resolvers
-const userResolver = require("./user");
-const eventResolver = require("./event");
+const userResolver = require("./userResolver");
+const eventResolver = require("./eventResolver");
 
 module.exports = {
     ...userResolver,

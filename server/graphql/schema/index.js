@@ -1,22 +1,22 @@
 const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
-    type User{
+    type Users{
         _id: ID!
         entity: String!
         username: String!
-        emails: Emails!
+        email: Email!
         password: String
-        fullName: String
+        fullName: String!
         gender: String!
         age: Float
         birthDate: String!
         companyName: String
         designation: String
         profileImg: String
-        location: String
-        country: String
-        createdEvents: [Event!]!
+        address: Address!
+        billingAddress: Address!
+        createdEvents: [Events!]!
         bookedEvents: [Booking!]!
         refundId: [Refund!]!
         techStack: [String]!
@@ -25,21 +25,40 @@ module.exports = buildSchema(`
         updatedAt: String!
     }
     
-    input UserInput {
+    input UsersInput {
         username: String!
         fullName: String!
         companyName: String
-        desgination: String
+        designation: String
         email: String!
         password: String!
+        gender: String!
+        birthDate: String!
+        address: AddressInput
+        billingAddress: AddressInput
+    }
+
+    type Email {
+        isVerified: Boolean!
+        email: String!
+    }
+
+    type Address {
+        streetAddress1: String!
+        streetAddress2: String!
+        state: String!
+        city: String!
+        pincode: String!
         country: String!
     }
 
-    type Emails {
-        _id: ID!
-        isVerified: Boolean!
-        isPrimary: Boolean!
-        email: String!
+    input AddressInput {
+        streetAddress1: String
+        streetAddress2: String
+        state: String
+        city: String
+        pincode: String
+        country: String
     }
 
     type Links {
@@ -51,7 +70,7 @@ module.exports = buildSchema(`
         _id: ID!
         entity: String!
         username: String!
-        emails: Emails!
+        email: Email!
         fullName: String
         gender: String!
         age: Float
@@ -66,28 +85,29 @@ module.exports = buildSchema(`
         updatedAt: String!
     }
 
-    type Event{
+    type Events{
         _id: ID!
         entity: String!
         slugUri: String
-        creator: User!
+        creator: Users!
         title: String!
         summary: String
         description: String!
         category: String!
-        location: String
-        country: String!
+        address: Address!
         heroImages: [HeroImages!]
         startDate: String!
         endDate: String!
-        speakers: [User!]!
-        attendees: [Attendee!]!
+        speakers: [Users!]!
+        attendees: [Booking!]!
         pricing: [Pricing!]!
         isPublished: Boolean!
         isListed: Boolean!
         isInviteOnly: Boolean!
         password: String
         capacity: Float!
+        spotsLeft: Float!
+        validPromocodes: [ValidPromocodes!]!
         createdAt: String!
         updatedAt: String!
     }
@@ -95,11 +115,13 @@ module.exports = buildSchema(`
     input EventInput {
         title: String!
         description: String!
+        summary: String
         category: String!
-        location: String
-        country: String!
         startDate: String!
         endDate: String!
+        password: String
+        capacity: Float!
+        address: AddressInput!
     }
 
     type HeroImages {
@@ -125,23 +147,27 @@ module.exports = buildSchema(`
         pendingTickets: Float!
     }
 
-    input PricingInput{
+    input PricingInput {
         tier: String!
         amount: Float!
         deliverables: [String!]!
         isBestSeller: Boolean
     }
 
+    type ValidPromocodes {
+        promocode: String!
+        discount: Float!
+    }
+
     type Booking{
         _id: ID!
         entity: String!
-        eventId: Event!
-        attendeeId: Attendee!
-        promoCode: String
+        eventId: Events!
+        attendeeId: Users!
+        promocode: String
         quantityOfTickets: Float!
-        team: [Team!]!
-        bookingStatus: String
-        eventAmountInfo: EventAmountInfo!
+        bookingStatus: String!
+        eventAmountInfo: AmountInfo!
         isFree: Boolean!
     }
 
@@ -158,7 +184,7 @@ module.exports = buildSchema(`
         profileImg: String
     }
 
-    type EventAmountInfo {
+    type AmountInfo {
         baseAmount: Float!
         taxInfo: [TaxInfo!]!
         totalAmount: Float!
@@ -173,7 +199,8 @@ module.exports = buildSchema(`
 
     type Refund{
         _id: ID!
-        eventId: Event!
+        entity: String!
+        eventId: Events!
         bookingId: Booking!
         itemType: String!
         status: String!
@@ -182,16 +209,26 @@ module.exports = buildSchema(`
         amountToBeRefunded: Float!
     }
 
+    type Speaker{
+        _id: ID!
+        entity: String!
+        eventId: Events!
+        userId: Users!
+        isFree: Boolean!
+        genre: [String!]!
+        speakerAmountInfo: AmountInfo!
+    }
+
     type RootQuery {
-        events: [Event!]!
-        event(title: String!): Event!
-        user(id: ID!): User!
-        users: [User!]!
+        events: [Events!]!
+        event(title: String!): Events!
+        user(id: ID!): Users!
+        users: [Users!]!
     }
 
     type RootMutation {
-        createEvent(eventInput: EventInput): Event!
-        createUser(userInput: UserInput): User!
+        createEvent(eventInput: EventInput): Events!
+        createUser(userInput: UsersInput): Users!
         addPricing(pricingInput: PricingInput): String!
         addHeroImages(heroImagesInput: HeroImagesInput): String!
         addSpeaker(id: ID!):String!

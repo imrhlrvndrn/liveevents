@@ -1,15 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const bookingSchema = new Schema({
+const speakerSchema = new Schema({
     entity: { type: String, required: true },
     eventId: { type: Schema.Types.ObjectId, ref: "Events" },
-    attendeeId: { type: Schema.Types.ObjectId, ref: "Users" },
-    promocode: { type: String },
-    quantityOfTickets: { type: Number, required: true },
-    bookingStatus: { type: String, required: true },
+    userId: { type: Schema.Types.ObjectId, ref: "Users" },
     isFree: { type: Boolean, required: true },
-    eventAmountInfo: {
+    genre: [{ type: String }],
+    speakerAmountInfo: {
         baseAmount: { type: Number, required: true },
         taxInfo: [
             {
@@ -20,7 +18,6 @@ const bookingSchema = new Schema({
         totalAmount: { type: Number, required: true },
         discountedAmount: { type: Number }
     }
-    // ! You still have to add the Team object in here
 });
 
-module.exports = mongoose.model("Booking", bookingSchema);
+module.exports = mongoose.model("Speaker", speakerSchema);

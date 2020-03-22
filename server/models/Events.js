@@ -5,18 +5,19 @@ const eventsSchema = new Schema(
     {
         entity: { type: String, required: true },
         slugUri: { type: String },
-        creator: { type: Schema.Types.ObjectId, ref: "Users", required: true },
+        creator: { type: Schema.Types.ObjectId, ref: "Users" },
         title: { type: String, required: true },
         summary: { type: String },
         description: { type: String, required: true },
         category: { type: String, required: true },
-        location: { type: String, required: true },
-        country: { type: String, required: true },
-        isPublished: { type: Boolean, required: true },
-        isListed: { type: Boolean, required: true },
-        isInviteOnly: { type: Boolean, required: true },
-        password: { type: String },
-        capacity: { type: Number, required: true },
+        address: {
+            streetAddress1: { type: String, required: true },
+            streetAddress2: { type: String, required: true },
+            state: { type: String, required: true },
+            city: { type: String, required: true },
+            pincode: { type: String, required: true },
+            country: { type: String, required: true }
+        },
         heroImages: [
             {
                 imgUrl: { type: String, required: true },
@@ -26,9 +27,8 @@ const eventsSchema = new Schema(
         ],
         startDate: { type: Date, required: true },
         endDate: { type: Date, required: true },
-        // ! Make the Speaker model in the GraphQL & Mongoose schema
         speakers: [{ type: Schema.Types.ObjectId, ref: "Speaker" }],
-        attendees: [{ type: Schema.Types.ObjectId, ref: "Attendee" }],
+        attendees: [{ type: Schema.Types.ObjectId, ref: "Booking" }],
         pricing: [
             {
                 tier: { type: String, required: true },
@@ -39,6 +39,18 @@ const eventsSchema = new Schema(
                 totalTickets: { type: Number, required: true },
                 soldTickets: { type: Number, required: true },
                 pendingTickets: { type: Number, required: true }
+            }
+        ],
+        isPublished: { type: Boolean, required: true },
+        isListed: { type: Boolean, required: true },
+        isInviteOnly: { type: Boolean, required: true },
+        password: { type: String },
+        capacity: { type: Number, required: true },
+        spotsLeft: { type: Number, required: true },
+        validPromocodes: [
+            {
+                promocode: { type: String },
+                discount: { type: Number }
             }
         ]
     },
