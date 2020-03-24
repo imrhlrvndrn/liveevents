@@ -5,7 +5,7 @@ const eventsSchema = new Schema(
     {
         entity: { type: String, required: true },
         slugUri: { type: String },
-        creator: { type: Schema.Types.ObjectId, ref: "Users" },
+        creator: { type: Schema.Types.ObjectId, ref: "User" },
         title: { type: String, required: true },
         summary: { type: String },
         description: { type: String, required: true },
@@ -57,4 +57,4 @@ const eventsSchema = new Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Events", eventsSchema);
+module.exports = mongoose.model("Event", eventsSchema);

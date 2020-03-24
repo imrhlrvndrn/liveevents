@@ -1,10 +1,11 @@
-const Events = require("../../models/Events");
-const Users = require("../../models/Users");
+const Event = require("../../models/Event");
+const User = require("../../models/User");
 const { transformEvent } = require("../helpers/helper");
 
 module.exports = {
     events: async () => {
-        const events = await Events.find({});
+        const events = await Event.find({});
+        // console.log(events);
 
         return events.map(savedEvent => {
             return transformEvent(savedEvent);
@@ -14,9 +15,9 @@ module.exports = {
         let slugArray = args.eventInput.title.toLowerCase().split(" ");
         let slugUri = slugArray.join("-");
 
-        const newEvent = new Events({
+        const newEvent = new Event({
             entity: "event",
-            creator: "5e76fce2580d630170b0cbc7",
+            creator: "5e7780b9d4ecef40840aba19",
             title: args.eventInput.title,
             summary: args.eventInput.summary || "",
             slugUri: slugUri,
@@ -44,7 +45,7 @@ module.exports = {
             const savedNewEvent = await newEvent.save();
             console.log(savedNewEvent);
 
-            const eventUser = await Users.findById("5e76fce2580d630170b0cbc7");
+            const eventUser = await User.findById("5e7780b9d4ecef40840aba19");
 
             eventUser.createdEvents.push(savedNewEvent._id);
             eventUser.save();

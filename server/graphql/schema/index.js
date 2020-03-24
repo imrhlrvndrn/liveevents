@@ -1,7 +1,7 @@
 const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
-    type Users{
+    type User {
         _id: ID!
         entity: String!
         username: String!
@@ -16,16 +16,15 @@ module.exports = buildSchema(`
         profileImg: String
         address: Address!
         billingAddress: Address!
-        createdEvents: [Events!]!
+        createdEvents: [Event!]!
         bookedEvents: [Booking!]!
-        refundId: [Refund!]!
         techStack: [String]!
-        links: [Links]!
+        links: [Link]!
         createdAt: String!
         updatedAt: String!
     }
     
-    input UsersInput {
+    input UserInput {
         username: String!
         fullName: String!
         companyName: String
@@ -49,8 +48,7 @@ module.exports = buildSchema(`
         state: String!
         city: String!
         pincode: String!
-        country: String!
-    }
+        country: String!    }
 
     input AddressInput {
         streetAddress1: String
@@ -61,12 +59,12 @@ module.exports = buildSchema(`
         country: String
     }
 
-    type Links {
+    type Link {
         _linkType: String!
         linkURI: String!
     }
 
-    type Attendee{
+    type Attendee {
         _id: ID!
         entity: String!
         username: String!
@@ -80,25 +78,25 @@ module.exports = buildSchema(`
         profileImg: String
         booking: Booking!
         refundId: [Refund!]!
-        links: [Links]!
+        links: [Link]!
         createdAt: String!
         updatedAt: String!
     }
 
-    type Events{
+    type Event {
         _id: ID!
         entity: String!
         slugUri: String
-        creator: Users!
+        creator: User!
         title: String!
         summary: String
         description: String!
         category: String!
         address: Address!
-        heroImages: [HeroImages!]
+        heroImages: [HeroImage!]
         startDate: String!
         endDate: String!
-        speakers: [Users!]!
+        speakers: [Speaker!]!
         attendees: [Booking!]!
         pricing: [Pricing!]!
         isPublished: Boolean!
@@ -107,7 +105,7 @@ module.exports = buildSchema(`
         password: String
         capacity: Float!
         spotsLeft: Float!
-        validPromocodes: [ValidPromocodes!]!
+        validPromocodes: [ValidPromocode!]!
         createdAt: String!
         updatedAt: String!
     }
@@ -124,13 +122,13 @@ module.exports = buildSchema(`
         address: AddressInput!
     }
 
-    type HeroImages {
+    type HeroImage {
         imgUrl: String!
         alt: String!
         thumbnail: String!
     }
 
-    input HeroImagesInput {
+    input HeroImageInput {
         imgUrl: String!
         alt: String!
         thumbnail: String!
@@ -154,16 +152,17 @@ module.exports = buildSchema(`
         isBestSeller: Boolean
     }
 
-    type ValidPromocodes {
+    type ValidPromocode {
         promocode: String!
         discount: Float!
     }
 
-    type Booking{
+    type Booking {
         _id: ID!
         entity: String!
-        eventId: Events!
-        attendeeId: Users!
+        eventId: Event!
+        attendeeId: User!
+        refundId: [Refund!]!
         promocode: String
         quantityOfTickets: Float!
         bookingStatus: String!
@@ -197,10 +196,10 @@ module.exports = buildSchema(`
         taxAmount: Float!
     }
 
-    type Refund{
+    type Refund {
         _id: ID!
         entity: String!
-        eventId: Events!
+        eventId: Event!
         bookingId: Booking!
         itemType: String!
         status: String!
@@ -209,28 +208,28 @@ module.exports = buildSchema(`
         amountToBeRefunded: Float!
     }
 
-    type Speaker{
+    type Speaker {
         _id: ID!
         entity: String!
-        eventId: Events!
-        userId: Users!
+        eventId: Event!
+        userId: User!
         isFree: Boolean!
         genre: [String!]!
         speakerAmountInfo: AmountInfo!
     }
 
     type RootQuery {
-        events: [Events!]!
-        event(title: String!): Events!
-        user(id: ID!): Users!
-        users: [Users!]!
+        events: [Event!]!
+        event(title: String!): Event!
+        user(id: ID!): User!
+        users: [User!]!
     }
 
     type RootMutation {
-        createEvent(eventInput: EventInput): Events!
-        createUser(userInput: UsersInput): Users!
+        createEvent(eventInput: EventInput): Event!
+        createUser(userInput: UserInput): User!
         addPricing(pricingInput: PricingInput): String!
-        addHeroImages(heroImagesInput: HeroImagesInput): String!
+        addHeroImages(heroImageInput: HeroImageInput): String!
         addSpeaker(id: ID!):String!
     }
 

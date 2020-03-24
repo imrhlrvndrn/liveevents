@@ -33,7 +33,7 @@ const userSchema = new Schema(
             pincode: { type: String, required: true },
             country: { type: String, required: true }
         },
-        createdEvents: [{ type: Schema.Types.ObjectId, ref: "Events" }],
+        createdEvents: [{ type: Schema.Types.ObjectId, ref: "Event" }],
         bookedEvents: [{ type: Schema.Types.ObjectId, ref: "Booking" }],
         techStack: [{ type: String }],
         links: [
@@ -46,4 +46,4 @@ const userSchema = new Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Users", userSchema);
+module.exports = mongoose.model("User", userSchema);

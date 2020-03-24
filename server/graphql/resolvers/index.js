@@ -1,6 +1,4 @@
-const Events = require("../../models/Events");
-const Users = require("../../models/Users");
-const bcrypt = require("bcryptjs");
+const Events = require("../../models/Event");
 
 // All the resolvers
 const userResolver = require("./userResolver");

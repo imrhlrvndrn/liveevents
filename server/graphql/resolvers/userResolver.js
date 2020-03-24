@@ -1,28 +1,28 @@
-const Events = require("../../models/Events");
-const Users = require("../../models/Users");
+const Event = require("../../models/Event");
+const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const { transformUser } = require("../helpers/helper");
 
 module.exports = {
     users: async () => {
-        const returnedUsers = await Users.find({});
+        const returnedUsers = await User.find({});
         return returnedUsers.map(singleUser => {
             return transformUser(singleUser);
         });
     },
     user: async args => {
-        const user = await Users.findById(args.id);
+        const user = await User.findById(args.id);
         console.log(user);
         return transformUser(user);
     },
     createUser: async args => {
         try {
             // Check if user already exists
-            const userExists = await Users.findOne({ username: args.userInput.username });
+            const userExists = await User.findOne({ username: args.userInput.username });
             if (userExists) throw new Error("Username already exists");
 
             // Check if user already exists
-            const userEmailExists = await Users.findOne({ "email.email": args.userInput.email });
+            const userEmailExists = await User.findOne({ "email.email": args.userInput.email });
             if (userEmailExists) throw new Error("Email already exists");
 
             // Hash the password
@@ -30,7 +30,7 @@ module.exports = {
             const hashedPassword = await bcrypt.hash(args.userInput.password, salt);
 
             // Create the user
-            const newUser = new Users({
+            const newUser = new User({
                 entity: "user",
                 username: args.userInput.username,
                 email: {
