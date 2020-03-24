@@ -13,8 +13,8 @@ const transformEvent = async event => {
         attendees: getAttendeesOfEvent.bind(this, event._doc.attendees),
         startDate: new Date(event._doc.startDate).toString(),
         endDate: new Date(event._doc.endDate).toString(),
-        createdAt: new Date(user._doc.createdAt).toString(),
-        updatedAt: new Date(user._doc.updatedAt).toString()
+        createdAt: new Date(event._doc.createdAt).toString(),
+        updatedAt: new Date(event._doc.updatedAt).toString()
     };
 };
 
@@ -67,7 +67,7 @@ const transformRefund = async refund => {
 
 const getUserById = async creatorId => {
     const returnedCreator = await User.findById(creatorId);
-
+    console.log(returnedCreator);
     return transformUser(returnedCreator);
 };
 
