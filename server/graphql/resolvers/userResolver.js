@@ -1,7 +1,7 @@
 const Event = require("../../models/Event");
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
-const { transformUser } = require("../helpers/helper");
+const { transformUser, getUserById } = require("../helpers/helper");
 
 module.exports = {
     users: async () => {
@@ -11,9 +11,7 @@ module.exports = {
         });
     },
     user: async args => {
-        const user = await User.findById(args.id);
-        console.log(user);
-        return transformUser(user);
+        getUserById(args.id)
     },
     createUser: async args => {
         try {

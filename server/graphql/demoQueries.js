@@ -1,6 +1,6 @@
 `
 mutation {
-  createEvent(eventInput: {title: "lsdfj", description: "kladsjf", category: "timepass", startDate: "Sun Mar 15 2020 20:42:16 GMT+0530 (India Standard Time)", endDate: "Sun Mar 15 2020 20:42:16 GMT+0530 (India Standard Time)",capacity:100.00},address: {streetAddress1: "ramchandra complex", streetAddress2: "Subhash cross road ganeshnagar", city: "Dombivli", state: "Maharashtra", pincode: "421202", country: "India"}) {
+  createEvent(eventInput: {title: "This is the ultimate optimization test", description: "kladsjf", category: "timepass", startDate: "Sun Mar 15 2020 20:42:16 GMT+0530 (India Standard Time)", endDate: "Sun Mar 15 2020 20:42:16 GMT+0530 (India Standard Time)",capacity:100.00,address: {streetAddress1: "ramchandra complex", streetAddress2: "Subhash cross road ganeshnagar", city: "Dombivli", state: "Maharashtra", pincode: "421202", country: "India"}}) {
     entity
     title
     description
@@ -13,6 +13,7 @@ mutation {
     endDate
   }
 }
+
 
 
 mutation {
@@ -50,6 +51,30 @@ mutation {
     userId {
       username
       email
+    }
+  }
+}
+
+{
+  users {
+    _id
+    fullName
+    createdAt
+    createdEvents {
+      entity
+      _id
+      title
+      creator{
+        username
+        email{
+          email
+        }
+        fullName
+        gender
+      }
+      slugUri
+      summary
+      password
     }
   }
 }

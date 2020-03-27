@@ -8,7 +8,11 @@ const speakerSchema = new Schema(
         userId: { type: Schema.Types.ObjectId, ref: "User" },
         isFree: { type: Boolean, required: true },
         genre: [{ type: String }],
+        topic: [{ type: String }],
         speakerAmountInfo: {
+            numberOfTicketsForAdults: { type: Number },
+            numberOfTicketsForChildren: { type: Number },
+            tier: { type: String },
             baseAmount: { type: Number, required: true },
             taxInfo: [
                 {

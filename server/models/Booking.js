@@ -8,10 +8,12 @@ const bookingSchema = new Schema(
         attendeeId: { type: Schema.Types.ObjectId, ref: "User" },
         refundId: { type: Schema.Types.ObjectId, ref: "Refund" },
         promocode: { type: String },
-        quantityOfTickets: { type: Number, required: true },
         bookingStatus: { type: String, required: true },
         isFree: { type: Boolean, required: true },
         eventAmountInfo: {
+            numberOfTicketsForAdults: { type: Number, required: true },
+            numberOfTicketsForChildren: { type: Number, required: true },
+            tier: { type: String },
             baseAmount: { type: Number, required: true },
             taxInfo: [
                 {

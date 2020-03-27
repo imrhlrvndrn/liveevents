@@ -12,15 +12,15 @@ module.exports = {
         });
     },
     createEvent: async args => {
-        let slugArray = args.eventInput.title.toLowerCase().split(" ");
-        let slugUri = slugArray.join("-");
-
-        const newEvent = new Event({
+        const newEvent = new Event({    
             entity: "event",
             creator: "5e7780b9d4ecef40840aba19",
             title: args.eventInput.title,
             summary: args.eventInput.summary || "",
-            slugUri: slugUri,
+            slugUri: args.eventInput.title
+                .toLowerCase()
+                .split(" ")
+                .join("-"),
             description: args.eventInput.description,
             category: args.eventInput.category,
             startDate: args.eventInput.startDate,
@@ -28,6 +28,7 @@ module.exports = {
             isPublished: false,
             isListed: false,
             isInviteOnly: false,
+            isAgeRestricted: false,
             password: args.eventInput.password || "",
             capacity: args.eventInput.capacity,
             spotsLeft: args.eventInput.capacity,

@@ -44,6 +44,7 @@ const eventsSchema = new Schema(
         isPublished: { type: Boolean, required: true },
         isListed: { type: Boolean, required: true },
         isInviteOnly: { type: Boolean, required: true },
+        isAgeRestricted: { type: Boolean, required: true },
         password: { type: String },
         capacity: { type: Number, required: true },
         spotsLeft: { type: Number, required: true },

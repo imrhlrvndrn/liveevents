@@ -102,6 +102,7 @@ module.exports = buildSchema(`
         isPublished: Boolean!
         isListed: Boolean!
         isInviteOnly: Boolean!
+        isAgeRestricted: Boolean!
         password: String
         capacity: Float!
         spotsLeft: Float!
@@ -164,10 +165,16 @@ module.exports = buildSchema(`
         attendeeId: User!
         refundId: [Refund!]!
         promocode: String
-        quantityOfTickets: Float!
         bookingStatus: String!
         eventAmountInfo: AmountInfo!
         isFree: Boolean!
+        createdAt: String!
+        updatedAt: String!
+    }
+
+    input BookingInput {
+        promocode: String
+        isFree: String
     }
 
     type Team {
@@ -184,6 +191,9 @@ module.exports = buildSchema(`
     }
 
     type AmountInfo {
+        numberOfTicketsForAdults: Float
+        numberOfTicketsForChildren: Float
+        tier: String
         baseAmount: Float!
         taxInfo: [TaxInfo!]!
         totalAmount: Float!
@@ -206,6 +216,8 @@ module.exports = buildSchema(`
         reason: String
         quantityRequested: Float! 
         amountToBeRefunded: Float!
+        createdAt: String!
+        updatedAt: String!
     }
 
     type Speaker {
@@ -215,7 +227,15 @@ module.exports = buildSchema(`
         userId: User!
         isFree: Boolean!
         genre: [String!]!
+        topic: [String!]!
         speakerAmountInfo: AmountInfo!
+        createdAt: String!
+        updatedAt: String!
+    }
+
+    input SpeakerInput {
+        genre:[String!]!
+        topic:[String!]!
     }
 
     type RootQuery {
@@ -228,6 +248,9 @@ module.exports = buildSchema(`
     type RootMutation {
         createEvent(eventInput: EventInput): Event!
         createUser(userInput: UserInput): User!
+        createBooking(bookingInput: BookingInput): Booking!
+        createSpeaker(speakerInput: SpeakerInput): Speaker!
+        createRefund(refund)
         addPricing(pricingInput: PricingInput): String!
         addHeroImages(heroImageInput: HeroImageInput): String!
         addSpeaker(id: ID!):String!
