@@ -12,9 +12,9 @@ module.exports = {
         });
     },
     createEvent: async args => {
-        const newEvent = new Event({    
+        const newEvent = new Event({
             entity: "event",
-            creator: "5e7780b9d4ecef40840aba19",
+            creator: "5e80aa6a9e568c50a0e65faa",
             title: args.eventInput.title,
             summary: args.eventInput.summary || "",
             slugUri: args.eventInput.title
@@ -46,7 +46,7 @@ module.exports = {
             const savedNewEvent = await newEvent.save();
             console.log(savedNewEvent);
 
-            const eventUser = await User.findById("5e7780b9d4ecef40840aba19");
+            const eventUser = await User.findById("5e80aa6a9e568c50a0e65faa");
 
             eventUser.createdEvents.push(savedNewEvent._id);
             eventUser.save();

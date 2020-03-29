@@ -174,7 +174,9 @@ module.exports = buildSchema(`
 
     input BookingInput {
         promocode: String
-        isFree: String
+        isFree: Boolean
+        tier: String
+        eventAmountInfo: AmountInfoInput!
     }
 
     type Team {
@@ -200,6 +202,12 @@ module.exports = buildSchema(`
         discountedAmount: Float
     }
 
+    input AmountInfoInput {
+        numberOfTicketsForAdults: Float
+        numberOfTicketsForChildren: Float
+        baseAmount: Float
+    }
+
     type TaxInfo {
         _id: ID!
         taxName: String!
@@ -218,6 +226,12 @@ module.exports = buildSchema(`
         amountToBeRefunded: Float!
         createdAt: String!
         updatedAt: String!
+    }
+
+    input RefundInput {
+        itemType: String
+        reason: String!
+        quantityRequested: Float!
     }
 
     type Speaker {
@@ -250,7 +264,7 @@ module.exports = buildSchema(`
         createUser(userInput: UserInput): User!
         createBooking(bookingInput: BookingInput): Booking!
         createSpeaker(speakerInput: SpeakerInput): Speaker!
-        createRefund(refund)
+        createRefund(refundInput: RefundInput): Refund!
         addPricing(pricingInput: PricingInput): String!
         addHeroImages(heroImageInput: HeroImageInput): String!
         addSpeaker(id: ID!):String!
