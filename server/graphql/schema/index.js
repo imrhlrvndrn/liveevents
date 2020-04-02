@@ -111,6 +111,29 @@ module.exports = buildSchema(`
         updatedAt: String!
     }
 
+
+    input UpdateEventInput {
+        _id: ID
+        slugUri: String
+        title: String
+        summary: String
+        description: String
+        category: String
+        address: AddressInput
+        heroImages: [HeroImageInput]
+        startDate: String
+        endDate: String
+        pricing: [PricingInput]
+        isPublished: Boolean
+        isListed: Boolean
+        isInviteOnly: Boolean
+        isAgeRestricted: Boolean
+        password: String
+        capacity: Float
+        spotsLeft: Float
+        validPromocodes: [ValidPromocodeInput]
+    }
+
     input EventInput {
         title: String!
         description: String!
@@ -154,6 +177,11 @@ module.exports = buildSchema(`
     }
 
     type ValidPromocode {
+        promocode: String!
+        discount: Float!
+    }
+
+    input ValidPromocodeInput {
         promocode: String!
         discount: Float!
     }
@@ -261,13 +289,13 @@ module.exports = buildSchema(`
 
     type RootMutation {
         createEvent(eventInput: EventInput): Event!
+        updateEvent(updateEventInput: UpdateEventInput):Event!
+        addEventPricing(pricingInput: PricingInput): String!
+        addEventHeroImages(heroImageInput: HeroImageInput): String!
         createUser(userInput: UserInput): User!
         createBooking(bookingInput: BookingInput): Booking!
         createSpeaker(speakerInput: SpeakerInput): Speaker!
         createRefund(refundInput: RefundInput): Refund!
-        addPricing(pricingInput: PricingInput): String!
-        addHeroImages(heroImageInput: HeroImageInput): String!
-        addSpeaker(id: ID!):String!
     }
 
     schema {
