@@ -125,6 +125,17 @@ const getRefundsOfBooking = async refundIds => {
     });
 };
 
+const popById = async (popIds, popIdToBeDeleted) => {
+    let array = [];
+    popIds.forEach(popId => {
+        if (popId !== popIdToBeDeleted) {
+            array.push(popId);
+        }
+    });
+
+    return array;
+};
+
 module.exports = {
     transformEvent: transformEvent,
     transformUser: transformUser,
@@ -139,5 +150,6 @@ module.exports = {
     getAttendeesOfEvent: getAttendeesOfEvent,
     getAllBookedEventsOfUser: getAllBookedEventsOfUser,
     getAllCreatedEventsOfUser: getAllCreatedEventsOfUser,
-    getRefundsOfBooking: getRefundsOfBooking
+    getRefundsOfBooking: getRefundsOfBooking,
+    popById: popById
 };
