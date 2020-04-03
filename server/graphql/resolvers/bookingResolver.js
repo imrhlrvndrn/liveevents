@@ -15,7 +15,7 @@ module.exports = {
 
         const newBooking = new Booking({
             entity: "booking",
-            eventId: "5e80ab2a94a1c004607e0ade",
+            eventId: "5e871290fd9f4d29e8748084",
             attendeeId: "5e80aa6a9e568c50a0e65faa",
             promocode: args.bookingInput.promocode || "",
             bookingStatus: "booked",
@@ -36,7 +36,7 @@ module.exports = {
         try {
             let returnedNewBooking = await newBooking.save();
 
-            let eventsBooking = await Event.findOne({ _id: "5e80ab2a94a1c004607e0ade" });
+            let eventsBooking = await Event.findOne({ _id: "5e871290fd9f4d29e8748084" });
             eventsBooking.attendees.push(returnedNewBooking._id);
             eventsBooking.save();
 
@@ -57,15 +57,17 @@ module.exports = {
             filteredBookingList = cancelledBookingEvent.attendees.filter(event => {
                 return event._id !== cancelledBooking._id;
             });
+            console.log(filteredBookingList);
             cancelledBookingEvent.attendees = filteredBookingList;
-            cancelledBookingEvent.save();
+            await cancelledBookingEvent.save();
 
             let cancelledBookingUser = await User.findById(cancelledBooking.attendeeId);
             filteredBookingList = cancelledBookingUser.bookedEvents.filter(event => {
                 return event._id !== cancelledBooking._id;
             });
+            console.log(filteredBookingList);
             cancelledBookingUser.bookedEvents = filteredBookingList;
-            cancelledBookingUser.save();
+            await cancelledBookingUser.save();
 
             const deletedBooking = await Booking.findByIdAndRemove(args.id);
 
