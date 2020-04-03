@@ -67,4 +67,9 @@ module.exports = {
             throw error;
         }
     },
+    transferBooking: async (args) => {
+        const transferedBooking = await Booking.findById(args.id);
+        transferedBooking.attendeeId = args.userId;
+        await transferedBooking.save();
+    },
 };

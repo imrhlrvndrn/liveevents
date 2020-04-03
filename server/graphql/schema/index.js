@@ -295,6 +295,7 @@ module.exports = buildSchema(`
         createUser(userInput: UserInput): User!
         createBooking(bookingInput: BookingInput): Booking!
         cancelBooking(id: ID!): Booking!
+        transferBooking(id: ID!, userId: ID!): Booking!
         createSpeaker(speakerInput: SpeakerInput): Speaker!
         createRefund(refundInput: RefundInput): Refund!
     }
