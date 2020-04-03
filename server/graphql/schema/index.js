@@ -294,6 +294,7 @@ module.exports = buildSchema(`
         addEventHeroImages(heroImageInput: HeroImageInput): String!
         createUser(userInput: UserInput): User!
         createBooking(bookingInput: BookingInput): Booking!
+        cancelBooking(id: ID!): Booking!
         createSpeaker(speakerInput: SpeakerInput): Speaker!
         createRefund(refundInput: RefundInput): Refund!
     }

@@ -48,5 +48,30 @@ module.exports = {
         } catch (error) {
             throw error;
         }
+    },
+    cancelBooking: async args => {
+        let filteredBookingList;
+        try {
+            let cancelledBooking = await Booking.findById(args.id);
+            let cancelledBookingEvent = await Event.findById(cancelledBooking.eventId);
+            filteredBookingList = cancelledBookingEvent.attendees.filter(event => {
+                return event._id !== cancelledBooking._id;
+            });
+            cancelledBookingEvent.attendees = filteredBookingList;
+            cancelledBookingEvent.save();
+
+            let cancelledBookingUser = await User.findById(cancelledBooking.attendeeId);
+            filteredBookingList = cancelledBookingUser.bookedEvents.filter(event => {
+                return event._id !== cancelledBooking._id;
+            });
+            cancelledBookingUser.bookedEvents = filteredBookingList;
+            cancelledBookingUser.save();
+
+            const deletedBooking = await Booking.findByIdAndRemove(args.id);
+
+            return transformBooking(deletedBooking);
+        } catch (error) {
+            throw error;
+        }
     }
 };
