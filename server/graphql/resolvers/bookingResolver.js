@@ -5,17 +5,17 @@ const User = require("../../models/User");
 const { transformBooking } = require("../helpers/helper");
 
 module.exports = {
-    createBooking: async args => {
+    createBooking: async (args) => {
         let {
             baseAmount,
             numberOfTicketsForAdults,
             numberOfTicketsForChildren,
-            tier
+            tier,
         } = args.bookingInput.eventAmountInfo;
 
         const newBooking = new Booking({
             entity: "booking",
-            eventId: "5e80ab2a94a1c004607e0ade",
+            eventId: "5e871290fd9f4d29e8748084",
             attendeeId: "5e80aa6a9e568c50a0e65faa",
             promocode: args.bookingInput.promocode || "",
             bookingStatus: "booked",
@@ -29,14 +29,14 @@ module.exports = {
                 totalAmount:
                     baseAmount * numberOfTicketsForAdults +
                     (baseAmount * numberOfTicketsForChildren) / 2,
-                discountedAmount: 0
-            }
+                discountedAmount: 0,
+            },
         });
 
         try {
             let returnedNewBooking = await newBooking.save();
 
-            let eventsBooking = await Event.findOne({ _id: "5e80ab2a94a1c004607e0ade" });
+            let eventsBooking = await Event.findOne({ _id: "5e871290fd9f4d29e8748084" });
             eventsBooking.attendees.push(returnedNewBooking._id);
             eventsBooking.save();
 
@@ -49,22 +49,15 @@ module.exports = {
             throw error;
         }
     },
-    cancelBooking: async args => {
-        let filteredBookingList;
+    cancelBooking: async (args) => {
         try {
             let cancelledBooking = await Booking.findById(args.id);
             let cancelledBookingEvent = await Event.findById(cancelledBooking.eventId);
-            filteredBookingList = cancelledBookingEvent.attendees.filter(event => {
-                return event._id !== cancelledBooking._id;
-            });
-            cancelledBookingEvent.attendees = filteredBookingList;
+            cancelledBookingEvent.attendees.pull(args.id);
             cancelledBookingEvent.save();
 
             let cancelledBookingUser = await User.findById(cancelledBooking.attendeeId);
-            filteredBookingList = cancelledBookingUser.bookedEvents.filter(event => {
-                return event._id !== cancelledBooking._id;
-            });
-            cancelledBookingUser.bookedEvents = filteredBookingList;
+            cancelledBookingUser.bookedEvents.pull(args.id);
             cancelledBookingUser.save();
 
             const deletedBooking = await Booking.findByIdAndRemove(args.id);
@@ -73,5 +66,5 @@ module.exports = {
         } catch (error) {
             throw error;
         }
-    }
+    },
 };

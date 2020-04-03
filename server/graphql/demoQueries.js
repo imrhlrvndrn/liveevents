@@ -15,6 +15,16 @@ mutation {
 }
 
 
+mutation{
+  createBooking(bookingInput:{promocode:"beingcodr20",isFree:false,tier:"premium",eventAmountInfo:{numberOfTicketsForAdults:2,numberOfTicketsForChildren:4,baseAmount:1000}}){
+    _id
+    entity
+    promocode
+    isFree
+  }
+}
+
+
 
 mutation {
   createEvent(eventInput: {title: "last test please work fine", description: "kladsjf", category: "timepass", location: "dombivli", country: "India", startDate: "Sun Mar 15 2020 20:42:16 GMT+0530 (India Standard Time)", endDate: "Sun Mar 15 2020 20:42:16 GMT+0530 (India Standard Time)"})
