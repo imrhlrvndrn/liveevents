@@ -5,6 +5,12 @@ const User = require("../../models/User");
 const { transformBooking } = require("../helpers/helper");
 
 module.exports = {
+    bookings: async () => {
+        const allReturnedBookings = await Booking.find({});
+        return allReturnedBookings.map((booking) => {
+            return transformBooking(booking);
+        });
+    },
     createBooking: async (args) => {
         let {
             baseAmount,
@@ -69,7 +75,15 @@ module.exports = {
     },
     transferBooking: async (args) => {
         const transferedBooking = await Booking.findById(args.id);
+        const transferedFromUser = await User.findById(transferedBooking.attendeeId);
+        transferedFromUser.bookedEvents.pull(args.id);
+
+        const transferedToUser = await User.findById(args.userId);
+        transferedToUser.bookedEvents.push(args.id);
+
         transferedBooking.attendeeId = args.userId;
         await transferedBooking.save();
+
+        return transformBooking(transferedBooking);
     },
 };

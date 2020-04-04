@@ -6,14 +6,14 @@ const { transformUser, getUserById } = require("../helpers/helper");
 module.exports = {
     users: async () => {
         const returnedUsers = await User.find({});
-        return returnedUsers.map(singleUser => {
+        return returnedUsers.map((singleUser) => {
             return transformUser(singleUser);
         });
     },
-    user: async args => {
-        getUserById(args.id)
+    user: async (args) => {
+        getUserById(args.id);
     },
-    createUser: async args => {
+    createUser: async (args) => {
         try {
             // Check if user already exists
             const userExists = await User.findOne({ username: args.userInput.username });
@@ -33,7 +33,7 @@ module.exports = {
                 username: args.userInput.username,
                 email: {
                     isVerified: false,
-                    email: args.userInput.email
+                    email: args.userInput.email,
                 },
                 password: hashedPassword,
                 fullName: args.userInput.fullName,
@@ -47,7 +47,7 @@ module.exports = {
                     state: args.userInput.address.state || "",
                     city: args.userInput.address.city || "",
                     pincode: args.userInput.address.pincode || "",
-                    country: args.userInput.address.country || ""
+                    country: args.userInput.address.country || "",
                 },
                 billingAddress: {
                     streetAddress1: args.userInput.billingAddress.streetAddress1 || "",
@@ -55,8 +55,8 @@ module.exports = {
                     state: args.userInput.billingAddress.state || "",
                     city: args.userInput.billingAddress.city || "",
                     pincode: args.userInput.billingAddress.pincode || "",
-                    country: args.userInput.billingAddress.country || ""
-                }
+                    country: args.userInput.billingAddress.country || "",
+                },
             });
 
             // Save the user in the database
@@ -65,5 +65,5 @@ module.exports = {
         } catch (error) {
             throw error;
         }
-    }
+    },
 };

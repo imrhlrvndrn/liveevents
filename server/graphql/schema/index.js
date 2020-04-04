@@ -285,6 +285,7 @@ module.exports = buildSchema(`
         event(title: String!): Event!
         user(id: ID!): User!
         users: [User!]!
+        bookings: [Booking]!
     }
 
     type RootMutation {
