@@ -77,9 +77,11 @@ module.exports = {
         const transferedBooking = await Booking.findById(args.id);
         const transferedFromUser = await User.findById(transferedBooking.attendeeId);
         transferedFromUser.bookedEvents.pull(args.id);
+        await transferedFromUser.save();
 
         const transferedToUser = await User.findById(args.userId);
         transferedToUser.bookedEvents.push(args.id);
+        await transferedFromUser.save();
 
         transferedBooking.attendeeId = args.userId;
         await transferedBooking.save();

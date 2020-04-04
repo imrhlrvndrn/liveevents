@@ -46,6 +46,20 @@ mutation {
 }
 
 
+mutation{
+  transferBooking(id:"5e8836cbe94a67151cbe054f",userId:"5e8764f61eb233115c85346b"){
+    _id
+    promocode
+    refundId{
+      amountToBeRefunded
+    }
+    attendeeId{
+      fullName
+    }
+  }
+}
+
+
 
 
 
