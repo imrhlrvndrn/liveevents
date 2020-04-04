@@ -66,4 +66,5 @@ module.exports = {
             throw error;
         }
     },
+    updateUser: async (args) => {},
 };

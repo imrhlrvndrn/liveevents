@@ -33,6 +33,19 @@ module.exports = buildSchema(`
         password: String!
         gender: String!
         birthDate: String!
+        address: AddressInput!
+        billingAddress: AddressInput!
+    }
+
+    input UpdateUserInput {
+        username: String
+        fullName: String
+        companyName: String
+        designation: String
+        email: String
+        password: String
+        gender: String
+        birthDate: String
         address: AddressInput
         billingAddress: AddressInput
     }
@@ -113,17 +126,14 @@ module.exports = buildSchema(`
 
 
     input UpdateEventInput {
-        _id: ID
-        slugUri: String
+        _id: ID!
         title: String
         summary: String
         description: String
         category: String
         address: AddressInput
-        heroImages: [HeroImageInput]
         startDate: String
         endDate: String
-        pricing: [PricingInput]
         isPublished: Boolean
         isListed: Boolean
         isInviteOnly: Boolean
@@ -291,9 +301,10 @@ module.exports = buildSchema(`
     type RootMutation {
         createEvent(eventInput: EventInput): Event!
         updateEvent(updateEventInput: UpdateEventInput):Event!
-        addEventPricing(pricingInput: PricingInput): String!
-        addEventHeroImages(heroImageInput: HeroImageInput): String!
+        addEventPricing(id: ID!, pricingInput: PricingInput): String!
+        addEventHeroImages(id: ID!, heroImageInput: HeroImageInput): String!
         createUser(userInput: UserInput): User!
+        updateUser(userInput: UpdateUserInput): User!
         createBooking(bookingInput: BookingInput): Booking!
         cancelBooking(id: ID!): Booking!
         transferBooking(id: ID!, userId: ID!): Booking!
