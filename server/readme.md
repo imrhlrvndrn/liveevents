@@ -9,7 +9,7 @@ EventsLive is an event hosting website where you can host your events and share 
 1. Fork the repository to your account
 1. Clone the repository from your GitHub account to your local machine
 1. Navigate to the `client` and `server` folder and run the following command in both the directories `npm install`. This will install all the necessary packages and dependencies
-1. Open the terminal and run following commands to see the output
+1. Open the terminal, `cd server` and run following commands to see the output
 
 | Scripts        | Output                                                                   |
 | -------------- | ------------------------------------------------------------------------ |
