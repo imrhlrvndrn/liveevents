@@ -57,6 +57,17 @@ module.exports = {
                     pincode: args.userInput.billingAddress.pincode || "",
                     country: args.userInput.billingAddress.country || "",
                 },
+                links: {
+                    instagram: "",
+                    youtube: "",
+                    linkedin: "",
+                    twitter: "",
+                    vimeo: "",
+                    whatsapp: "",
+                    facebook: "",
+                    discord: "",
+                    telegram: "",
+                },
             });
 
             // Save the user in the database
@@ -67,44 +78,89 @@ module.exports = {
         }
     },
     updateUser: async (args) => {
-        let user = await User.findById(args.id);
+        let user = await User.findById(args.updateUserInput.id);
         if (!user) throw new Error("No user found!");
+        const userEmailExists = await User.findOne({
+            "email.email": args.updateUserInput.email,
+        });
+        if (userEmailExists) throw new Error("This email is linked with other account");
 
-        if (user.fullName !== undefined) {
-            user.fullName = args.fullName;
+        const usernameExists = await User.findOne({ username: args.updateUserInput.username });
+        if (usernameExists) throw new Error("Username already exists");
+
+        if (args.updateUserInput.fullName !== undefined) {
+            user.fullName = args.updateUserInput.fullName;
         }
-        if (user.email !== undefined) {
-            user.email = args.email;
+        if (args.updateUserInput.email !== undefined) {
+            user.email.email = args.updateUserInput.email;
         }
-        if (user.username !== undefined) {
-            user.username = args.username;
+        if (args.updateUserInput.username !== undefined) {
+            user.username = args.updateUserInput.username;
         }
-        if (user.companyName !== undefined) {
-            user.companyName = args.companyName;
+        if (args.updateUserInput.companyName !== undefined) {
+            user.companyName = args.updateUserInput.companyName;
         }
-        if (user.designation !== undefined) {
-            user.designation = args.designation;
+        if (args.updateUserInput.designation !== undefined) {
+            user.designation = args.updateUserInput.designation;
         }
-        if (user.gender !== undefined) {
-            user.gender = args.gender;
+        if (args.updateUserInput.gender !== undefined) {
+            user.gender = args.updateUserInput.gender;
         }
-        if (user.age !== undefined) {
-            user.age = args.age;
+        if (args.updateUserInput.age !== undefined) {
+            user.age = args.updateUserInput.age;
         }
-        if (user.birthDate !== undefined) {
-            user.birthDate = args.birthDate;
+        if (args.updateUserInput.birthDate !== undefined) {
+            user.birthDate = args.updateUserInput.birthDate;
         }
-        if (user.techStack !== undefined) {
-            user.techStack = args.techStack;
+        if (args.updateUserInput.techStack !== undefined) {
+            let filteredTechStack = [];
+            const userStack = user.techStack.map((item) => {
+                return item.toLowerCase();
+            });
+            args.updateUserInput.techStack.forEach((stack) => {
+                if (!userStack.includes(stack.toLowerCase())) {
+                    filteredTechStack.push(stack);
+                }
+            });
+            user.techStack = [...user.techStack, ...filteredTechStack];
         }
-        if (user.links !== undefined) {
-            user.links = args.links;
+        if (args.updateUserInput.links !== undefined) {
+            args.updateUserInput.links.forEach((link) => {
+                user.links.forEach((userLink) => {
+                    if (userLink._linkType !== link._linkType) return;
+                });
+            });
+            user.links = [...user.links, ...args.updateUserInput.links];
         }
-        if (user.address !== undefined) {
-            user.address = args.address;
+        if (args.updateUserInput.address !== undefined) {
+            user.address = {
+                streetAddress1:
+                    args.updateUserInput.address.streetAddress1 || user.address.streetAddress1,
+                streetAddress2:
+                    args.updateUserInput.address.streetAddress2 || user.address.streetAddress2,
+                state: args.updateUserInput.address.state || user.address.state,
+                city: args.updateUserInput.address.city || user.address.city,
+                pincode: args.updateUserInput.address.pincode || user.address.pincode,
+                country: args.updateUserInput.address.country || user.address.country,
+            };
         }
-        if (user.billingAddress !== undefined) {
-            user.billingAddress = args.billingAddress;
+        if (args.updateUserInput.billingAddress !== undefined) {
+            user.billingAddress = {
+                streetAddress1:
+                    args.updateUserInput.billingAddress.streetAddress1 ||
+                    user.billingAddress.streetAddress1,
+                streetAddress2:
+                    args.updateUserInput.billingAddress.streetAddress2 ||
+                    user.billingAddress.streetAddress2,
+                state: args.updateUserInput.billingAddress.state || user.billingAddress.state,
+                city: args.updateUserInput.billingAddress.city || user.billingAddress.city,
+                pincode: args.updateUserInput.billingAddress.pincode || user.billingAddress.pincode,
+                country: args.updateUserInput.billingAddress.country || user.billingAddress.country,
+            };
         }
+
+        await user.save();
+
+        return transformUser(user);
     },
 };

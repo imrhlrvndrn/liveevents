@@ -10,20 +10,20 @@ const eventsSchema = new Schema(
         summary: { type: String },
         description: { type: String, required: true },
         category: { type: String, required: true },
-        address: {
+        venue: {
             streetAddress1: { type: String, required: true },
             streetAddress2: { type: String, required: true },
             state: { type: String, required: true },
             city: { type: String, required: true },
             pincode: { type: String, required: true },
-            country: { type: String, required: true }
+            country: { type: String, required: true },
         },
         heroImages: [
             {
                 imgUrl: { type: String, required: true },
                 alt: { type: String, required: true },
-                thumbnail: { type: String, required: true }
-            }
+                thumbnail: { type: String, required: true },
+            },
         ],
         startDate: { type: Date, required: true },
         endDate: { type: Date, required: true },
@@ -38,8 +38,8 @@ const eventsSchema = new Schema(
                 isBestSeller: Boolean,
                 totalTickets: { type: Number, required: true },
                 soldTickets: { type: Number, required: true },
-                pendingTickets: { type: Number, required: true }
-            }
+                pendingTickets: { type: Number, required: true },
+            },
         ],
         isPublished: { type: Boolean, required: true },
         isListed: { type: Boolean, required: true },
@@ -51,9 +51,9 @@ const eventsSchema = new Schema(
         validPromocodes: [
             {
                 promocode: { type: String },
-                discount: { type: Number }
-            }
-        ]
+                discount: { type: Number },
+            },
+        ],
     },
     { timestamps: true }
 );

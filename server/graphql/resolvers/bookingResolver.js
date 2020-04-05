@@ -21,8 +21,8 @@ module.exports = {
 
         const newBooking = new Booking({
             entity: "booking",
-            eventId: "5e871290fd9f4d29e8748084",
-            attendeeId: "5e80aa6a9e568c50a0e65faa",
+            eventId: "5e8a0c828e8e9a0580120797",
+            attendeeId: "5e8a0b2192747413e043404f",
             promocode: args.bookingInput.promocode || "",
             bookingStatus: "booked",
             isFree: args.bookingInput.isFree || false,
@@ -42,11 +42,11 @@ module.exports = {
         try {
             let returnedNewBooking = await newBooking.save();
 
-            let eventsBooking = await Event.findOne({ _id: "5e871290fd9f4d29e8748084" });
+            let eventsBooking = await Event.findOne({ _id: "5e8a0c828e8e9a0580120797" });
             eventsBooking.attendees.push(returnedNewBooking._id);
             eventsBooking.save();
 
-            let usersBooking = await User.findById("5e80aa6a9e568c50a0e65faa");
+            let usersBooking = await User.findById("5e8a0b2192747413e043404f");
             usersBooking.bookedEvents.push(returnedNewBooking._id);
             usersBooking.save();
 
@@ -81,7 +81,7 @@ module.exports = {
 
         const transferedToUser = await User.findById(args.userId);
         transferedToUser.bookedEvents.push(args.id);
-        await transferedFromUser.save();
+        await transferedToUser.save();
 
         transferedBooking.attendeeId = args.userId;
         await transferedBooking.save();

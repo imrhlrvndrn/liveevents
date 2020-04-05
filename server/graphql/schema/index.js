@@ -38,6 +38,7 @@ module.exports = buildSchema(`
     }
 
     input UpdateUserInput {
+        id: ID!
         username: String
         fullName: String
         companyName: String
@@ -47,10 +48,10 @@ module.exports = buildSchema(`
         gender: String
         birthDate: String
         age: Float        
-        techStack: [String]!
-        links: [LinkInput]!
-        address: AddressInput
-        billingAddress: AddressInput
+        techStack: [String]
+        links: [LinkInput]
+        address: UpdateAddressInput
+        billingAddress: UpdateAddressInput
     }
 
     type Email {
@@ -64,7 +65,8 @@ module.exports = buildSchema(`
         state: String!
         city: String!
         pincode: String!
-        country: String!    }
+        country: String!
+    }
 
     input AddressInput {
         streetAddress1: String
@@ -74,15 +76,38 @@ module.exports = buildSchema(`
         pincode: String
         country: String
     }
+    
+    input UpdateAddressInput {
+        streetAddress1: String
+        streetAddress2: String
+        state: String
+        city: String
+        pincode: String
+        country: String
+    }
 
     type Link {
-        _linkType: String!
-        linkURI: String!
+        instagram: String
+        youtube: String
+        linkedin: String
+        twitter: String
+        vimeo: String
+        whatsapp: String
+        facebook: String
+        discord: String
+        telegram: String
     }
 
     input LinkInput {
-        _linkType: String!
-        linkURI: String!
+        instagram: String
+        youtube: String
+        linkedin: String
+        twitter: String
+        vimeo: String
+        whatsapp: String
+        facebook: String
+        discord: String
+        telegram: String
     }
 
     type Attendee {
@@ -113,7 +138,7 @@ module.exports = buildSchema(`
         summary: String
         description: String!
         category: String!
-        address: Address!
+        venue: Address!
         heroImages: [HeroImage!]
         startDate: String!
         endDate: String!
@@ -161,7 +186,7 @@ module.exports = buildSchema(`
         endDate: String!
         password: String
         capacity: Float!
-        address: AddressInput!
+        venue: AddressInput!
     }
 
     type HeroImage {
@@ -312,7 +337,7 @@ module.exports = buildSchema(`
         addEventPricing(id: ID!, pricingInput: PricingInput): String!
         addEventHeroImages(id: ID!, heroImageInput: HeroImageInput): String!
         createUser(userInput: UserInput): User!
-        updateUser(userInput: UpdateUserInput): User!
+        updateUser(updateUserInput: UpdateUserInput): User!
         createBooking(bookingInput: BookingInput): Booking!
         cancelBooking(id: ID!): Booking!
         transferBooking(id: ID!, userId: ID!): Booking!

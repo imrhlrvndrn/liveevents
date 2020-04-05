@@ -7,20 +7,17 @@ module.exports = {
         const events = await Event.find({});
         // console.log(events);
 
-        return events.map(savedEvent => {
+        return events.map((savedEvent) => {
             return transformEvent(savedEvent);
         });
     },
-    createEvent: async args => {
+    createEvent: async (args) => {
         const newEvent = new Event({
             entity: "event",
-            creator: "5e80aa6a9e568c50a0e65faa",
+            creator: "5e8a0b2192747413e043404f",
             title: args.eventInput.title,
             summary: args.eventInput.summary || "",
-            slugUri: args.eventInput.title
-                .toLowerCase()
-                .split(" ")
-                .join("-"),
+            slugUri: args.eventInput.title.toLowerCase().split(" ").join("-"),
             description: args.eventInput.description,
             category: args.eventInput.category,
             startDate: args.eventInput.startDate,
@@ -32,21 +29,21 @@ module.exports = {
             password: args.eventInput.password || "",
             capacity: args.eventInput.capacity,
             spotsLeft: args.eventInput.capacity,
-            address: {
-                streetAddress1: args.eventInput.address.streetAddress1 || "",
-                streetAddress2: args.eventInput.address.streetAddress2 || "",
-                state: args.eventInput.address.state || "",
-                city: args.eventInput.address.city || "",
-                pincode: args.eventInput.address.pincode || "",
-                country: args.eventInput.address.country || ""
-            }
+            venue: {
+                streetAddress1: args.eventInput.venue.streetAddress1 || "",
+                streetAddress2: args.eventInput.venue.streetAddress2 || "",
+                state: args.eventInput.venue.state || "",
+                city: args.eventInput.venue.city || "",
+                pincode: args.eventInput.venue.pincode || "",
+                country: args.eventInput.venue.country || "",
+            },
         });
 
         try {
             const savedNewEvent = await newEvent.save();
             console.log(savedNewEvent);
 
-            const eventUser = await User.findById("5e80aa6a9e568c50a0e65faa");
+            const eventUser = await User.findById("5e8a0b2192747413e043404f");
 
             eventUser.createdEvents.push(savedNewEvent._id);
             eventUser.save();
@@ -57,5 +54,5 @@ module.exports = {
             console.log(error);
             throw error;
         }
-    }
+    },
 };

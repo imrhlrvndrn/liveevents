@@ -7,7 +7,7 @@ const userSchema = new Schema(
         username: { type: String, required: true, unique: true },
         email: {
             isVerified: { type: Boolean, required: true },
-            email: { type: String, required: true, unique: true }
+            email: { type: String, required: true, unique: true },
         },
         password: { type: String, required: true },
         fullName: { type: String, required: true },
@@ -23,7 +23,7 @@ const userSchema = new Schema(
             state: { type: String, required: true },
             city: { type: String, required: true },
             pincode: { type: String, required: true },
-            country: { type: String, required: true }
+            country: { type: String, required: true },
         },
         billingAddress: {
             streetAddress1: { type: String, required: true },
@@ -31,17 +31,22 @@ const userSchema = new Schema(
             state: { type: String, required: true },
             city: { type: String, required: true },
             pincode: { type: String, required: true },
-            country: { type: String, required: true }
+            country: { type: String, required: true },
         },
         createdEvents: [{ type: Schema.Types.ObjectId, ref: "Event" }],
         bookedEvents: [{ type: Schema.Types.ObjectId, ref: "Booking" }],
         techStack: [{ type: String }],
-        links: [
-            {
-                _linkType: { type: String, required: true },
-                linkURI: { type: String, required: true }
-            }
-        ]
+        links: {
+            instagram: { type: String },
+            youtube: { type: String },
+            linkedin: { type: String },
+            twitter: { type: String },
+            vimeo: { type: String },
+            whatsapp: { type: String },
+            facebook: { type: String },
+            discord: { type: String },
+            telegram: { type: String },
+        },
     },
     { timestamps: true }
 );
