@@ -46,6 +46,9 @@ module.exports = buildSchema(`
         password: String
         gender: String
         birthDate: String
+        age: Float        
+        techStack: [String]!
+        links: [LinkInput]!
         address: AddressInput
         billingAddress: AddressInput
     }
@@ -73,6 +76,11 @@ module.exports = buildSchema(`
     }
 
     type Link {
+        _linkType: String!
+        linkURI: String!
+    }
+
+    input LinkInput {
         _linkType: String!
         linkURI: String!
     }

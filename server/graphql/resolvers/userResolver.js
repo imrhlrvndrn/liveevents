@@ -66,5 +66,45 @@ module.exports = {
             throw error;
         }
     },
-    updateUser: async (args) => {},
+    updateUser: async (args) => {
+        let user = await User.findById(args.id);
+        if (!user) throw new Error("No user found!");
+
+        if (user.fullName !== undefined) {
+            user.fullName = args.fullName;
+        }
+        if (user.email !== undefined) {
+            user.email = args.email;
+        }
+        if (user.username !== undefined) {
+            user.username = args.username;
+        }
+        if (user.companyName !== undefined) {
+            user.companyName = args.companyName;
+        }
+        if (user.designation !== undefined) {
+            user.designation = args.designation;
+        }
+        if (user.gender !== undefined) {
+            user.gender = args.gender;
+        }
+        if (user.age !== undefined) {
+            user.age = args.age;
+        }
+        if (user.birthDate !== undefined) {
+            user.birthDate = args.birthDate;
+        }
+        if (user.techStack !== undefined) {
+            user.techStack = args.techStack;
+        }
+        if (user.links !== undefined) {
+            user.links = args.links;
+        }
+        if (user.address !== undefined) {
+            user.address = args.address;
+        }
+        if (user.billingAddress !== undefined) {
+            user.billingAddress = args.billingAddress;
+        }
+    },
 };
