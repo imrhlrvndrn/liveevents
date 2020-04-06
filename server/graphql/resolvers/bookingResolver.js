@@ -57,16 +57,16 @@ module.exports = {
     },
     cancelBooking: async (args) => {
         try {
-            let cancelledBooking = await Booking.findById(args.id);
+            let cancelledBooking = await Booking.findById(args.bookingId);
             let cancelledBookingEvent = await Event.findById(cancelledBooking.eventId);
-            cancelledBookingEvent.attendees.pull(args.id);
+            cancelledBookingEvent.attendees.pull(args.bookingId);
             cancelledBookingEvent.save();
 
             let cancelledBookingUser = await User.findById(cancelledBooking.attendeeId);
-            cancelledBookingUser.bookedEvents.pull(args.id);
+            cancelledBookingUser.bookedEvents.pull(args.bookingId);
             cancelledBookingUser.save();
 
-            const deletedBooking = await Booking.findByIdAndRemove(args.id);
+            const deletedBooking = await Booking.findByIdAndRemove(args.bookingId);
 
             return transformBooking(deletedBooking);
         } catch (error) {
@@ -74,13 +74,13 @@ module.exports = {
         }
     },
     transferBooking: async (args) => {
-        const transferedBooking = await Booking.findById(args.id);
+        const transferedBooking = await Booking.findById(args.bookingId);
         const transferedFromUser = await User.findById(transferedBooking.attendeeId);
-        transferedFromUser.bookedEvents.pull(args.id);
+        transferedFromUser.bookedEvents.pull(args.bookingId);
         await transferedFromUser.save();
 
         const transferedToUser = await User.findById(args.userId);
-        transferedToUser.bookedEvents.push(args.id);
+        transferedToUser.bookedEvents.push(args.bookingId);
         await transferedToUser.save();
 
         transferedBooking.attendeeId = args.userId;

@@ -125,12 +125,17 @@ module.exports = {
             user.techStack = [...user.techStack, ...filteredTechStack];
         }
         if (args.updateUserInput.links !== undefined) {
-            args.updateUserInput.links.forEach((link) => {
-                user.links.forEach((userLink) => {
-                    if (userLink._linkType !== link._linkType) return;
-                });
-            });
-            user.links = [...user.links, ...args.updateUserInput.links];
+            user.links = {
+                instagram: args.updateUserInput.links.instagram || user.links.instagram,
+                youtube: args.updateUserInput.links.youtube || user.links.youtube,
+                linkedin: args.updateUserInput.links.linkedin || user.links.linkedin,
+                twitter: args.updateUserInput.links.twitter || user.links.twitter,
+                vimeo: args.updateUserInput.links.vimeo || user.links.vimeo,
+                whatsapp: args.updateUserInput.links.whatsapp || user.links.whatsapp,
+                facebook: args.updateUserInput.links.facebook || user.links.facebook,
+                discord: args.updateUserInput.links.discord || user.links.discord,
+                telegram: args.updateUserInput.links.telegram || user.links.telegram,
+            };
         }
         if (args.updateUserInput.address !== undefined) {
             user.address = {

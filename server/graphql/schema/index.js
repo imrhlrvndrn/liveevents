@@ -19,7 +19,7 @@ module.exports = buildSchema(`
         createdEvents: [Event!]!
         bookedEvents: [Booking!]!
         techStack: [String]!
-        links: [Link]!
+        links: Link!
         createdAt: String!
         updatedAt: String!
     }
@@ -49,7 +49,7 @@ module.exports = buildSchema(`
         birthDate: String
         age: Float        
         techStack: [String]
-        links: [LinkInput]
+        links: LinkInput
         address: UpdateAddressInput
         billingAddress: UpdateAddressInput
     }
@@ -110,25 +110,6 @@ module.exports = buildSchema(`
         telegram: String
     }
 
-    type Attendee {
-        _id: ID!
-        entity: String!
-        username: String!
-        email: Email!
-        fullName: String
-        gender: String!
-        age: Float
-        birthDate: String!
-        companyName: String
-        designation: String
-        profileImg: String
-        booking: Booking!
-        refundId: [Refund!]!
-        links: [Link]!
-        createdAt: String!
-        updatedAt: String!
-    }
-
     type Event {
         _id: ID!
         entity: String!
@@ -159,12 +140,11 @@ module.exports = buildSchema(`
 
 
     input UpdateEventInput {
-        _id: ID!
         title: String
         summary: String
         description: String
         category: String
-        address: AddressInput
+        venue: AddressInput
         startDate: String
         endDate: String
         isPublished: Boolean
@@ -201,6 +181,12 @@ module.exports = buildSchema(`
         thumbnail: String!
     }
 
+    input UpdateHeroImageInput {
+        imgUrl: String
+        alt: String
+        thumbnail: String
+    }
+
     type Pricing {
         tier: String!
         amount: Float!
@@ -217,6 +203,17 @@ module.exports = buildSchema(`
         amount: Float!
         deliverables: [String!]!
         isBestSeller: Boolean
+    }
+
+    input UpdatePricingInput {
+        tier: String
+        amount: Float
+        deliverables: [String]
+        isSelected: Boolean
+        isBestSeller: Boolean
+        totalTickets: Float
+        soldTickets: Float
+        pendingTickets: Float
     }
 
     type ValidPromocode {
@@ -333,14 +330,19 @@ module.exports = buildSchema(`
 
     type RootMutation {
         createEvent(eventInput: EventInput): Event!
-        updateEvent(updateEventInput: UpdateEventInput):Event!
-        addEventPricing(id: ID!, pricingInput: PricingInput): String!
-        addEventHeroImages(id: ID!, heroImageInput: HeroImageInput): String!
+        updateEvent(eventId: ID!,updateEventInput: UpdateEventInput):Event!
+        addEventPricing(eventId: ID!, pricingInput: PricingInput): String!
+        updateEventPricing(eventId: ID!, updatePricingInput: UpdatePricingInput): String!
+        addValidPromocodes(eventId: ID!, validPromocodeInput: ValidPromocodeInput): String!
+        addEventHeroImages(eventId: ID!, heroImageInput: HeroImageInput): String!
+        updateEventHeroImages(eventId: ID!, updateheroImageInput: UpdateHeroImageInput): String!
+
         createUser(userInput: UserInput): User!
         updateUser(updateUserInput: UpdateUserInput): User!
+
         createBooking(bookingInput: BookingInput): Booking!
-        cancelBooking(id: ID!): Booking!
-        transferBooking(id: ID!, userId: ID!): Booking!
+        cancelBooking(bookingId: ID!): Booking!
+        transferBooking(bookingId: ID!, userId: ID!): Booking!
         createSpeaker(speakerInput: SpeakerInput): Speaker!
         createRefund(refundInput: RefundInput): Refund!
     }
