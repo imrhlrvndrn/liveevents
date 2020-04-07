@@ -121,14 +121,15 @@ module.exports = {
     },
     addValidPromocodes: async (args) => {
         const eventToBeUpdated = await Event.findById(args.eventId);
-        const filteredPromocode = eventToBeUpdated.validPromocodes.filter((code) => {
-            return code.promocode !== args.validPromocodeInput.promocode;
+        const filteredPromocode = eventToBeUpdated.validPromocodes.map((code) => {
+            return code.promocode.toLowerCase();
         });
         console.log(filteredPromocode);
-        if (filteredPromocode.length > 0) eventToBeUpdated.validPromocodes.push(args.validPromocodeInput);
-
-        await eventToBeUpdated.save();
-
-        return "Promocode added successfully";
+        if (!filteredPromocode.includes(args.validPromocodeInput.promocode.toLowerCase())) {
+            eventToBeUpdated.validPromocodes.push(args.validPromocodeInput);
+            await eventToBeUpdated.save();
+            return "Promocode added successfully";
+        }
+        return `Promocode ${args.validPromocodeInput.promocode} already exists with discount of ${args.validPromocodeInput.discount}%`;
     },
 };
