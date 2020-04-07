@@ -132,4 +132,16 @@ module.exports = {
         }
         return `Promocode ${args.validPromocodeInput.promocode} already exists with discount of ${args.validPromocodeInput.discount}%`;
     },
+    addEventPricing: async (args) => {
+        const newPricingTier = {
+            tier: { type: String, required: true },
+            amount: { type: String, required: true },
+            deliverables: { type: String, required: true },
+            isSelected: { type: String, required: true },
+            isBestSeller: { type: String, required: true },
+            totalTickets: { type: String, required: true },
+            soldTickets: { type: String, required: true },
+            pendingTickets: { type: String, required: true },
+        };
+    },
 };
