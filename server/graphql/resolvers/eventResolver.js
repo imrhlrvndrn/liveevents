@@ -55,6 +55,10 @@ module.exports = {
             throw error;
         }
     },
+    deleteEvent: async (args) => {
+        const deletedEvent = await Event.findByIdAndDelete(args.eventId);
+        return transformEvent(deletedEvent);
+    },
     updateEvent: async (args) => {
         const eventToBeUpdated = await Event.findById(args.eventId);
         if (!eventToBeUpdated) throw new Error("No event found!");
@@ -124,7 +128,6 @@ module.exports = {
         const filteredPromocode = eventToBeUpdated.validPromocodes.map((code) => {
             return code.promocode.toLowerCase();
         });
-        console.log(filteredPromocode);
         if (!filteredPromocode.includes(args.validPromocodeInput.promocode.toLowerCase())) {
             eventToBeUpdated.validPromocodes.push(args.validPromocodeInput);
             await eventToBeUpdated.save();
@@ -132,16 +135,72 @@ module.exports = {
         }
         return `Promocode ${args.validPromocodeInput.promocode} already exists with discount of ${args.validPromocodeInput.discount}%`;
     },
+    updateValidPromocodes: async (args) => {
+        const eventToBeUpdated = await Event.findById(args.eventId);
+
+        const code = eventToBeUpdated.validPromocodes.id(args.updateValidPromocodeInput._id);
+        if (args.updateValidPromocodeInput.promocode != undefined)
+            code["promocode"] = args.updateValidPromocodeInput.promocode;
+        if (args.updateValidPromocodeInput.discount != undefined)
+            code["discount"] = args.updateValidPromocodeInput.discount;
+        await eventToBeUpdated.save();
+
+        return "Promocode updated successfully!";
+    },
     addEventPricing: async (args) => {
         const newPricingTier = {
-            tier: { type: String, required: true },
-            amount: { type: String, required: true },
-            deliverables: { type: String, required: true },
-            isSelected: { type: String, required: true },
-            isBestSeller: { type: String, required: true },
-            totalTickets: { type: String, required: true },
-            soldTickets: { type: String, required: true },
-            pendingTickets: { type: String, required: true },
+            tier: args.pricingInput.tier,
+            amount: args.pricingInput.amount,
+            isBestSeller: args.pricingInput.isBestSeller || false,
+            deliverables: [...args.pricingInput.deliverables],
+            totalTickets: args.pricingInput.totalTickets,
+            soldTickets: 0,
+            pendingTickets: args.pricingInput.totalTickets,
         };
+
+        try {
+            let returnedEvent = await Event.findById(args.eventId);
+            const filteredPricing = returnedEvent.pricing.filter((event) => {
+                return event.tier === newPricingTier.tier;
+            });
+            if (filteredPricing)
+                throw new Error(`Pricing tier ${newPricingTier.tier.toUpperCase()} already exists`);
+
+            returnedEvent.pricing.push(newPricingTier);
+            await returnedEvent.save();
+
+            return "Added new pricing tier";
+        } catch (error) {
+            throw error;
+        }
+    },
+    updateEventPricing: async (args) => {
+        const eventToBeUpdated = await Event.findById(args.eventId);
+        const pricingToBeUpdated = eventToBeUpdated.pricing.id(args.updatePricingInput._id);
+        if (args.updatePricingInput.tier !== undefined) {
+            pricingToBeUpdated["tier"] = args.updatePricingInput.tier;
+        }
+        if (args.updatePricingInput.amount !== undefined) {
+            pricingToBeUpdated["amount"] = args.updatePricingInput.amount;
+        }
+        if (args.updatePricingInput.deliverables !== undefined) {
+            pricingToBeUpdated["deliverables"] = args.updatePricingInput.deliverables;
+        }
+        if (args.updatePricingInput.isBestSeller !== undefined) {
+            pricingToBeUpdated["isBestSeller"] = args.updatePricingInput.isBestSeller;
+        }
+        if (args.updatePricingInput.totalTickets !== undefined) {
+            pricingToBeUpdated["totalTickets"] = args.updatePricingInput.totalTickets;
+        }
+        if (args.updatePricingInput.soldTickets !== undefined) {
+            pricingToBeUpdated["soldTickets"] = args.updatePricingInput.soldTickets;
+        }
+        if (args.updatePricingInput.pendingTickets !== undefined) {
+            pricingToBeUpdated["pendingTickets"] = args.updatePricingInput.pendingTickets;
+        }
+
+        await eventToBeUpdated.save();
+
+        return "Pricing tier updated successfully!";
     },
 };

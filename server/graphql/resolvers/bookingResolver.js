@@ -21,7 +21,7 @@ module.exports = {
 
         const newBooking = new Booking({
             entity: "booking",
-            eventId: "5e8a0c828e8e9a0580120797",
+            eventId: "5e8db545c9cf08174439ae8e",
             attendeeId: "5e8a0b2192747413e043404f",
             promocode: args.bookingInput.promocode || "",
             bookingStatus: "booked",
@@ -74,18 +74,22 @@ module.exports = {
         }
     },
     transferBooking: async (args) => {
-        const transferedBooking = await Booking.findById(args.bookingId);
-        const transferedFromUser = await User.findById(transferedBooking.attendeeId);
-        transferedFromUser.bookedEvents.pull(args.bookingId);
-        await transferedFromUser.save();
+        try {
+            const transferedBooking = await Booking.findById(args.bookingId);
+            const transferedFromUser = await User.findById(transferedBooking.attendeeId);
+            transferedFromUser.bookedEvents.pull(args.bookingId);
+            await transferedFromUser.save();
 
-        const transferedToUser = await User.findById(args.userId);
-        transferedToUser.bookedEvents.push(args.bookingId);
-        await transferedToUser.save();
+            const transferedToUser = await User.findById(args.userId);
+            transferedToUser.bookedEvents.push(args.bookingId);
+            await transferedToUser.save();
 
-        transferedBooking.attendeeId = args.userId;
-        await transferedBooking.save();
+            transferedBooking.attendeeId = args.userId;
+            await transferedBooking.save();
 
-        return transformBooking(transferedBooking);
+            return transformBooking(transferedBooking);
+        } catch (error) {
+            throw error;
+        }
     },
 };

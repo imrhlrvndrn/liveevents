@@ -77,6 +77,10 @@ module.exports = {
             throw error;
         }
     },
+    deleteUser: async (args) => {
+        const deletedUser = await User.findByIdAndDelete(args.userId);
+        return transformUser(deletedUser);
+    },
     updateUser: async (args) => {
         let user = await User.findById(args.updateUserInput.id);
         if (!user) throw new Error("No user found!");

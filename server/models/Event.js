@@ -34,7 +34,6 @@ const eventsSchema = new Schema(
                 tier: { type: String, required: true },
                 amount: { type: Number, required: true },
                 deliverables: [String],
-                isSelected: { type: Boolean, required: true },
                 isBestSeller: Boolean,
                 totalTickets: { type: Number, required: true },
                 soldTickets: { type: Number, required: true },

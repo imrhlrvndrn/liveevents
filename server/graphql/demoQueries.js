@@ -1,6 +1,7 @@
 `
 mutation {
-  createEvent(eventInput: {title: "This is the ultimate optimization test", description: "kladsjf", category: "timepass", startDate: "Sun Mar 15 2020 20:42:16 GMT+0530 (India Standard Time)", endDate: "Sun Mar 15 2020 20:42:16 GMT+0530 (India Standard Time)",capacity:100.00,address: {streetAddress1: "ramchandra complex", streetAddress2: "Subhash cross road ganeshnagar", city: "Dombivli", state: "Maharashtra", pincode: "421202", country: "India"}}) {
+  createEvent(eventInput: {title: "This is the ultimate optimization test", description: "kladsjf", category: "timepass", startDate: "Sun Mar 15 2020 20:42:16 GMT+0530 (India Standard Time)", endDate: "Sun Mar 15 2020 20:42:16 GMT+0530 (India Standard Time)",capacity:100.00,venue: {streetAddress1: "ramchandra complex", streetAddress2: "Subhash cross road ganeshnagar", city: "Dombivli", state: "Maharashtra", pincode: "421202", country: "India"}}) {
+    _id
     entity
     title
     description
@@ -60,6 +61,23 @@ mutation{
 }
 
 
+
+mutation {
+  addEventPricing(eventId: "5e8db545c9cf08174439ae8e", pricingInput: {tier: "Basic", amount: 100.00, deliverables: ["hahaahah", "lolwa"],isSelected:false, totalTickets: 100})
+}
+
+mutation{
+  addValidPromocodes(eventId:"5e8db545c9cf08174439ae8e", validPromocodeInput:{promocode:"beingcodr20",discount: 20.00})
+}
+
+mutation {
+  updateEventPricing(eventId: "5e8db545c9cf08174439ae8e", updatePricingInput: {_id:"5e8db5e8e712890d0045eda1", tier:"Premium",amount:100000,totalTickets:1000, pendingTickets:1000})
+}
+
+
+mutation {
+  updateValidPromocodes(eventId: "5e8db545c9cf08174439ae8e", updateValidPromocodeInput: {_id:"5e8db6eee0a0461bbc9d4294",promocode: "beingcodr"})
+}
 
 
 

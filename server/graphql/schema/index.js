@@ -191,7 +191,6 @@ module.exports = buildSchema(`
         tier: String!
         amount: Float!
         deliverables: [String!]!
-        isSelected: Boolean!
         isBestSeller: Boolean
         totalTickets: Float!
         soldTickets: Float!
@@ -203,17 +202,18 @@ module.exports = buildSchema(`
         amount: Float!
         deliverables: [String!]!
         isBestSeller: Boolean
+        totalTickets: Float!
     }
 
     input UpdatePricingInput {
+        _id: ID!
         tier: String
         amount: Float
         deliverables: [String]
-        isSelected: Boolean
         isBestSeller: Boolean
-        totalTickets: Float
+        totalTickets: Float!
         soldTickets: Float
-        pendingTickets: Float
+        pendingTickets: Float!
     }
 
     type ValidPromocode {
@@ -224,6 +224,12 @@ module.exports = buildSchema(`
     input ValidPromocodeInput {
         promocode: String!
         discount: Float!
+    }
+
+    input UpdateValidPromocodeInput {
+        _id: ID!
+        promocode: String
+        discount: Float
     }
 
     type Booking {
@@ -330,20 +336,25 @@ module.exports = buildSchema(`
 
     type RootMutation {
         createEvent(eventInput: EventInput): Event!
+        deleteEvent(eventId: ID!): Event!
         updateEvent(eventId: ID!,updateEventInput: UpdateEventInput):Event!
         addEventPricing(eventId: ID!, pricingInput: PricingInput): String!
         updateEventPricing(eventId: ID!, updatePricingInput: UpdatePricingInput): String!
         addValidPromocodes(eventId: ID!, validPromocodeInput: ValidPromocodeInput): String!
+        updateValidPromocodes(eventId: ID!, updateValidPromocodeInput: UpdateValidPromocodeInput): String!
         addEventHeroImages(eventId: ID!, heroImageInput: HeroImageInput): String!
         updateEventHeroImages(eventId: ID!, updateheroImageInput: UpdateHeroImageInput): String!
 
         createUser(userInput: UserInput): User!
+        deleteUser(userId: ID!): User!
         updateUser(updateUserInput: UpdateUserInput): User!
 
         createBooking(bookingInput: BookingInput): Booking!
         cancelBooking(bookingId: ID!): Booking!
         transferBooking(bookingId: ID!, userId: ID!): Booking!
+
         createSpeaker(speakerInput: SpeakerInput): Speaker!
+
         createRefund(refundInput: RefundInput): Refund!
     }
 
