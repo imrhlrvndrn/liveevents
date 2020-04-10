@@ -88,7 +88,7 @@ module.exports = {
         deleteAllCreatedEventsOfUser(deletedUser.createdEvents);
         deleteAllBookedEventsOfUser(deletedUser.bookedEvents);
 
-        return transformUser(deletedUser);
+        return "Your account has been permanently deleted! We're sorry to see you leave us.";
     },
     updateUser: async (args) => {
         let user = await User.findById(args.updateUserInput.id);

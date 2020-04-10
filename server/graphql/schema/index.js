@@ -373,7 +373,7 @@ module.exports = buildSchema(`
         updateEventHeroImages(eventId: ID!, updateheroImageInput: UpdateHeroImageInput): String!
 
         createUser(userInput: UserInput): User!
-        deleteUser(userId: ID!): User!
+        deleteUser(userId: ID!): String!
         updateUser(updateUserInput: UpdateUserInput): User!
 
         createBooking(bookingInput: BookingInput): Booking!

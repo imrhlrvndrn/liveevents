@@ -1,6 +1,10 @@
 const Event = require("../../models/Event");
 const User = require("../../models/User");
-const { transformEvent } = require("../helpers/helper");
+const {
+    transformEvent,
+    deleteAllAttendeesOfEvent,
+    deleteAllSpeakersOfEvent,
+} = require("../helpers/helper");
 
 module.exports = {
     events: async () => {
@@ -61,6 +65,9 @@ module.exports = {
         const creator = await User.findById(deletedEvent.creator);
         creator.createdEvents.pull(args.eventId);
         await creator.save();
+
+        deleteAllAttendeesOfEvent(deleteEvent.attendees);
+        deleteAllSpeakersOfEvent(deleteEvent.speakers);
 
         return transformEvent(deletedEvent);
     },

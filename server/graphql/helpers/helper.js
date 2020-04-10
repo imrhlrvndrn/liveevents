@@ -126,14 +126,15 @@ const getRefundsOfBooking = async (refundIds) => {
 };
 
 const deleteAllCreatedEventsOfUser = async (createdEventsIds) => {
-    return createdEventsIds.forEach((event) => {
-        return Event.findByIdAndDelete(event._id).then((deletedEvent) => {
-            deletedEvent.attendees.forEach((booking) => {
-                return Booking.findByIdAndDelete(booking._id).then((deletedBooking) => {
-                    deletedBooking.refundId.forEach((refund) => {
-                        return Refund.findByIdAndDelete(refund._id);
-                    });
-                });
+    return createdEventsIds.forEach(async (event) => {
+        const deletedEvent = await Event.findByIdAndDelete(event._id);
+        deletedEvent.speakers.forEach((speaker) => {
+            return Speaker.findByIdAndDelete(speaker._id);
+        });
+        deletedEvent.attendees.forEach(async (booking) => {
+            const deletedBooking = await Booking.findByIdAndDelete(booking._id);
+            deletedBooking.refundId.forEach((refund) => {
+                return Refund.findByIdAndDelete(refund._id);
             });
         });
     });
@@ -141,7 +142,14 @@ const deleteAllCreatedEventsOfUser = async (createdEventsIds) => {
 
 const deleteAllBookedEventsOfUser = async (bookedEventIds) => {
     await Booking.findByIdAndDelete({ _id: { $in: bookedEventIds } });
-    return "The user has been permanently deleted";
+};
+
+const deleteAllSpeakersOfEvent = async (speakerIds) => {
+    await Speaker.findByIdAndDelete({ _id: { $in: speakerIds } });
+};
+
+const deleteAllAttendeesOfEvent = async (attendeeIds) => {
+    await Booking.findByIdAndDelete({ _id: { $in: attendeeIds } });
 };
 
 module.exports = {
@@ -161,4 +169,6 @@ module.exports = {
     getRefundsOfBooking: getRefundsOfBooking,
     deleteAllCreatedEventsOfUser: deleteAllCreatedEventsOfUser,
     deleteAllBookedEventsOfUser: deleteAllBookedEventsOfUser,
+    deleteAllSpeakersOfEvent: deleteAllSpeakersOfEvent,
+    deleteAllAttendeesOfEvent: deleteAllAttendeesOfEvent,
 };
