@@ -1,7 +1,12 @@
 const Event = require("../../models/Event");
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
-const { transformUser, getUserById } = require("../helpers/helper");
+const {
+    transformUser,
+    getUserById,
+    deleteAllCreatedEventsOfUser,
+    deleteAllBookedEventsOfUser,
+} = require("../helpers/helper");
 
 module.exports = {
     users: async () => {
@@ -79,6 +84,10 @@ module.exports = {
     },
     deleteUser: async (args) => {
         const deletedUser = await User.findByIdAndDelete(args.userId);
+
+        deleteAllCreatedEventsOfUser(deletedUser.createdEvents);
+        deleteAllBookedEventsOfUser(deletedUser.bookedEvents);
+
         return transformUser(deletedUser);
     },
     updateUser: async (args) => {

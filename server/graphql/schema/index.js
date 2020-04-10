@@ -284,6 +284,10 @@ module.exports = buildSchema(`
         numberOfTicketsForAdults: Float
         numberOfTicketsForChildren: Float
         baseAmount: Float
+        isPaid: Boolean
+        paidAmount: Float
+        pendingAmount: Float
+        totalInstallments: Int
     }
 
     input UpdateAmountInfoInput {

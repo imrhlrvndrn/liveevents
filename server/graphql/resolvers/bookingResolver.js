@@ -19,10 +19,13 @@ module.exports = {
             tier,
         } = args.bookingInput.eventAmountInfo;
 
+        let totalAmount =
+            baseAmount * numberOfTicketsForAdults + (baseAmount * numberOfTicketsForChildren) / 2;
+
         const newBooking = new Booking({
             entity: "booking",
-            eventId: "5e8db545c9cf08174439ae8e",
-            attendeeId: "5e8a0b2192747413e043404f",
+            eventId: "5e905047107cfa00e80e34f8",
+            attendeeId: "5e904ee796f04a0948c1c14c",
             promocode: args.bookingInput.promocode || "",
             bookingStatus: "booked",
             isFree: args.bookingInput.isFree || false,
@@ -32,21 +35,23 @@ module.exports = {
                 tier: tier || "",
                 taxInfo: [{ taxName: "GST", taxAmount: 300 }],
                 baseAmount: baseAmount,
-                totalAmount:
-                    baseAmount * numberOfTicketsForAdults +
-                    (baseAmount * numberOfTicketsForChildren) / 2,
+                totalAmount: totalAmount,
                 discountedAmount: 0,
+                isPaid: false,
+                paidAmount: 0,
+                pendingAmount: totalAmount,
+                totalInstallments: args.bookingInput.totalInstallments || 0,
             },
         });
 
         try {
             let returnedNewBooking = await newBooking.save();
 
-            let eventsBooking = await Event.findOne({ _id: "5e8a0c828e8e9a0580120797" });
+            let eventsBooking = await Event.findOne({ _id: "5e905047107cfa00e80e34f8" });
             eventsBooking.attendees.push(returnedNewBooking._id);
             eventsBooking.save();
 
-            let usersBooking = await User.findById("5e8a0b2192747413e043404f");
+            let usersBooking = await User.findById("5e904ee796f04a0948c1c14c");
             usersBooking.bookedEvents.push(returnedNewBooking._id);
             usersBooking.save();
 

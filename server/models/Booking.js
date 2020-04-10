@@ -6,7 +6,7 @@ const bookingSchema = new Schema(
         entity: { type: String, required: true },
         eventId: { type: Schema.Types.ObjectId, ref: "Event" },
         attendeeId: { type: Schema.Types.ObjectId, ref: "User" },
-        refundId: { type: Schema.Types.ObjectId, ref: "Refund" },
+        refundId: [{ type: Schema.Types.ObjectId, ref: "Refund" }],
         promocode: { type: String },
         bookingStatus: { type: String, required: true },
         isFree: { type: Boolean, required: true },

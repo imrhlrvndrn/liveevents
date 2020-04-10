@@ -14,7 +14,7 @@ module.exports = {
     createEvent: async (args) => {
         const newEvent = new Event({
             entity: "event",
-            creator: "5e8a0b2192747413e043404f",
+            creator: "5e904ee796f04a0948c1c14c",
             title: args.eventInput.title,
             summary: args.eventInput.summary || "",
             slugUri: args.eventInput.title.toLowerCase().split(" ").join("-"),
@@ -43,7 +43,7 @@ module.exports = {
             const savedNewEvent = await newEvent.save();
             console.log(savedNewEvent);
 
-            const eventUser = await User.findById("5e8a0b2192747413e043404f");
+            const eventUser = await User.findById("5e904ee796f04a0948c1c14c");
 
             eventUser.createdEvents.push(savedNewEvent._id);
             eventUser.save();
@@ -57,6 +57,11 @@ module.exports = {
     },
     deleteEvent: async (args) => {
         const deletedEvent = await Event.findByIdAndDelete(args.eventId);
+
+        const creator = await User.findById(deletedEvent.creator);
+        creator.createdEvents.pull(args.eventId);
+        await creator.save();
+
         return transformEvent(deletedEvent);
     },
     updateEvent: async (args) => {

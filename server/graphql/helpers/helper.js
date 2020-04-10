@@ -4,7 +4,7 @@ const Speaker = require("../../models/Speaker");
 const Refund = require("../../models/Refund");
 const User = require("../../models/User");
 
-const transformEvent = async event => {
+const transformEvent = async (event) => {
     return {
         ...event._doc,
         _id: event.id,
@@ -14,11 +14,11 @@ const transformEvent = async event => {
         startDate: new Date(event._doc.startDate).toString(),
         endDate: new Date(event._doc.endDate).toString(),
         createdAt: new Date(event._doc.createdAt).toString(),
-        updatedAt: new Date(event._doc.updatedAt).toString()
+        updatedAt: new Date(event._doc.updatedAt).toString(),
     };
 };
 
-const transformUser = async user => {
+const transformUser = async (user) => {
     return {
         ...user._doc,
         _id: user.id,
@@ -27,11 +27,11 @@ const transformUser = async user => {
         bookedEvents: getAllBookedEventsOfUser.bind(this, user._doc.bookedEvents),
         birthDate: new Date(user._doc.birthDate).toString(),
         createdAt: new Date(user._doc.createdAt).toString(),
-        updatedAt: new Date(user._doc.updatedAt).toString()
+        updatedAt: new Date(user._doc.updatedAt).toString(),
     };
 };
 
-const transformBooking = async booking => {
+const transformBooking = async (booking) => {
     return {
         ...booking._doc,
         _id: booking.id,
@@ -39,101 +39,109 @@ const transformBooking = async booking => {
         attendeeId: getAttendeeById.bind(this, booking._doc.attendeeId),
         refundId: getRefundsOfBooking.bind(this, booking._doc.refundId),
         createdAt: new Date(booking._doc.createdAt).toString(),
-        updatedAt: new Date(booking._doc.updatedAt).toString()
+        updatedAt: new Date(booking._doc.updatedAt).toString(),
     };
 };
 
-const transformSpeaker = async speaker => {
+const transformSpeaker = async (speaker) => {
     return {
         ...speaker._doc,
         _id: speaker.id,
         eventId: getEventById.bind(this, speaker._doc.eventId),
         userId: getUserById.bind(this, speaker._doc.userId),
         createdAt: new Date(speaker._doc.createdAt).toString(),
-        updatedAt: new Date(speaker._doc.updatedAt).toString()
+        updatedAt: new Date(speaker._doc.updatedAt).toString(),
     };
 };
 
-const transformRefund = async refund => {
+const transformRefund = async (refund) => {
     return {
         ...refund._doc,
         _id: refund.id,
         eventId: getEventById.bind(this, refund._doc.eventId),
         bookingId: getBookingById.bind(this, refund._doc.bookingId),
         createdAt: new Date(refund._doc.createdAt).toString(),
-        updatedAt: new Date(refund._doc.updatedAt).toString()
+        updatedAt: new Date(refund._doc.updatedAt).toString(),
     };
 };
 
-const getUserById = async creatorId => {
+const getUserById = async (creatorId) => {
     const returnedCreator = await User.findById(creatorId);
     console.log(returnedCreator);
     return transformUser(returnedCreator);
 };
 
-const getEventById = async eventId => {
+const getEventById = async (eventId) => {
     const returnedEvent = await Event.findById(eventId);
     return transformEvent(returnedEvent);
 };
 
-const getAttendeeById = async attendeeId => {
+const getAttendeeById = async (attendeeId) => {
     const returnedAttendee = await User.findById(attendeeId);
     return transformUser(returnedAttendee);
 };
 
-const getBookingById = async bookingId => {
+const getBookingById = async (bookingId) => {
     const returnedBooking = await Booking.findById(bookingId);
     return transformBooking(returnedBooking);
 };
 
-const getSpeakersOfEvent = async speakerIds => {
+const getSpeakersOfEvent = async (speakerIds) => {
     const returnedSpeakers = await Speaker.find({ _id: { $in: speakerIds } });
 
-    return returnedSpeakers.map(speaker => {
+    return returnedSpeakers.map((speaker) => {
         return transformSpeaker(speaker);
     });
 };
 
-const getAttendeesOfEvent = async attendeeIds => {
+const getAttendeesOfEvent = async (attendeeIds) => {
     const returnedBookedByUsers = await Booking.find({ _id: { $in: attendeeIds } });
 
-    return returnedBookedByUsers.map(singleBooking => {
+    return returnedBookedByUsers.map((singleBooking) => {
         return transformBooking(singleBooking);
     });
 };
 
-const getAllBookedEventsOfUser = async bookedEventIds => {
+const getAllBookedEventsOfUser = async (bookedEventIds) => {
     const returnedBookedEvents = await Booking.find({ _id: { $in: bookedEventIds } });
 
-    return returnedBookedEvents.map(singleBookedEvent => {
+    return returnedBookedEvents.map((singleBookedEvent) => {
         return transformBooking(singleBookedEvent);
     });
 };
 
-const getAllCreatedEventsOfUser = async createdEventIds => {
+const getAllCreatedEventsOfUser = async (createdEventIds) => {
     const returnedCreatedEvents = await Event.find({ _id: { $in: createdEventIds } });
 
-    return returnedCreatedEvents.map(singleCreatedEvent => {
+    return returnedCreatedEvents.map((singleCreatedEvent) => {
         return transformEvent(singleCreatedEvent);
     });
 };
 
-const getRefundsOfBooking = async refundIds => {
+const getRefundsOfBooking = async (refundIds) => {
     const returnedRefunds = await Refund.find({ _id: { $in: refundIds } });
-    return returnedRefunds.map(singleRefund => {
+    return returnedRefunds.map((singleRefund) => {
         return transformRefund(singleRefund);
     });
 };
 
-const popById = async (popIds, popIdToBeDeleted) => {
-    let array = [];
-    popIds.forEach(popId => {
-        if (popId !== popIdToBeDeleted) {
-            array.push(popId);
-        }
+const deleteAllCreatedEventsOfUser = async (createdEventsIds) => {
+    return createdEventsIds.forEach((event) => {
+        return Event.findByIdAndDelete(event._id).then((deletedEvent) => {
+            deletedEvent.attendees.forEach((booking) => {
+                return Booking.findByIdAndDelete(booking._id).then((deletedBooking) => {
+                    deletedBooking.refundId.forEach((refund) => {
+                        return Refund.findByIdAndDelete(refund._id);
+                    });
+                });
+            });
+        });
     });
+};
 
-    return array;
+const deleteAllBookedEventsOfUser = async (bookedEventIds) => {
+    await Booking.findByIdAndDelete({ _id: { $in: bookedEventIds } });
+    return "The user has been permanently deleted";
 };
 
 module.exports = {
@@ -151,5 +159,6 @@ module.exports = {
     getAllBookedEventsOfUser: getAllBookedEventsOfUser,
     getAllCreatedEventsOfUser: getAllCreatedEventsOfUser,
     getRefundsOfBooking: getRefundsOfBooking,
-    popById: popById
+    deleteAllCreatedEventsOfUser: deleteAllCreatedEventsOfUser,
+    deleteAllBookedEventsOfUser: deleteAllBookedEventsOfUser,
 };
