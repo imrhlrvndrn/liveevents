@@ -274,6 +274,10 @@ module.exports = buildSchema(`
         taxInfo: [TaxInfo!]!
         totalAmount: Float!
         discountedAmount: Float
+        isPaid: Boolean!
+        paidAmount: Float!
+        pendingAmount: Float!
+        totalInstallments: Int!
     }
 
     input AmountInfoInput {
@@ -282,8 +286,27 @@ module.exports = buildSchema(`
         baseAmount: Float
     }
 
+    input UpdateAmountInfoInput {
+        numberOfTicketsForAdults: Float
+        numberOfTicketsForChildren: Float
+        tier: String
+        baseAmount: Float
+        taxInfo: [TaxInfoInput]
+        totalAmount: Float
+        discountedAmount: Float
+        isPaid: Boolean
+        paidAmount: Float
+        pendingAmount: Float
+        totalInstallments: Float
+    }
+
     type TaxInfo {
         _id: ID!
+        taxName: String!
+        taxAmount: Float!
+    }
+
+    input TaxInfoInput {
         taxName: String!
         taxAmount: Float!
     }
@@ -352,6 +375,7 @@ module.exports = buildSchema(`
         createBooking(bookingInput: BookingInput): Booking!
         cancelBooking(bookingId: ID!): Booking!
         transferBooking(bookingId: ID!, userId: ID!): Booking!
+        addBookingAmountInfo(bookingId: ID!): AmountInfo!
 
         createSpeaker(speakerInput: SpeakerInput): Speaker!
 

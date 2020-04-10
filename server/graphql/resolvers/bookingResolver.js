@@ -92,4 +92,5 @@ module.exports = {
             throw error;
         }
     },
+    addBookingAmountInfo: async (args) => {},
 };

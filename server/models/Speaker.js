@@ -17,12 +17,16 @@ const speakerSchema = new Schema(
             taxInfo: [
                 {
                     taxName: { type: String, required: true },
-                    taxAmount: { type: Number, required: true }
-                }
+                    taxAmount: { type: Number, required: true },
+                },
             ],
             totalAmount: { type: Number, required: true },
-            discountedAmount: { type: Number }
-        }
+            discountedAmount: { type: Number },
+            isPaid: { type: Boolean, required: true },
+            paidAmount: { type: Number, required: true },
+            pendingAmount: { type: Number, required: true },
+            totalInstallments: { type: Number, required: true },
+        },
     },
     { timestamps: true }
 );
