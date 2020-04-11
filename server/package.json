@@ -8,7 +8,7 @@
         "dev": "concurrently \"npm run client\" \"npm run server\"",
         "server": "nodemon index",
         "client": "cd .. && cd client && npm start",
-        "gitpush": " git add . && git commit -m $MSG && git push origin dev",
+        "gitpush": " git add . && git commit -m %MSG% && git push origin dev",
         "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd client && npm install && npm run build"
     },
     "keywords": [],
