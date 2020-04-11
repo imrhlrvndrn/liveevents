@@ -18,7 +18,7 @@ const bookingSchema = new Schema(
             taxInfo: [
                 {
                     taxName: { type: String, required: true },
-                    taxAmount: { type: Number, required: true },
+                    taxPercentage: { type: Number, required: true },
                 },
             ],
             totalAmount: { type: Number, required: true },

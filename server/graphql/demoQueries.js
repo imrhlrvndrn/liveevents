@@ -17,7 +17,7 @@ mutation {
 
 
 mutation{
-  createBooking(bookingInput:{promocode:"beingcodr20",isFree:false,tier:"premium",eventAmountInfo:{numberOfTicketsForAdults:2,numberOfTicketsForChildren:4,baseAmount:1000}}){
+  createBooking(bookingInput:{promocode:"beingcodr20",tier:"premium",eventAmountInfo:{numberOfTicketsForAdults:2,numberOfTicketsForChildren:4,baseAmount:1000}}){
     _id
     entity
     promocode

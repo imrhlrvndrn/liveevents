@@ -307,12 +307,12 @@ module.exports = buildSchema(`
     type TaxInfo {
         _id: ID!
         taxName: String!
-        taxAmount: Float!
+        taxPercentage: Float!
     }
 
     input TaxInfoInput {
         taxName: String!
-        taxAmount: Float!
+        taxPercentage: Float!
     }
 
     type Refund {

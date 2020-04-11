@@ -59,18 +59,6 @@ module.exports = {
             throw error;
         }
     },
-    deleteEvent: async (args) => {
-        const deletedEvent = await Event.findByIdAndDelete(args.eventId);
-
-        const creator = await User.findById(deletedEvent.creator);
-        creator.createdEvents.pull(args.eventId);
-        await creator.save();
-
-        deleteAllAttendeesOfEvent(deleteEvent.attendees);
-        deleteAllSpeakersOfEvent(deleteEvent.speakers);
-
-        return transformEvent(deletedEvent);
-    },
     updateEvent: async (args) => {
         const eventToBeUpdated = await Event.findById(args.eventId);
         if (!eventToBeUpdated) throw new Error("No event found!");
@@ -134,6 +122,18 @@ module.exports = {
         await eventToBeUpdated.save();
 
         return transformEvent(eventToBeUpdated);
+    },
+    deleteEvent: async (args) => {
+        const deletedEvent = await Event.findByIdAndDelete(args.eventId);
+
+        const creator = await User.findById(deletedEvent.creator);
+        creator.createdEvents.pull(args.eventId);
+        await creator.save();
+
+        deleteAllAttendeesOfEvent(deleteEvent.attendees);
+        deleteAllSpeakersOfEvent(deleteEvent.speakers);
+
+        return transformEvent(deletedEvent);
     },
     addValidPromocodes: async (args) => {
         const eventToBeUpdated = await Event.findById(args.eventId);
