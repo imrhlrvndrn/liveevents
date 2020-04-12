@@ -1,14 +1,18 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const speakerSchema = new Schema(
+const artistSchema = new Schema(
     {
         entity: { type: String, required: true },
         eventId: { type: Schema.Types.ObjectId, ref: "Event" },
         userId: { type: Schema.Types.ObjectId, ref: "User" },
-        isFree: { type: Boolean, required: true },
-        genre: [{ type: String }],
-        topic: [{ type: String }],
+        type: { type: String, required: true }, // musician, coder, DJ
+        isFree: { type: Boolean, required: true }, // performance is free or not
+        isHidden: { type: Boolean, required: true }, // visibility of the artist is hidden or not
+        genres: [{ type: String }],
+        topics: [{ type: String }],
+        sort_order: { type: Number, required: true }, // The order of performance
+        role: { type: String, required: true },
         speakerAmountInfo: {
             numberOfTicketsForAdults: { type: Number },
             numberOfTicketsForChildren: { type: Number },
@@ -31,4 +35,4 @@ const speakerSchema = new Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Speaker", speakerSchema);
+module.exports = mongoose.model("Artist", artistSchema);

@@ -123,7 +123,7 @@ module.exports = buildSchema(`
         heroImages: [HeroImage!]
         startDate: String!
         endDate: String!
-        speakers: [Speaker!]!
+        artists: [Artist!]!
         attendees: [Booking!]!
         pricing: [Pricing!]!
         isPublished: Boolean!
@@ -195,6 +195,9 @@ module.exports = buildSchema(`
         totalTickets: Float!
         soldTickets: Float!
         pendingTickets: Float!
+        minimum_quantity: Int!
+        maximum_quantity: Int!
+        isFree: Boolean!
     }
 
     input PricingInput {
@@ -203,6 +206,9 @@ module.exports = buildSchema(`
         deliverables: [String!]!
         isBestSeller: Boolean
         totalTickets: Float!
+        minimum_quantity: Int
+        maximum_quantity: Int
+        isFree: Boolean
     }
 
     input UpdatePricingInput {
@@ -214,6 +220,9 @@ module.exports = buildSchema(`
         totalTickets: Float!
         soldTickets: Float
         pendingTickets: Float!
+        minimum_quantity: Int
+        maximum_quantity: Int
+        isFree: Boolean
     }
 
     type ValidPromocode {
@@ -335,22 +344,44 @@ module.exports = buildSchema(`
         quantityRequested: Float!
     }
 
-    type Speaker {
+    type Artist {
         _id: ID!
         entity: String!
         eventId: Event!
         userId: User!
         isFree: Boolean!
-        genre: [String!]!
-        topic: [String!]!
-        speakerAmountInfo: AmountInfo!
+        type: String!
+        genres: [String!]!
+        topics: [String!]!
+        artistAmountInfo: AmountInfo!
+        isHidden: Boolean!
+        sort_order: Int!
+        role: Role!
         createdAt: String!
         updatedAt: String!
     }
 
-    input SpeakerInput {
-        genre:[String!]!
-        topic:[String!]!
+    input ArtistInput {
+        type: String!
+        genres:[String!]!
+        topics:[String!]!
+        isHidden: Boolean!
+        sort_order: Int!
+        role: Role!
+    }
+
+    input UpdateArtistInput {
+        type: String
+        genres:[String]
+        topics:[String]
+        isHidden: Boolean
+        sort_order: Int
+        role: Role
+    }
+
+    enum Role{
+        headliner
+        supporter
     }
 
     type RootQuery {
@@ -381,7 +412,7 @@ module.exports = buildSchema(`
         transferBooking(bookingId: ID!, userId: ID!): Booking!
         addBookingAmountInfo(bookingId: ID!): AmountInfo!
 
-        createSpeaker(speakerInput: SpeakerInput): Speaker!
+        createArtist(artistInput: ArtistInput): Artist!
 
         createRefund(refundInput: RefundInput): Refund!
     }

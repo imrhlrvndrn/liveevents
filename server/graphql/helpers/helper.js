@@ -1,6 +1,6 @@
 const Event = require("../../models/Event");
 const Booking = require("../../models/Booking");
-const Speaker = require("../../models/Speaker");
+const Artist = require("../../models/Artist");
 const Refund = require("../../models/Refund");
 const User = require("../../models/User");
 
@@ -9,7 +9,7 @@ const transformEvent = async (event) => {
         ...event._doc,
         _id: event.id,
         creator: getUserById.bind(this, event._doc.creator),
-        speakers: getSpeakersOfEvent.bind(this, event._doc.speakers),
+        artists: getArtistsOfEvent.bind(this, event._doc.artists),
         attendees: getAttendeesOfEvent.bind(this, event._doc.attendees),
         startDate: new Date(event._doc.startDate).toString(),
         endDate: new Date(event._doc.endDate).toString(),
@@ -43,14 +43,14 @@ const transformBooking = async (booking) => {
     };
 };
 
-const transformSpeaker = async (speaker) => {
+const transformArtist = async (artist) => {
     return {
-        ...speaker._doc,
-        _id: speaker.id,
-        eventId: getEventById.bind(this, speaker._doc.eventId),
-        userId: getUserById.bind(this, speaker._doc.userId),
-        createdAt: new Date(speaker._doc.createdAt).toString(),
-        updatedAt: new Date(speaker._doc.updatedAt).toString(),
+        ...artist._doc,
+        _id: artist.id,
+        eventId: getEventById.bind(this, artist._doc.eventId),
+        userId: getUserById.bind(this, artist._doc.userId),
+        createdAt: new Date(artist._doc.createdAt).toString(),
+        updatedAt: new Date(artist._doc.updatedAt).toString(),
     };
 };
 
@@ -86,11 +86,11 @@ const getBookingById = async (bookingId) => {
     return transformBooking(returnedBooking);
 };
 
-const getSpeakersOfEvent = async (speakerIds) => {
-    const returnedSpeakers = await Speaker.find({ _id: { $in: speakerIds } });
+const getArtistsOfEvent = async (artistIds) => {
+    const returnedArtists = await Artist.find({ _id: { $in: artistIds } });
 
-    return returnedSpeakers.map((speaker) => {
-        return transformSpeaker(speaker);
+    return returnedArtists.map((artist) => {
+        return transformArtist(artist);
     });
 };
 
@@ -128,8 +128,8 @@ const getRefundsOfBooking = async (refundIds) => {
 const deleteAllCreatedEventsOfUser = async (createdEventsIds) => {
     return createdEventsIds.forEach(async (event) => {
         const deletedEvent = await Event.findByIdAndDelete(event._id);
-        deletedEvent.speakers.forEach((speaker) => {
-            return Speaker.findByIdAndDelete(speaker._id);
+        deletedEvent.artists.forEach((artist) => {
+            return Artist.findByIdAndDelete(artist._id);
         });
         deletedEvent.attendees.forEach(async (booking) => {
             const deletedBooking = await Booking.findByIdAndDelete(booking._id);
@@ -144,8 +144,8 @@ const deleteAllBookedEventsOfUser = async (bookedEventIds) => {
     await Booking.findByIdAndDelete({ _id: { $in: bookedEventIds } });
 };
 
-const deleteAllSpeakersOfEvent = async (speakerIds) => {
-    await Speaker.findByIdAndDelete({ _id: { $in: speakerIds } });
+const deleteAllArtistsOfEvent = async (artistIds) => {
+    await Artist.findByIdAndDelete({ _id: { $in: artistIds } });
 };
 
 const deleteAllAttendeesOfEvent = async (attendeeIds) => {
@@ -157,18 +157,18 @@ module.exports = {
     transformUser: transformUser,
     transformBooking: transformBooking,
     transformRefund: transformRefund,
-    transformSpeaker: transformSpeaker,
+    transformArtist: transformArtist,
     getUserById: getUserById,
     getEventById: getEventById,
     getBookingById: getBookingById,
     getAttendeeById: getAttendeeById,
-    getSpeakersOfEvent: getSpeakersOfEvent,
+    getArtistsOfEvent: getArtistsOfEvent,
     getAttendeesOfEvent: getAttendeesOfEvent,
     getAllBookedEventsOfUser: getAllBookedEventsOfUser,
     getAllCreatedEventsOfUser: getAllCreatedEventsOfUser,
     getRefundsOfBooking: getRefundsOfBooking,
     deleteAllCreatedEventsOfUser: deleteAllCreatedEventsOfUser,
     deleteAllBookedEventsOfUser: deleteAllBookedEventsOfUser,
-    deleteAllSpeakersOfEvent: deleteAllSpeakersOfEvent,
+    deleteAllArtistsOfEvent: deleteAllArtistsOfEvent,
     deleteAllAttendeesOfEvent: deleteAllAttendeesOfEvent,
 };

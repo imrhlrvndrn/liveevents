@@ -17,6 +17,8 @@ const eventsSchema = new Schema(
             city: { type: String, required: true },
             pincode: { type: String, required: true },
             country: { type: String, required: true },
+
+            //todo Add lattitude and longitude fields
         },
         heroImages: [
             {
@@ -27,7 +29,7 @@ const eventsSchema = new Schema(
         ],
         startDate: { type: Date, required: true },
         endDate: { type: Date, required: true },
-        speakers: [{ type: Schema.Types.ObjectId, ref: "Speaker" }],
+        speakers: [{ type: Schema.Types.ObjectId, ref: "Artist" }],
         attendees: [{ type: Schema.Types.ObjectId, ref: "Booking" }],
         pricing: [
             {
@@ -38,14 +40,17 @@ const eventsSchema = new Schema(
                 totalTickets: { type: Number, required: true },
                 soldTickets: { type: Number, required: true },
                 pendingTickets: { type: Number, required: true },
+                minimum_quantity: { type: Number, required: true },
+                maximum_quantity: { type: Number, required: true },
+                isFree: { type: Boolean, required: true }, // The tier is free or not
             },
         ],
         isPublished: { type: Boolean, required: true },
-        isListed: { type: Boolean, required: true },
-        isInviteOnly: { type: Boolean, required: true },
-        isAgeRestricted: { type: Boolean, required: true },
-        password: { type: String },
-        capacity: { type: Number, required: true },
+        isListed: { type: Boolean, required: true }, // if `true` the event is listed on the homepage and is searchable
+        isInviteOnly: { type: Boolean, required: true }, // is private and inviteOnly event
+        isAgeRestricted: { type: Boolean, required: true }, // age restriction to the event venue
+        password: { type: String }, //if `true` the event is private
+        capacity: { type: Number, required: true }, // total capacity of attendees
         spotsLeft: { type: Number, required: true },
         validPromocodes: [
             {

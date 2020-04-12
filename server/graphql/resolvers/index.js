@@ -8,5 +8,5 @@ const bookingResolver = require("./bookingResolver");
 module.exports = {
     ...userResolver,
     ...eventResolver,
-    ...bookingResolver
+    ...bookingResolver,
 };
