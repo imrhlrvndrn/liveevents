@@ -29,7 +29,8 @@ const eventsSchema = new Schema(
         ],
         startDate: { type: Date, required: true },
         endDate: { type: Date, required: true },
-        speakers: [{ type: Schema.Types.ObjectId, ref: "Artist" }],
+        reportingTime: { type: String, required: true },
+        artists: [{ type: Schema.Types.ObjectId, ref: "Artist" }],
         attendees: [{ type: Schema.Types.ObjectId, ref: "Booking" }],
         pricing: [
             {
@@ -48,7 +49,7 @@ const eventsSchema = new Schema(
         isPublished: { type: Boolean, required: true },
         isListed: { type: Boolean, required: true }, // if `true` the event is listed on the homepage and is searchable
         isInviteOnly: { type: Boolean, required: true }, // is private and inviteOnly event
-        isAgeRestricted: { type: Boolean, required: true }, // age restriction to the event venue
+        isAgeRestricted: { type: Number, required: true }, // age restriction to the event venue
         password: { type: String }, //if `true` the event is private
         capacity: { type: Number, required: true }, // total capacity of attendees
         spotsLeft: { type: Number, required: true },

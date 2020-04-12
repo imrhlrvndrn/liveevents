@@ -123,13 +123,14 @@ module.exports = buildSchema(`
         heroImages: [HeroImage!]
         startDate: String!
         endDate: String!
+        reportingTime: String!
         artists: [Artist!]!
         attendees: [Booking!]!
         pricing: [Pricing!]!
         isPublished: Boolean!
         isListed: Boolean!
         isInviteOnly: Boolean!
-        isAgeRestricted: Boolean!
+        isAgeRestricted: Int
         password: String
         capacity: Float!
         spotsLeft: Float!
@@ -147,6 +148,7 @@ module.exports = buildSchema(`
         venue: AddressInput
         startDate: String
         endDate: String
+        reportingTime: String
         isPublished: Boolean
         isListed: Boolean
         isInviteOnly: Boolean
@@ -164,6 +166,7 @@ module.exports = buildSchema(`
         category: String!
         startDate: String!
         endDate: String!
+        reportingTime: String!
         password: String
         capacity: Float!
         venue: AddressInput!

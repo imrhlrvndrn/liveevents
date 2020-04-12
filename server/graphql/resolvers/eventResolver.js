@@ -26,6 +26,7 @@ module.exports = {
             category: args.eventInput.category,
             startDate: args.eventInput.startDate,
             endDate: args.eventInput.endDate,
+            reportingTime: args.eventInput.reportingTime,
             isPublished: false,
             isListed: false,
             isInviteOnly: false,

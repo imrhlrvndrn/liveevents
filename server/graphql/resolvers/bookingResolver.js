@@ -24,7 +24,7 @@ module.exports = {
 
         const newBooking = new Booking({
             entity: "booking",
-            eventId: "5e905047107cfa00e80e34f8",
+            eventId: "5e92ff22aac0a018247e230b",
             attendeeId: "5e904ee796f04a0948c1c14c",
             promocode: args.bookingInput.promocode || "",
             bookingStatus: "booked",
@@ -47,7 +47,7 @@ module.exports = {
         try {
             let returnedNewBooking = await newBooking.save();
 
-            let eventsBooking = await Event.findOne({ _id: "5e905047107cfa00e80e34f8" });
+            let eventsBooking = await Event.findOne({ _id: "5e92ff22aac0a018247e230b" });
             eventsBooking.attendees.push(returnedNewBooking._id);
             eventsBooking.save();
 
