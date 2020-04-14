@@ -1,8 +1,8 @@
-const Booking = require("../../models/Booking");
-const Event = require("../../models/Event");
-const Refund = require("../../models/Refund");
-const User = require("../../models/User");
-const { transformBooking } = require("../helpers/helper");
+const Booking = require('../../models/Booking');
+const Event = require('../../models/Event');
+const Refund = require('../../models/Refund');
+const User = require('../../models/User');
+const { transformBooking } = require('../helpers/helper');
 
 module.exports = {
     bookings: async () => {
@@ -23,17 +23,17 @@ module.exports = {
             baseAmount * numberOfTicketsForAdults + (baseAmount * numberOfTicketsForChildren) / 2;
 
         const newBooking = new Booking({
-            entity: "booking",
-            eventId: "5e92ff22aac0a018247e230b",
-            attendeeId: "5e904ee796f04a0948c1c14c",
-            promocode: args.bookingInput.promocode || "",
-            bookingStatus: "booked",
+            entity: 'booking',
+            eventId: '5e92ff22aac0a018247e230b',
+            attendeeId: '5e904ee796f04a0948c1c14c',
+            promocode: args.bookingInput.promocode || '',
+            bookingStatus: 'booked',
             isFree: baseAmount === 0 ? true : false,
             eventAmountInfo: {
                 numberOfTicketsForAdults: numberOfTicketsForAdults || 0,
                 numberOfTicketsForChildren: numberOfTicketsForChildren || 0,
-                tier: tier || "",
-                taxInfo: [{ taxName: "GST", taxPercentage: 18 }],
+                tier: tier || '',
+                taxInfo: [{ taxName: 'GST', taxPercentage: 18 }],
                 baseAmount: baseAmount,
                 totalAmount: totalAmount,
                 discountedAmount: 0,
@@ -47,11 +47,11 @@ module.exports = {
         try {
             let returnedNewBooking = await newBooking.save();
 
-            let eventsBooking = await Event.findOne({ _id: "5e92ff22aac0a018247e230b" });
+            let eventsBooking = await Event.findOne({ _id: '5e92ff22aac0a018247e230b' });
             eventsBooking.attendees.push(returnedNewBooking._id);
             eventsBooking.save();
 
-            let usersBooking = await User.findById("5e904ee796f04a0948c1c14c");
+            let usersBooking = await User.findById('5e904ee796f04a0948c1c14c');
             usersBooking.bookedEvents.push(returnedNewBooking._id);
             usersBooking.save();
 
@@ -62,7 +62,7 @@ module.exports = {
     },
     cancelBooking: async (args) => {
         try {
-            let cancelledBooking = await Booking.findById(args.bookingId);
+            let cancelledBooking = await Booking.findByIdAndDelete(args.bookingId);
             let cancelledBookingEvent = await Event.findById(cancelledBooking.eventId);
             cancelledBookingEvent.attendees.pull(args.bookingId);
             cancelledBookingEvent.save();
@@ -71,9 +71,7 @@ module.exports = {
             cancelledBookingUser.bookedEvents.pull(args.bookingId);
             cancelledBookingUser.save();
 
-            const deletedBooking = await Booking.findByIdAndRemove(args.bookingId);
-
-            return transformBooking(deletedBooking);
+            return transformBooking(cancelledBooking);
         } catch (error) {
             throw error;
         }

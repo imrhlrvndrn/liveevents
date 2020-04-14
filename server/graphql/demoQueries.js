@@ -79,6 +79,74 @@ mutation {
   updateValidPromocodes(eventId: "5e8db545c9cf08174439ae8e", updateValidPromocodeInput: {_id:"5e8db6eee0a0461bbc9d4294",promocode: "beingcodr"})
 }
 
+mutation {
+  createArtist(artistInput: {type: "Coder", genres: ["React", "GraphQL"], topics: ["GraphQL"], isHidden: true, isFree: false, sort_order: 1, role: headliner, artistAmountInfo: {baseAmount: 1000, totalInstallments: 12}}) {
+    _id
+    entity
+    isFree
+    role
+    isFree
+    isHidden
+    sort_order
+    genres
+    topics
+    artistAmountInfo {
+      numberOfTicketsForAdults
+      numberOfTicketsForChildren
+      tier
+      baseAmount
+      taxInfo {
+        _id
+        taxName
+        taxPercentage
+      }
+      totalAmount
+      discountedAmount
+      isPaid
+      paidAmount
+      pendingAmount
+      totalInstallments
+    }
+  }
+}
+
+
+
+mutation {
+  deleteArtist(artistId: "5e9552bd5d04b11f207a3b69") {
+    _id
+    entity
+    isFree
+    role
+    isFree
+    isHidden
+    sort_order
+    genres
+    topics
+    artistAmountInfo {
+      numberOfTicketsForAdults
+      numberOfTicketsForChildren
+      tier
+      baseAmount
+      taxInfo {
+        _id
+        taxName
+        taxPercentage
+      }
+      totalAmount
+      discountedAmount
+      isPaid
+      paidAmount
+      pendingAmount
+      totalInstallments
+    }
+  }
+}
+
+
+
+
+
 
 
 

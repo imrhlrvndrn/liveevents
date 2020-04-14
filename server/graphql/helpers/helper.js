@@ -1,8 +1,8 @@
-const Event = require("../../models/Event");
-const Booking = require("../../models/Booking");
-const Artist = require("../../models/Artist");
-const Refund = require("../../models/Refund");
-const User = require("../../models/User");
+const Event = require('../../models/Event');
+const Booking = require('../../models/Booking');
+const Artist = require('../../models/Artist');
+const Refund = require('../../models/Refund');
+const User = require('../../models/User');
 
 const transformEvent = async (event) => {
     return {
@@ -86,6 +86,11 @@ const getBookingById = async (bookingId) => {
     return transformBooking(returnedBooking);
 };
 
+const getArtistById = async (artistId) => {
+    const returnedArtist = await Artist.findById(artistId);
+    return transformArtist(returnedArtist);
+};
+
 const getArtistsOfEvent = async (artistIds) => {
     const returnedArtists = await Artist.find({ _id: { $in: artistIds } });
 
@@ -162,6 +167,7 @@ module.exports = {
     getEventById: getEventById,
     getBookingById: getBookingById,
     getAttendeeById: getAttendeeById,
+    getArtistById: getArtistById,
     getArtistsOfEvent: getArtistsOfEvent,
     getAttendeesOfEvent: getAttendeesOfEvent,
     getAllBookedEventsOfUser: getAllBookedEventsOfUser,

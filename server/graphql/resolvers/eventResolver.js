@@ -1,15 +1,14 @@
-const Event = require("../../models/Event");
-const User = require("../../models/User");
+const Event = require('../../models/Event');
+const User = require('../../models/User');
 const {
     transformEvent,
     deleteAllAttendeesOfEvent,
     deleteAllSpeakersOfEvent,
-} = require("../helpers/helper");
+} = require('../helpers/helper');
 
 module.exports = {
     events: async () => {
         const events = await Event.find({});
-        // console.log(events);
 
         return events.map((savedEvent) => {
             return transformEvent(savedEvent);
@@ -17,11 +16,11 @@ module.exports = {
     },
     createEvent: async (args) => {
         const newEvent = new Event({
-            entity: "event",
-            creator: "5e904ee796f04a0948c1c14c",
+            entity: 'event',
+            creator: '5e904ee796f04a0948c1c14c',
             title: args.eventInput.title,
-            summary: args.eventInput.summary || "",
-            slugUri: args.eventInput.title.toLowerCase().split(" ").join("-"),
+            summary: args.eventInput.summary || '',
+            slugUri: args.eventInput.title.toLowerCase().split(' ').join('-'),
             description: args.eventInput.description,
             category: args.eventInput.category,
             startDate: args.eventInput.startDate,
@@ -31,24 +30,23 @@ module.exports = {
             isListed: false,
             isInviteOnly: false,
             isAgeRestricted: false,
-            password: args.eventInput.password || "",
+            password: args.eventInput.password || '',
             capacity: args.eventInput.capacity,
             spotsLeft: args.eventInput.capacity,
             venue: {
-                streetAddress1: args.eventInput.venue.streetAddress1 || "",
-                streetAddress2: args.eventInput.venue.streetAddress2 || "",
-                state: args.eventInput.venue.state || "",
-                city: args.eventInput.venue.city || "",
-                pincode: args.eventInput.venue.pincode || "",
-                country: args.eventInput.venue.country || "",
+                streetAddress1: args.eventInput.venue.streetAddress1 || '',
+                streetAddress2: args.eventInput.venue.streetAddress2 || '',
+                state: args.eventInput.venue.state || '',
+                city: args.eventInput.venue.city || '',
+                pincode: args.eventInput.venue.pincode || '',
+                country: args.eventInput.venue.country || '',
             },
         });
 
         try {
             const savedNewEvent = await newEvent.save();
-            console.log(savedNewEvent);
 
-            const eventUser = await User.findById("5e904ee796f04a0948c1c14c");
+            const eventUser = await User.findById('5e904ee796f04a0948c1c14c');
 
             eventUser.createdEvents.push(savedNewEvent._id);
             eventUser.save();
@@ -56,20 +54,19 @@ module.exports = {
             return transformEvent(savedNewEvent);
             // return "savedNewEvent";
         } catch (error) {
-            console.log(error);
             throw error;
         }
     },
     updateEvent: async (args) => {
         const eventToBeUpdated = await Event.findById(args.eventId);
-        if (!eventToBeUpdated) throw new Error("No event found!");
+        if (!eventToBeUpdated) throw new Error('No event found!');
 
         if (args.updateEventInput.title != undefined) {
             eventToBeUpdated.title = args.updateEventInput.title;
             eventToBeUpdated.slugUri = args.updateEventInput.title
                 .toLowerCase()
-                .split(" ")
-                .join("-");
+                .split(' ')
+                .join('-');
         }
         if (args.updateEventInput.summary != undefined) {
             eventToBeUpdated.summary = args.updateEventInput.summary;
@@ -144,7 +141,7 @@ module.exports = {
         if (!filteredPromocode.includes(args.validPromocodeInput.promocode.toLowerCase())) {
             eventToBeUpdated.validPromocodes.push(args.validPromocodeInput);
             await eventToBeUpdated.save();
-            return "Promocode added successfully";
+            return 'Promocode added successfully';
         }
         return `Promocode ${args.validPromocodeInput.promocode} already exists with discount of ${args.validPromocodeInput.discount}%`;
     },
@@ -153,12 +150,12 @@ module.exports = {
 
         const code = eventToBeUpdated.validPromocodes.id(args.updateValidPromocodeInput._id);
         if (args.updateValidPromocodeInput.promocode != undefined)
-            code["promocode"] = args.updateValidPromocodeInput.promocode;
+            code['promocode'] = args.updateValidPromocodeInput.promocode;
         if (args.updateValidPromocodeInput.discount != undefined)
-            code["discount"] = args.updateValidPromocodeInput.discount;
+            code['discount'] = args.updateValidPromocodeInput.discount;
         await eventToBeUpdated.save();
 
-        return "Promocode updated successfully!";
+        return 'Promocode updated successfully!';
     },
     addEventPricing: async (args) => {
         const newPricingTier = {
@@ -182,7 +179,7 @@ module.exports = {
             returnedEvent.pricing.push(newPricingTier);
             await returnedEvent.save();
 
-            return "Added new pricing tier";
+            return 'Added new pricing tier';
         } catch (error) {
             throw error;
         }
@@ -191,29 +188,29 @@ module.exports = {
         const eventToBeUpdated = await Event.findById(args.eventId);
         const pricingToBeUpdated = eventToBeUpdated.pricing.id(args.updatePricingInput._id);
         if (args.updatePricingInput.tier !== undefined) {
-            pricingToBeUpdated["tier"] = args.updatePricingInput.tier;
+            pricingToBeUpdated['tier'] = args.updatePricingInput.tier;
         }
         if (args.updatePricingInput.amount !== undefined) {
-            pricingToBeUpdated["amount"] = args.updatePricingInput.amount;
+            pricingToBeUpdated['amount'] = args.updatePricingInput.amount;
         }
         if (args.updatePricingInput.deliverables !== undefined) {
-            pricingToBeUpdated["deliverables"] = args.updatePricingInput.deliverables;
+            pricingToBeUpdated['deliverables'] = args.updatePricingInput.deliverables;
         }
         if (args.updatePricingInput.isBestSeller !== undefined) {
-            pricingToBeUpdated["isBestSeller"] = args.updatePricingInput.isBestSeller;
+            pricingToBeUpdated['isBestSeller'] = args.updatePricingInput.isBestSeller;
         }
         if (args.updatePricingInput.totalTickets !== undefined) {
-            pricingToBeUpdated["totalTickets"] = args.updatePricingInput.totalTickets;
+            pricingToBeUpdated['totalTickets'] = args.updatePricingInput.totalTickets;
         }
         if (args.updatePricingInput.soldTickets !== undefined) {
-            pricingToBeUpdated["soldTickets"] = args.updatePricingInput.soldTickets;
+            pricingToBeUpdated['soldTickets'] = args.updatePricingInput.soldTickets;
         }
         if (args.updatePricingInput.pendingTickets !== undefined) {
-            pricingToBeUpdated["pendingTickets"] = args.updatePricingInput.pendingTickets;
+            pricingToBeUpdated['pendingTickets'] = args.updatePricingInput.pendingTickets;
         }
 
         await eventToBeUpdated.save();
 
-        return "Pricing tier updated successfully!";
+        return 'Pricing tier updated successfully!';
     },
 };

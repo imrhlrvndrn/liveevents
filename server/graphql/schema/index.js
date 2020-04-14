@@ -1,4 +1,4 @@
-const { buildSchema } = require("graphql");
+const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
     type User {
@@ -356,7 +356,7 @@ module.exports = buildSchema(`
         type: String!
         genres: [String!]!
         topics: [String!]!
-        artistAmountInfo: AmountInfo!
+        artistAmountInfo: AmountInfo
         isHidden: Boolean!
         sort_order: Int!
         role: Role!
@@ -368,18 +368,22 @@ module.exports = buildSchema(`
         type: String!
         genres:[String!]!
         topics:[String!]!
+        isFree: Boolean!
         isHidden: Boolean!
         sort_order: Int!
         role: Role!
+        artistAmountInfo: AmountInfoInput!
     }
 
     input UpdateArtistInput {
         type: String
         genres:[String]
         topics:[String]
+        isFree: Boolean
         isHidden: Boolean
         sort_order: Int
         role: Role
+        artistAmountInfo: UpdateAmountInfoInput
     }
 
     enum Role{
@@ -390,9 +394,13 @@ module.exports = buildSchema(`
     type RootQuery {
         events: [Event!]!
         event(title: String!): Event!
+
         user(id: ID!): User!
         users: [User!]!
+
         bookings: [Booking]!
+
+        artists: [Artist!]!
     }
 
     type RootMutation {
@@ -416,6 +424,9 @@ module.exports = buildSchema(`
         addBookingAmountInfo(bookingId: ID!): AmountInfo!
 
         createArtist(artistInput: ArtistInput): Artist!
+        deleteArtist(artistId: ID!): Artist!
+        updateArtist(artistId: ID!, updateArtistInput: UpdateArtistInput): Artist!
+
 
         createRefund(refundInput: RefundInput): Refund!
     }
