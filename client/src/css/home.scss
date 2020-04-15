@@ -1,13 +1,14 @@
-@import "./mixins.scss";
+@import './mixins.scss';
 
 .homepage_hero {
     height: 100vh;
     padding-top: 100px;
     @include lowerCut();
-    background-position: center;
+    background-position: bottom;
+    background-size: cover;
     background-attachment: fixed;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0.1)),
-        url(https://images.pexels.com/photos/3473085/pexels-photo-3473085.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+        url(https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80);
     @include flexCentered();
 
     &_heroContent {
@@ -44,7 +45,7 @@
 
             img {
                 transition: 0.4s all;
-                filter: grayscale(1);
+                // filter: grayscale(1);
             }
 
             &_overlay {

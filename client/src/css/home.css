@@ -3,10 +3,11 @@
   padding-top: 100px;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
   clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
-  background-position: center;
+  background-position: bottom;
+  background-size: cover;
   background-attachment: fixed;
-  background-image: -webkit-gradient(linear, left top, right top, from(black), to(rgba(255, 255, 255, 0.1))), url(https://images.pexels.com/photos/3473085/pexels-photo-3473085.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
-  background-image: linear-gradient(to right, black, rgba(255, 255, 255, 0.1)), url(https://images.pexels.com/photos/3473085/pexels-photo-3473085.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  background-image: -webkit-gradient(linear, left top, right top, from(black), to(rgba(255, 255, 255, 0.1))), url(https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80);
+  background-image: linear-gradient(to right, black, rgba(255, 255, 255, 0.1)), url(https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -77,8 +78,6 @@
 .homepage_steps_details_step img {
   -webkit-transition: 0.4s all;
   transition: 0.4s all;
-  -webkit-filter: grayscale(1);
-          filter: grayscale(1);
 }
 
 .homepage_steps_details_step_overlay {

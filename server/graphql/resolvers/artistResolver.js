@@ -1,5 +1,4 @@
 const Artist = require('../../models/Artist');
-const User = require('../../models/User');
 const Event = require('../../models/Event');
 const { transformArtist } = require('../helpers/helper');
 
@@ -100,6 +99,51 @@ module.exports = {
         if (role != undefined) {
             artistToBeUpdated.role = role;
         }
+        if (args.updateArtistInput.artistAmountInfo !== undefined) {
+            let {
+                numberOfTicketsForAdults,
+                numberOfTicketsForChildren,
+                tier,
+                baseAmount,
+                totalAmount,
+                totalInstallments,
+                isPaid,
+                pendingAmount,
+                paidAmount,
+            } = args.updateArtistInput.artistAmountInfo;
+
+            let filteredTaxInfo = [];
+            if (args.updateArtistInput.artistAmountInfo.taxInfo !== undefined) {
+                const originalTaxInfo = artistToBeUpdated.artistAmountInfo.taxInfo.map((item) => {
+                    return item.taxName.toLowerCase();
+                });
+                args.updateArtistInput.artistAmountInfo.taxInfo.forEach((stack) => {
+                    if (!originalTaxInfo.includes(stack.taxName.toLowerCase())) {
+                        filteredTaxInfo.push(stack);
+                    }
+                });
+            }
+
+            artistToBeUpdated.artistAmountInfo = {
+                numberOfTicketsForAdults:
+                    numberOfTicketsForAdults ||
+                    artistToBeUpdated.artistAmountInfo.numberOfTicketsForAdults,
+                numberOfTicketsForChildren:
+                    numberOfTicketsForChildren ||
+                    artistToBeUpdated.artistAmountInfo.numberOfTicketsForChildren,
+                tier: tier || artistToBeUpdated.artistAmountInfo.tier,
+                baseAmount: baseAmount || artistToBeUpdated.artistAmountInfo.baseAmount,
+                totalAmount: baseAmount || artistToBeUpdated.artistAmountInfo.totalAmount,
+                totalInstallments:
+                    totalInstallments || artistToBeUpdated.artistAmountInfo.totalInstallments,
+                isPaid: isPaid || artistToBeUpdated.artistAmountInfo.isPaid,
+                pendingAmount: baseAmount || artistToBeUpdated.artistAmountInfo.pendingAmount,
+                paidAmount: paidAmount || artistToBeUpdated.artistAmountInfo.paidAmount,
+                taxInfo: [...artistToBeUpdated.artistAmountInfo.taxInfo, ...filteredTaxInfo] || [
+                    ...artistToBeUpdated.artistAmountInfo.taxInfo,
+                ],
+            };
+        }
 
         await artistToBeUpdated.save();
         return transformArtist(artistToBeUpdated);
@@ -112,5 +156,16 @@ module.exports = {
         await event.save();
 
         return transformArtist(deletedArtist);
+    },
+    updateArtistTaxInfo: async (args) => {
+        const taxInfoToBeUpdated = await Artist.findById(args.artistId);
+
+        const originalTaxInfo = taxInfoToBeUpdated.artistAmountInfo.taxInfo.id(args.taxInfoId);
+        originalTaxInfo.taxName = args.updateTaxInfo.taxName || originalTaxInfo.taxName;
+        originalTaxInfo.taxPercentage =
+            args.updateTaxInfo.taxPercentage || originalTaxInfo.taxPercentage;
+
+        await taxInfoToBeUpdated.save();
+        return transformArtist(taxInfoToBeUpdated);
     },
 };

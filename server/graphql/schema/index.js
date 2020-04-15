@@ -268,7 +268,7 @@ module.exports = buildSchema(`
     type Team {
         _id: ID!
         entity: String!
-        emails: String!
+        email: String!
         fullName: String
         gender: String!
         age: Float
@@ -325,6 +325,11 @@ module.exports = buildSchema(`
     input TaxInfoInput {
         taxName: String!
         taxPercentage: Float!
+    }
+
+    input UpdateTaxInfoInput{
+        taxName: String
+        taxPercentage: Float
     }
 
     type Refund {
@@ -426,6 +431,7 @@ module.exports = buildSchema(`
         createArtist(artistInput: ArtistInput): Artist!
         deleteArtist(artistId: ID!): Artist!
         updateArtist(artistId: ID!, updateArtistInput: UpdateArtistInput): Artist!
+        updateArtistTaxInfo(artistId: ID!,taxInfoId: ID!, updateTaxInfo: UpdateTaxInfoInput): Artist!
 
 
         createRefund(refundInput: RefundInput): Refund!

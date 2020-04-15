@@ -112,6 +112,47 @@ mutation {
 
 
 
+mutation{
+  updateArtist(artistId:"5e95562b0ed6da1cfce99d80",updateArtistInput:{artistAmountInfo:{baseAmount:5000,taxInfo:[{taxName: "CESS",taxPercentage:3}]}}){
+    _id
+    genres
+    topics
+    artistAmountInfo{
+      baseAmount
+      totalAmount
+      isPaid
+      taxInfo{
+        _id
+        taxName
+        taxPercentage
+      }
+    }
+  }
+}
+
+
+
+
+mutation{
+  updateArtistTaxInfo(artistId:"5e95562b0ed6da1cfce99d80",taxInfoId:"5e95562b0ed6da1cfce99d81",updateTaxInfo:{taxName:"GST", taxPercentage:18}){
+    _id
+    genres
+    topics
+    artistAmountInfo{
+      baseAmount
+      totalAmount
+      isPaid
+      taxInfo{
+        _id
+        taxName
+        taxPercentage
+      }
+    }
+  }
+}
+
+
+
 mutation {
   deleteArtist(artistId: "5e9552bd5d04b11f207a3b69") {
     _id

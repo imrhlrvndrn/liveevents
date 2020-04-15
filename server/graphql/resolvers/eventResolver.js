@@ -194,7 +194,10 @@ module.exports = {
             pricingToBeUpdated['amount'] = args.updatePricingInput.amount;
         }
         if (args.updatePricingInput.deliverables !== undefined) {
-            pricingToBeUpdated['deliverables'] = args.updatePricingInput.deliverables;
+            pricingToBeUpdated['deliverables'] = [
+                ...pricingToBeUpdated.deliverables,
+                ...args.updatePricingInput.deliverables,
+            ];
         }
         if (args.updatePricingInput.isBestSeller !== undefined) {
             pricingToBeUpdated['isBestSeller'] = args.updatePricingInput.isBestSeller;
