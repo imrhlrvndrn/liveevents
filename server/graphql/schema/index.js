@@ -1,4 +1,4 @@
-const { buildSchema } = require('graphql');
+const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
     type User {
@@ -244,6 +244,22 @@ module.exports = buildSchema(`
         discount: Float
     }
 
+    type Organization {
+        _id:ID!
+        entity: String!
+        owner: User!
+        name: String!
+        description: String!
+        image: String!
+        createdEvents: [Event!]!
+        members: [User!]!
+    }
+
+    input OrganizationInput {
+        name: String!
+        description: String!
+    }
+
     type Booking {
         _id: ID!
         entity: String!
@@ -433,8 +449,9 @@ module.exports = buildSchema(`
         updateArtist(artistId: ID!, updateArtistInput: UpdateArtistInput): Artist!
         updateArtistTaxInfo(artistId: ID!,taxInfoId: ID!, updateTaxInfo: UpdateTaxInfoInput): Artist!
 
-
         createRefund(refundInput: RefundInput): Refund!
+
+        createOrganization(userId:ID!, organizationInput: OrganizationInput): Organization!
     }
 
     schema {
