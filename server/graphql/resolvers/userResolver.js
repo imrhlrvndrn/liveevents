@@ -1,12 +1,12 @@
-const Event = require("../../models/Event");
-const User = require("../../models/User");
-const bcrypt = require("bcryptjs");
+const Event = require('../../models/Event');
+const User = require('../../models/User');
+const bcrypt = require('bcryptjs');
 const {
     transformUser,
     getUserById,
     deleteAllCreatedEventsOfUser,
     deleteAllBookedEventsOfUser,
-} = require("../helpers/helper");
+} = require('../helpers/helper');
 
 module.exports = {
     users: async () => {
@@ -22,11 +22,11 @@ module.exports = {
         try {
             // Check if user already exists
             const userExists = await User.findOne({ username: args.userInput.username });
-            if (userExists) throw new Error("Username already exists");
+            if (userExists) throw new Error('Username already exists');
 
             // Check if user already exists
-            const userEmailExists = await User.findOne({ "email.email": args.userInput.email });
-            if (userEmailExists) throw new Error("Email already exists");
+            const userEmailExists = await User.findOne({ 'email.email': args.userInput.email });
+            if (userEmailExists) throw new Error('Email already exists');
 
             // Hash the password
             const salt = await bcrypt.genSalt(12);
@@ -34,7 +34,7 @@ module.exports = {
 
             // Create the user
             const newUser = new User({
-                entity: "user",
+                entity: 'user',
                 username: args.userInput.username,
                 email: {
                     isVerified: false,
@@ -42,36 +42,36 @@ module.exports = {
                 },
                 password: hashedPassword,
                 fullName: args.userInput.fullName,
-                designation: args.userInput.designation || "",
-                companyName: args.userInput.companyName || "",
+                designation: args.userInput.designation || '',
+                companyName: args.userInput.companyName || '',
                 birthDate: args.userInput.birthDate,
                 gender: args.userInput.gender,
                 address: {
-                    streetAddress1: args.userInput.address.streetAddress1 || "",
-                    streetAddress2: args.userInput.address.streetAddress2 || "",
-                    state: args.userInput.address.state || "",
-                    city: args.userInput.address.city || "",
-                    pincode: args.userInput.address.pincode || "",
-                    country: args.userInput.address.country || "",
+                    streetAddress1: args.userInput.address.streetAddress1 || '',
+                    streetAddress2: args.userInput.address.streetAddress2 || '',
+                    state: args.userInput.address.state || '',
+                    city: args.userInput.address.city || '',
+                    pincode: args.userInput.address.pincode || '',
+                    country: args.userInput.address.country || '',
                 },
                 billingAddress: {
-                    streetAddress1: args.userInput.billingAddress.streetAddress1 || "",
-                    streetAddress2: args.userInput.billingAddress.streetAddress1 || "",
-                    state: args.userInput.billingAddress.state || "",
-                    city: args.userInput.billingAddress.city || "",
-                    pincode: args.userInput.billingAddress.pincode || "",
-                    country: args.userInput.billingAddress.country || "",
+                    streetAddress1: args.userInput.billingAddress.streetAddress1 || '',
+                    streetAddress2: args.userInput.billingAddress.streetAddress1 || '',
+                    state: args.userInput.billingAddress.state || '',
+                    city: args.userInput.billingAddress.city || '',
+                    pincode: args.userInput.billingAddress.pincode || '',
+                    country: args.userInput.billingAddress.country || '',
                 },
                 links: {
-                    instagram: "",
-                    youtube: "",
-                    linkedin: "",
-                    twitter: "",
-                    vimeo: "",
-                    whatsapp: "",
-                    facebook: "",
-                    discord: "",
-                    telegram: "",
+                    instagram: '',
+                    youtube: '',
+                    linkedin: '',
+                    twitter: '',
+                    vimeo: '',
+                    whatsapp: '',
+                    facebook: '',
+                    discord: '',
+                    telegram: '',
                 },
             });
 
@@ -92,14 +92,14 @@ module.exports = {
     },
     updateUser: async (args) => {
         let user = await User.findById(args.updateUserInput.id);
-        if (!user) throw new Error("No user found!");
+        if (!user) throw new Error('No user found!');
         const userEmailExists = await User.findOne({
-            "email.email": args.updateUserInput.email,
+            'email.email': args.updateUserInput.email,
         });
-        if (userEmailExists) throw new Error("This email is linked with other account");
+        if (userEmailExists) throw new Error('This email is linked with other account');
 
         const usernameExists = await User.findOne({ username: args.updateUserInput.username });
-        if (usernameExists) throw new Error("Username already exists");
+        if (usernameExists) throw new Error('Username already exists');
 
         if (args.updateUserInput.fullName !== undefined) {
             user.fullName = args.updateUserInput.fullName;

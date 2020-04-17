@@ -1,18 +1,18 @@
-const Booking = require("../../models/Booking");
-const Event = require("../../models/Event");
-const Refund = require("../../models/Refund");
-const User = require("../../models/User");
-const { transformRefund } = require("../helpers/helper");
+const Booking = require('../../models/Booking');
+const Event = require('../../models/Event');
+const Refund = require('../../models/Refund');
+const User = require('../../models/User');
+const { transformRefund } = require('../helpers/helper');
 
 module.exports = {
-    createRefund: async args => {
+    createRefund: async (args) => {
         const newRefund = new Refund({
-            entity: "refund",
-            itemType: args.refundInput.itemType || "",
-            status: "initiated",
+            entity: 'refund',
+            itemType: args.refundInput.itemType || '',
+            status: 'initiated',
             reason: args.refundInput.reason,
             quantityRequested: args.refundInput.quantityRequested,
-            amountToBeRefunded: args.refundInput.amountToBeRefunded
+            amountToBeRefunded: args.refundInput.amountToBeRefunded,
         });
 
         try {
@@ -22,5 +22,5 @@ module.exports = {
         } catch (error) {
             throw error;
         }
-    }
+    },
 };

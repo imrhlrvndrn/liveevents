@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const eventsSchema = new Schema(
     {
         entity: { type: String, required: true },
         slugUri: { type: String },
-        creator: { type: Schema.Types.ObjectId, ref: "User" },
+        creator: { type: Schema.Types.ObjectId, ref: 'User' },
         title: { type: String, required: true },
         summary: { type: String },
         description: { type: String, required: true },
@@ -30,8 +30,8 @@ const eventsSchema = new Schema(
         startDate: { type: Date, required: true },
         endDate: { type: Date, required: true },
         reportingTime: { type: String, required: true },
-        artists: [{ type: Schema.Types.ObjectId, ref: "Artist" }],
-        attendees: [{ type: Schema.Types.ObjectId, ref: "Booking" }],
+        artists: [{ type: Schema.Types.ObjectId, ref: 'Artist' }],
+        attendees: [{ type: Schema.Types.ObjectId, ref: 'Booking' }],
         pricing: [
             {
                 tier: { type: String, required: true },
@@ -63,4 +63,4 @@ const eventsSchema = new Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Event", eventsSchema);
+module.exports = mongoose.model('Event', eventsSchema);

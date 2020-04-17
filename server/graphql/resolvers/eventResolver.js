@@ -1,5 +1,6 @@
 const Event = require("../../models/Event");
 const User = require("../../models/User");
+const Organization = require("../../models/Organization");
 const {
   transformEvent,
   deleteAllAttendeesOfEvent,
@@ -231,6 +232,77 @@ module.exports = {
 
     return "Pricing tier updated successfully!";
   },
-  transferToUser: async (args) => {},
-  transferToOrganization: async (args) => {},
+  transferToUser: async (args) => {
+    const returnedEvent = await Event.findById(args.eventId);
+    if (!returnedEvent) throw new Error("No event found!");
+    const transferFromUser = await User.findById(returnedEvent.creator);
+    if (!transferFromUser) {
+      const transferFromOrganization = await Organization.findById(
+        returnedEvent.creator
+      );
+
+      if (!transferFromOrganization)
+        throw new Error("No such user/organization found!");
+    }
+    const transferToUser = await User.findById(args.userId);
+    if (!transferToUser) throw new Error("No such user found!");
+
+    try {
+      returnedEvent.creator = args.userId;
+      await returnedEvent.save();
+
+      if (transferFromUser) {
+        transferFromUser.createdEvents.pull(args.eventId);
+        await transferFromUser.save();
+      } else {
+        transferFromOrganization.createdEvents.pull(args.eventId);
+        await transferFromOrganization.save();
+      }
+
+      transferToUser.createdEvents.push(args.eventId);
+      await transferToUser.save();
+
+      return transformEvent(returnedEvent);
+    } catch (error) {
+      throw error;
+    }
+  },
+  transferToOrganization: async (args) => {
+    const returnedEvent = await Event.findById(args.eventId);
+    if (!returnedEvent) throw new Error("No event found!");
+    const transferFromUser = await User.findById(returnedEvent.creator);
+    if (!transferFromUser) {
+      const transferFromOrganization = await Organization.findById(
+        returnedEvent.creator
+      );
+
+      if (!transferFromOrganization)
+        throw new Error("No such user/organization found!");
+    }
+    const transferToOrganization = await Organization.findById(
+      args.organizationId
+    );
+
+    if (!transferToOrganization) throw new Error("No such user found!");
+
+    try {
+      returnedEvent.creator = args.organizationId;
+      await returnedEvent.save();
+
+      if (transferFromUser) {
+        transferFromUser.createdEvents.pull(args.eventId);
+        await transferFromUser.save();
+      } else {
+        transferFromOrganization.createdEvents.pull(args.eventId);
+        await transferFromOrganization.save();
+      }
+
+      transferToOrganization.createdEvents.push(args.eventId);
+      await transferToOrganization.save();
+
+      return transformEvent(returnedEvent);
+    } catch (error) {
+      throw error;
+    }
+  },
 };

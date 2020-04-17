@@ -1,4 +1,4 @@
-const { buildSchema } = require("graphql");
+const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
     type User {
@@ -260,6 +260,42 @@ module.exports = buildSchema(`
         description: String!
     }
 
+    input UpdateOrganizationInput {
+        name: String
+        description: String
+        image: String
+        members: [OrgMember!]!
+    }
+    
+    type OrgMember {
+        memberId: User!
+        permissions: OrgMemberPermission!
+        isAdmin: Boolean
+    }
+
+    input OrgMemberInput {
+        permissions: OrgMemberPermissionInput
+        isAdmin: Boolean
+    }
+
+    input UpdateOrgMemberInput {
+        _id: ID!
+        permissions: OrgMemberPermissionInput
+        isAdmin: Boolean
+    }
+
+    type OrgMemberPermission {
+        canAddAdmins: Boolean!
+        canReadAndWriteArtists:Boolean!
+        canReadAndWriteEvents: Boolean!
+    }
+
+    input OrgMemberPermissionInput {
+        canAddAdmins: Boolean
+        canReadAndWriteArtists:Boolean
+        canReadAndWriteEvents: Boolean
+    }
+
     type Booking {
         _id: ID!
         entity: String!
@@ -434,6 +470,8 @@ module.exports = buildSchema(`
         updateValidPromocodes(eventId: ID!, updateValidPromocodeInput: UpdateValidPromocodeInput): String!
         addEventHeroImages(eventId: ID!, heroImageInput: HeroImageInput): String!
         updateEventHeroImages(eventId: ID!, updateheroImageInput: UpdateHeroImageInput): String!
+        transferToUser(userId:ID!, eventId: ID!): Event!
+        transferToOrganization(organizationId:ID!, eventId: ID!): Event!
 
         createUser(userInput: UserInput): User!
         deleteUser(userId: ID!): String!
@@ -451,7 +489,13 @@ module.exports = buildSchema(`
 
         createRefund(refundInput: RefundInput): Refund!
 
-        createOrganization(userId:ID!, organizationInput: OrganizationInput): Organization!
+        createOrganization(userId:ID!, createOrganization: OrganizationInput): Organization!
+        updateOrganization(organizationId:ID!, updateOrganization: UpdateOrganizationInput): Organization!
+        addOrganizationMember(organizationId: ID!,userId: ID!, members: [OrgMemberInput!]): Organization!
+        updateOrganizationMember(organizationId: ID!, member: UpdateOrgMemberInput!): Organization!
+    
+    
+    
     }
 
     schema {

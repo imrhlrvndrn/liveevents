@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
@@ -33,8 +33,8 @@ const userSchema = new Schema(
             pincode: { type: String, required: true },
             country: { type: String, required: true },
         },
-        createdEvents: [{ type: Schema.Types.ObjectId, ref: "Event" }],
-        bookedEvents: [{ type: Schema.Types.ObjectId, ref: "Booking" }],
+        createdEvents: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
+        bookedEvents: [{ type: Schema.Types.ObjectId, ref: 'Booking' }],
         techStack: [{ type: String }],
         links: {
             instagram: { type: String },
@@ -51,4 +51,4 @@ const userSchema = new Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

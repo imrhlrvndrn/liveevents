@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bookingSchema = new Schema(
     {
         entity: { type: String, required: true },
-        eventId: { type: Schema.Types.ObjectId, ref: "Event" },
-        attendeeId: { type: Schema.Types.ObjectId, ref: "User" },
-        refundId: [{ type: Schema.Types.ObjectId, ref: "Refund" }],
+        eventId: { type: Schema.Types.ObjectId, ref: 'Event' },
+        attendeeId: { type: Schema.Types.ObjectId, ref: 'User' },
+        refundId: [{ type: Schema.Types.ObjectId, ref: 'Refund' }],
         promocode: { type: String },
         bookingStatus: { type: String, required: true },
         isFree: { type: Boolean, required: true },
@@ -33,4 +33,4 @@ const bookingSchema = new Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Booking", bookingSchema);
+module.exports = mongoose.model('Booking', bookingSchema);

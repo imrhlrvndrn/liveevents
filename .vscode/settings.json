@@ -1,8 +1,9 @@
 {
-    "editor.cursorBlinking": "smooth",
-    "editor.fontWeight": "100",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnType": true,
-    "files.autoSave": "afterDelay"
+  "editor.cursorBlinking": "smooth",
+  "editor.fontWeight": "100",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "files.autoSave": "afterDelay",
+  "editor.wordWrap": "off"
 }
