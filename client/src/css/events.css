@@ -84,6 +84,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   width: 60%;
+  max-width: 800px;
   height: 400px;
   margin: 60px auto 0 auto;
   padding-right: 20px;
@@ -93,18 +94,18 @@
 .eventsList_eventsContainer_event {
   width: 100%;
   height: auto;
-  padding: 3em 0;
+  padding: 2em 0;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 120px 170px 1fr 170px;
-      grid-template-columns: 120px 170px 1fr 170px;
+  -ms-grid-columns: 100px 170px 1fr 170px;
+      grid-template-columns: 100px 170px 1fr 170px;
   grid-gap: 20px;
 }
 
 .eventsList_eventsContainer_event_date {
   text-transform: capitalize;
   color: var(--white);
-  font-size: 1.2em;
+  font-size: 1rem;
   padding: 1em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -122,6 +123,7 @@
 }
 
 .eventsList_eventsContainer_event_details h4 {
+  font-size: 1.2rem;
   margin-bottom: 10px;
 }
 
@@ -143,12 +145,29 @@
   margin-left: 20px;
 }
 
+.eventsList_eventsContainer_event_CTA {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .eventsList_eventsContainer_event_CTA a {
   display: block;
+  width: 100%;
   padding: 1em 2em;
   text-transform: uppercase;
   background-color: var(--mediumBlue);
-  font-size: 0.9em;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--white);
   text-align: center;

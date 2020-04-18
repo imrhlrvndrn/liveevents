@@ -38,12 +38,121 @@
 #salesDashboard #mainDashboard {
   width: 85%;
   height: 100%;
-  padding: 2em 1em;
-  background-color: whitesmoke;
+  padding: 2em 3em;
+  background-color: #eee;
+  overflow-y: scroll;
 }
 
 #salesDashboard #mainDashboard h2 {
   color: black;
   text-transform: capitalize;
+}
+
+#salesDashboard #mainDashboard .overviewAnalyticsWrapper {
+  width: 100%;
+  height: auto;
+  padding: 2em 0;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(200px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 40px;
+}
+
+#salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics {
+  padding: calc(1em + 10px) 2em 1em 2em;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: white;
+  text-align: center;
+}
+
+#salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics * {
+  color: black;
+  margin-bottom: 10px;
+}
+
+#salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics .subtleTitle {
+  text-transform: uppercase;
+  color: var(--grey);
+  font-size: 0.8rem;
+}
+
+#salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics .mainTitle {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+#salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics .percentageTag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--red);
+}
+
+#salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics:last-child {
+  border: dashed var(--grey);
+  background-color: transparent;
+}
+
+#salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics:last-child .mainTitle {
+  margin: 0 auto;
+  background-color: var(--white);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#salesDashboard #mainDashboard .allCreatedEvents {
+  width: 100%;
+  height: 50vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#salesDashboard #mainDashboard .allCreatedEvents * {
+  color: var(--black);
+}
+
+#salesDashboard #mainDashboard .allCreatedEvents h4 {
+  margin-bottom: 10px;
+}
+
+#salesDashboard #mainDashboard .allCreatedEvents .createdEvent {
+  width: 100%;
+  padding: 1em;
+  background: var(--white);
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /*# sourceMappingURL=salesDashboard.css.map */

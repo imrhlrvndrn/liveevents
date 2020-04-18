@@ -14,9 +14,25 @@
     display: flex;
 }
 
+@mixin flexDirectionColumn {
+    display: flex;
+    flex-direction: column;
+}
+
 @mixin lowerCut {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
     clip-path: polygon(0 0, 100% 0, 100% 79%, 0% 100%);
+}
+
+@mixin defuseBtn($color, $opacity) {
+    display: block;
+    width: max-content;
+    color: $color !important;
+    padding: 1em 2em;
+    font-weight: 700;
+    background-color: rgba($color, $opacity);
+    color: $color;
+    text-transform: capitalize;
 }
 
 @mixin primaryBtn($color, $hoveredColor) {

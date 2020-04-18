@@ -53,11 +53,12 @@ nav {
             width: max-content;
             height: 100%;
             padding: 0 4em;
-            font-size: 0.8em;
             text-transform: capitalize;
             @include flexAlignCenterSpaceBetween();
 
             a {
+                font-size: 0.8rem;
+
                 &:first-child {
                     margin-right: 40px;
                     height: 60%;

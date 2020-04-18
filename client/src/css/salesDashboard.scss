@@ -1,3 +1,5 @@
+@import './mixins.scss';
+
 #salesDashboard {
     width: 100%;
     height: 100vh;
@@ -33,13 +35,93 @@
     #mainDashboard {
         width: 85%;
         height: 100%;
-        padding: 2em 1em;
-        background-color: whitesmoke;
-        // overflow-y: scroll;
+        padding: 2em 3em;
+        background-color: #eee;
+        overflow-y: scroll;
 
         h2 {
             color: black;
             text-transform: capitalize;
+        }
+
+        .overviewAnalyticsWrapper {
+            width: 100%;
+            height: auto;
+            padding: 2em 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 40px;
+
+            .globalAnalytics {
+                padding: calc(1em + 10px) 2em 1em 2em;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                background: white;
+                text-align: center;
+
+                * {
+                    color: black;
+                    margin-bottom: 10px;
+                }
+
+                .subtleTitle {
+                    text-transform: uppercase;
+                    // opacity: 0.6;
+                    color: var(--grey);
+                    font-size: 0.8rem;
+                }
+
+                .mainTitle {
+                    font-size: 2rem;
+                    font-weight: 700;
+                }
+
+                .percentageTag {
+                    font-size: 0.8rem;
+                    font-weight: 700;
+                    color: var(--red);
+                }
+
+                &:last-child {
+                    border: dashed var(--grey);
+                    background-color: transparent;
+
+                    .mainTitle {
+                        margin: 0 auto;
+                        background-color: var(--white);
+                        border-radius: 50%;
+                        width: 60px;
+                        height: 60px;
+                        @include flexCentered();
+                    }
+                }
+            }
+        }
+
+        .allCreatedEvents {
+            width: 100%;
+            height: 50vh;
+            // background: #d4d4d4;
+            @include flexDirectionColumn();
+
+            * {
+                color: var(--black);
+            }
+
+            h4{
+                margin-bottom:10px;
+            }
+
+            .createdEvent {
+                width: 100%;
+                // height: 60px;
+                padding: 1em;
+                background: var(--white);
+                border-radius: 5px;
+                @include flexAlignCenterSpaceBetween();
+            }
         }
     }
 }

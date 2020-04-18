@@ -85,7 +85,6 @@ nav .nav_auth {
   width: max-content;
   height: 100%;
   padding: 0 4em;
-  font-size: 0.8em;
   text-transform: capitalize;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -96,6 +95,10 @@ nav .nav_auth {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+nav .nav_auth a {
+  font-size: 0.8rem;
 }
 
 nav .nav_auth a:first-child {
