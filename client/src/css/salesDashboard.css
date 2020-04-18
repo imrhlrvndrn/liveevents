@@ -1,0 +1,49 @@
+#salesDashboard {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#salesDashboard #dashboardNav {
+  width: 15%;
+  height: 100%;
+  padding: 2em 1em;
+  background-color: white;
+}
+
+#salesDashboard #dashboardNav a {
+  color: black;
+}
+
+#salesDashboard #dashboardNav .dashboardLogo {
+  font-size: 2rem;
+}
+
+#salesDashboard #dashboardNav ul {
+  margin-top: 60px;
+}
+
+#salesDashboard #dashboardNav ul a {
+  padding: 1em 1em 1em 0;
+  display: block;
+  text-transform: capitalize;
+}
+
+#salesDashboard #mainDashboard {
+  width: 85%;
+  height: 100%;
+  padding: 2em 1em;
+  background-color: whitesmoke;
+}
+
+#salesDashboard #mainDashboard h2 {
+  color: black;
+  text-transform: capitalize;
+}
+/*# sourceMappingURL=salesDashboard.css.map */
