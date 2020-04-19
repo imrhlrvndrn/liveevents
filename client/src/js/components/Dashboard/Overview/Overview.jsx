@@ -37,7 +37,7 @@ const Overview = () => {
 
             {/* All the createdEvents Of User/Organization */}
             <div className='allCreatedEvents'>
-                <div className='TitleWrapper'><h4>created events</h4></div>
+                <div className='TitleWrapper'><h4>created events</h4> </div>
                 {list.map((event) => {
                     return <CreatedEventList />;
                 })}
