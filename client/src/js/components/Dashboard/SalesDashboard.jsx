@@ -1,44 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+// Components
 import DashboardNav from './DashboardNav';
+import Overview from './Overview/Overview';
+import BookedEvents from './BookedEvents/BookedEvents';
 
 const SalesDashboard = () => {
+    const [dashboardNav, setDashboardNav] = useState('overview');
+
     return (
         <section id='salesDashboard'>
-            <DashboardNav />
+            <DashboardNav setDashboardNav={setDashboardNav} />
             <section id='mainDashboard'>
-                <h2>overview</h2>
-                {/* Global Analytics for all events  */}
-                <div className='overviewAnalyticsWrapper'>
-                    <div className='globalAnalytics'>
-                        <p className='subtleTitle'>total sales</p>
-                        <p className='mainTitle'>$2,233</p>
-                        <p className='percentageTag'>▲ 35.20%</p>
-                    </div>
-                    <div className='globalAnalytics'>
-                        <p className='subtleTitle'>registrations</p>
-                        <p className='mainTitle'>$2,233</p>
-                        <p className='percentageTag'>▼ 35.20%</p>
-                    </div>
-                    <div className='globalAnalytics'>
-                        <p className='subtleTitle'>total attendees</p>
-                        <p className='mainTitle'>$2,233</p>
-                        <p className='percentageTag'>▲ 35.20%</p>
-                    </div>
-                    <div className='globalAnalytics'>
-                        <p className='subtleTitle'>create new event</p>
-                        <p className='mainTitle'>+</p>
-                        {/* <p className='percentageTag'>▲ 35.20%</p> */}
-                    </div>
-                </div>
-
-                {/* All the createdEvents Of User/Organization */}
-                <div className='allCreatedEvents'>
-                    <h4>All created events</h4>
-                    <div className='createdEvent'>
-                        <p className='bold'>GraphQL Asia 2020</p>
-                        <a href='#'>test transparentize</a>
-                    </div>
-                </div>
+                {dashboardNav === 'overview' ? (
+                    <Overview />
+                ) : dashboardNav === 'booked events' ? (
+                    <BookedEvents />
+                ) : null}
             </section>
         </section>
     );

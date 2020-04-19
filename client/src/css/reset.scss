@@ -6,16 +6,18 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    color: whitesmoke;
+    color: var(--lightGrey);
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+
     font-family: 'Manrope', sans-serif;
     scroll-behavior: smooth;
 }
 
 /* width */
 *::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
 }
 
 /* Track */
@@ -25,7 +27,7 @@
 
 /* Handle */
 *::-webkit-scrollbar-thumb {
-    background: var(--mediumBlue);
+    background: var(--lightGreen);
 }
 
 body {
@@ -67,7 +69,8 @@ img {
 }
 
 .bold {
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: 1.5px;
 }
 
 .tagContainer {

@@ -11,23 +11,47 @@
         width: 15%;
         height: 100%;
         padding: 2em 1em;
-        background-color: white;
+        background-color: var(--lightBlack);
 
         a {
-            color: black;
+            color: var(--lightGrey);
         }
 
         .dashboardLogo {
-            font-size: 2rem;
+            font-size: 1.5rem;
+            font-family: 'Anton';
         }
 
         ul {
+            height: 85%;
             margin-top: 60px;
+            @include flexDirectionColumnVerticalSB();
 
-            a {
+            .navItems {
                 padding: 1em 1em 1em 0;
                 display: block;
+                color: var(--grey);
                 text-transform: capitalize;
+                font-size: 0.8rem;
+            }
+
+            .userProfile {
+                width: 100%;
+                height: auto;
+                @include flexAlignCenter();
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-color: var(--lightGrey);
+                    margin-right: 10px;
+                }
+
+                .username {
+                    font-size: 0.8rem;
+                    letter-spacing: 2px;
+                }
             }
         }
     }
@@ -36,18 +60,19 @@
         width: 85%;
         height: 100%;
         padding: 2em 3em;
-        background-color: #eee;
+        background-color: var(--black);
         overflow-y: scroll;
 
         h2 {
-            color: black;
+            margin-bottom: 40px;
+            color: var(--lightGrey);
             text-transform: capitalize;
         }
 
         .overviewAnalyticsWrapper {
             width: 100%;
             height: auto;
-            padding: 2em 0;
+            padding: 0 0 2em 0;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             grid-gap: 40px;
@@ -58,11 +83,11 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                background: white;
+                background: var(--lightBlack);
                 text-align: center;
 
                 * {
-                    color: black;
+                    color: var(--lightGrey);
                     margin-bottom: 10px;
                 }
 
@@ -81,46 +106,107 @@
                 .percentageTag {
                     font-size: 0.8rem;
                     font-weight: 700;
-                    color: var(--red);
+                    color: var(--brightPink);
                 }
 
                 &:last-child {
-                    border: dashed var(--grey);
+                    border: 2px dashed var(--lightGrey);
                     background-color: transparent;
+                    cursor: pointer;
+                    transition: 0.4s all ease-in-out;
 
                     .mainTitle {
                         margin: 0 auto;
-                        background-color: var(--white);
+                        background-color: var(--lightGrey);
+                        color: var(--lightBlack);
                         border-radius: 50%;
                         width: 60px;
                         height: 60px;
                         @include flexCentered();
                     }
+
+                    &:hover {
+                        background-color: var(--lightBlack);
+                    }
                 }
             }
         }
 
-        .allCreatedEvents {
+        .allCreatedEvents,
+        .allBookedEvents {
             width: 100%;
-            height: 50vh;
-            // background: #d4d4d4;
+            height: auto;
+            max-height: 50vh;
+            margin-bottom: 40px;
+            // overflow-y: scroll;
             @include flexDirectionColumn();
 
             * {
-                color: var(--black);
+                color: var(--lightGrey);
             }
 
-            h4{
-                margin-bottom:10px;
+            h4 {
+                margin-bottom: 20px;
+                text-transform: capitalize;
             }
 
-            .createdEvent {
+            .createdEvent,
+            .bookedEvent {
                 width: 100%;
-                // height: 60px;
+                height: 60px;
                 padding: 1em;
-                background: var(--white);
+                background: var(--lightBlack);
                 border-radius: 5px;
+                margin-bottom: 10px;
                 @include flexAlignCenterSpaceBetween();
+
+                div {
+                    width: max-content;
+                    height: 100%;
+                    position: relative;
+                    @include flex();
+                    a {
+                        font-size: 0.8rem;
+                        height: max-content;
+                        padding: 0.5em 1em;
+                        border-radius: 5px;
+                        color: var(--brightPink);
+                        background-color: rgba(#ff0e57, 0.1);
+                    }
+
+                    img {
+                        width: auto;
+                        height: 100%;
+                        filter: invert(1);
+                        margin-left: 10px;
+                        cursor: pointer;
+                    }
+
+                    .options {
+                        position: absolute;
+                        top: 50%;
+                        right: 10%;
+                        width: 200px;
+                        height: auto;
+                        display: flex;
+                        flex-direction: column;
+                        z-index: 10;
+
+                        .optionItems {
+                            background: var(--black);
+                            display: block;
+                            font-size: 0.8rem;
+                            width: 100%;
+                            padding: 1em 2em;
+                            transition: 0.4s all ease-in-out;
+                            cursor: pointer;
+
+                            &:hover {
+                                background: var(--lightBlack);
+                            }
+                        }
+                    }
+                }
             }
         }
     }

@@ -14,44 +14,83 @@
   width: 15%;
   height: 100%;
   padding: 2em 1em;
-  background-color: white;
+  background-color: var(--lightBlack);
 }
 
 #salesDashboard #dashboardNav a {
-  color: black;
+  color: var(--lightGrey);
 }
 
 #salesDashboard #dashboardNav .dashboardLogo {
-  font-size: 2rem;
+  font-size: 1.5rem;
+  font-family: 'Anton';
 }
 
 #salesDashboard #dashboardNav ul {
+  height: 85%;
   margin-top: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-#salesDashboard #dashboardNav ul a {
+#salesDashboard #dashboardNav ul .navItems {
   padding: 1em 1em 1em 0;
   display: block;
+  color: var(--grey);
   text-transform: capitalize;
+  font-size: 0.8rem;
+}
+
+#salesDashboard #dashboardNav ul .userProfile {
+  width: 100%;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#salesDashboard #dashboardNav ul .userProfile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--lightGrey);
+  margin-right: 10px;
+}
+
+#salesDashboard #dashboardNav ul .userProfile .username {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
 }
 
 #salesDashboard #mainDashboard {
   width: 85%;
   height: 100%;
   padding: 2em 3em;
-  background-color: #eee;
+  background-color: var(--black);
   overflow-y: scroll;
 }
 
 #salesDashboard #mainDashboard h2 {
-  color: black;
+  margin-bottom: 40px;
+  color: var(--lightGrey);
   text-transform: capitalize;
 }
 
 #salesDashboard #mainDashboard .overviewAnalyticsWrapper {
   width: 100%;
   height: auto;
-  padding: 2em 0;
+  padding: 0 0 2em 0;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (minmax(200px, 1fr))[auto-fit];
@@ -72,12 +111,12 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background: white;
+  background: var(--lightBlack);
   text-align: center;
 }
 
 #salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics * {
-  color: black;
+  color: var(--lightGrey);
   margin-bottom: 10px;
 }
 
@@ -95,17 +134,21 @@
 #salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics .percentageTag {
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--red);
+  color: var(--brightPink);
 }
 
 #salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics:last-child {
-  border: dashed var(--grey);
+  border: 2px dashed var(--lightGrey);
   background-color: transparent;
+  cursor: pointer;
+  -webkit-transition: 0.4s all ease-in-out;
+  transition: 0.4s all ease-in-out;
 }
 
 #salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics:last-child .mainTitle {
   margin: 0 auto;
-  background-color: var(--white);
+  background-color: var(--lightGrey);
+  color: var(--lightBlack);
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -120,9 +163,16 @@
           justify-content: center;
 }
 
-#salesDashboard #mainDashboard .allCreatedEvents {
+#salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics:last-child:hover {
+  background-color: var(--lightBlack);
+}
+
+#salesDashboard #mainDashboard .allCreatedEvents,
+#salesDashboard #mainDashboard .allBookedEvents {
   width: 100%;
-  height: 50vh;
+  height: auto;
+  max-height: 50vh;
+  margin-bottom: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -132,19 +182,27 @@
           flex-direction: column;
 }
 
-#salesDashboard #mainDashboard .allCreatedEvents * {
-  color: var(--black);
+#salesDashboard #mainDashboard .allCreatedEvents *,
+#salesDashboard #mainDashboard .allBookedEvents * {
+  color: var(--lightGrey);
 }
 
-#salesDashboard #mainDashboard .allCreatedEvents h4 {
-  margin-bottom: 10px;
+#salesDashboard #mainDashboard .allCreatedEvents h4,
+#salesDashboard #mainDashboard .allBookedEvents h4 {
+  margin-bottom: 20px;
+  text-transform: capitalize;
 }
 
-#salesDashboard #mainDashboard .allCreatedEvents .createdEvent {
+#salesDashboard #mainDashboard .allCreatedEvents .createdEvent,
+#salesDashboard #mainDashboard .allCreatedEvents .bookedEvent,
+#salesDashboard #mainDashboard .allBookedEvents .createdEvent,
+#salesDashboard #mainDashboard .allBookedEvents .bookedEvent {
   width: 100%;
+  height: 60px;
   padding: 1em;
-  background: var(--white);
+  background: var(--lightBlack);
   border-radius: 5px;
+  margin-bottom: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -154,5 +212,88 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+#salesDashboard #mainDashboard .allCreatedEvents .createdEvent div,
+#salesDashboard #mainDashboard .allCreatedEvents .bookedEvent div,
+#salesDashboard #mainDashboard .allBookedEvents .createdEvent div,
+#salesDashboard #mainDashboard .allBookedEvents .bookedEvent div {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#salesDashboard #mainDashboard .allCreatedEvents .createdEvent div a,
+#salesDashboard #mainDashboard .allCreatedEvents .bookedEvent div a,
+#salesDashboard #mainDashboard .allBookedEvents .createdEvent div a,
+#salesDashboard #mainDashboard .allBookedEvents .bookedEvent div a {
+  font-size: 0.8rem;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  color: var(--brightPink);
+  background-color: rgba(255, 14, 87, 0.1);
+}
+
+#salesDashboard #mainDashboard .allCreatedEvents .createdEvent div img,
+#salesDashboard #mainDashboard .allCreatedEvents .bookedEvent div img,
+#salesDashboard #mainDashboard .allBookedEvents .createdEvent div img,
+#salesDashboard #mainDashboard .allBookedEvents .bookedEvent div img {
+  width: auto;
+  height: 100%;
+  -webkit-filter: invert(1);
+          filter: invert(1);
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#salesDashboard #mainDashboard .allCreatedEvents .createdEvent div .options,
+#salesDashboard #mainDashboard .allCreatedEvents .bookedEvent div .options,
+#salesDashboard #mainDashboard .allBookedEvents .createdEvent div .options,
+#salesDashboard #mainDashboard .allBookedEvents .bookedEvent div .options {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  width: 200px;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  z-index: 10;
+}
+
+#salesDashboard #mainDashboard .allCreatedEvents .createdEvent div .options .optionItems,
+#salesDashboard #mainDashboard .allCreatedEvents .bookedEvent div .options .optionItems,
+#salesDashboard #mainDashboard .allBookedEvents .createdEvent div .options .optionItems,
+#salesDashboard #mainDashboard .allBookedEvents .bookedEvent div .options .optionItems {
+  background: var(--black);
+  display: block;
+  font-size: 0.8rem;
+  width: 100%;
+  padding: 1em 2em;
+  -webkit-transition: 0.4s all ease-in-out;
+  transition: 0.4s all ease-in-out;
+  cursor: pointer;
+}
+
+#salesDashboard #mainDashboard .allCreatedEvents .createdEvent div .options .optionItems:hover,
+#salesDashboard #mainDashboard .allCreatedEvents .bookedEvent div .options .optionItems:hover,
+#salesDashboard #mainDashboard .allBookedEvents .createdEvent div .options .optionItems:hover,
+#salesDashboard #mainDashboard .allBookedEvents .bookedEvent div .options .optionItems:hover {
+  background: var(--lightBlack);
 }
 /*# sourceMappingURL=salesDashboard.css.map */

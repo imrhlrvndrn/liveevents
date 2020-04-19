@@ -10,13 +10,25 @@
     justify-content: space-between;
 }
 
+@mixin flexAlignCenter {
+    display: flex;
+    align-items: center;
+}
+
 @mixin flex {
     display: flex;
+    align-items: center;
 }
 
 @mixin flexDirectionColumn {
     display: flex;
     flex-direction: column;
+}
+
+@mixin flexDirectionColumnVerticalSB {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 @mixin lowerCut {
