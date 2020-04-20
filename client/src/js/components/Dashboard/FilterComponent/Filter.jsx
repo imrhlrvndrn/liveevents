@@ -30,6 +30,7 @@ const Filter = () => {
                         src={options}
                         alt='filter dropdown icon'
                         onClick={() => setIsFilterActive(!isFilterActive)}
+                        style={{ transform: isFilterActive && 'rotate(180deg)' }}
                     />
                 </div>
                 {isFilterActive && (

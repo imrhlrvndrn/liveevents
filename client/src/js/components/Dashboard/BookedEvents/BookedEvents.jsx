@@ -1,14 +1,20 @@
 import React from 'react';
 
+// Components
+import Filter from '../FilterComponent/Filter';
+
 // Icons and images
-import options from '../../../../icons/keyboard_arrow_down-24px.svg';
+import options from '../../../../icons/options.svg';
 
 const BookedEvents = () => {
     return (
         <>
             {/* All the bookedEvents Of User/Organization */}
             <div className='allBookedEvents'>
-                <h2>booked events</h2>
+                <div className='titleWrapper'>
+                    <h2>booked events</h2>
+                    <Filter />
+                </div>
                 <div className='bookedEvent'>
                     <p className='bold'>GraphQL Asia 2020</p>
                     <div>

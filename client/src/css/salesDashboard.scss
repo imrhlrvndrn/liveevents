@@ -64,7 +64,7 @@
         overflow-y: scroll;
 
         h2 {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             color: var(--lightGrey);
             text-transform: capitalize;
         }
@@ -147,7 +147,7 @@
 
             .titleWrapper {
                 width: 100%;
-                height: 60px;
+                height: max-content;
                 margin-bottom: 20px;
                 @include flexAlignCenterSpaceBetween();
 
@@ -172,6 +172,7 @@
                     height: 100%;
                     position: relative;
                     @include flex();
+
                     a {
                         font-size: 0.8rem;
                         height: max-content;
@@ -182,9 +183,10 @@
                     }
 
                     img {
-                        width: auto;
-                        height: 100%;
+                        width: 15px;
+                        height: 15px;
                         filter: invert(1);
+                        transform: rotateZ(90deg);
                         margin-left: 10px;
                         cursor: pointer;
                     }
@@ -214,6 +216,13 @@
                         }
                     }
                 }
+            }
+        }
+
+        // This style resets the margin of main heading in bookedEvents component
+        .allBookedEvents {
+            h2 {
+                margin: 0;
             }
         }
     }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Icons and images
-import options from '../../../../icons/keyboard_arrow_down-24px.svg';
+import options from '../../../../icons/options.svg';
 
 const CreatedEventList = () => {
     const [optionIsActive, setOptionIsActive] = useState(false);

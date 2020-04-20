@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +11,7 @@
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 1.5px;
+  font-family: 'Bungee Hairline', sans-serif;
   font-family: 'Manrope', sans-serif;
   scroll-behavior: smooth;
 }
