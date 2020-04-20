@@ -145,9 +145,16 @@
                 color: var(--lightGrey);
             }
 
-            h4 {
+            .titleWrapper {
+                width: 100%;
+                height: 60px;
                 margin-bottom: 20px;
-                text-transform: capitalize;
+                @include flexAlignCenterSpaceBetween();
+
+                h4 {
+                    // margin-bottom: 20px;
+                    text-transform: capitalize;
+                }
             }
 
             .createdEvent,

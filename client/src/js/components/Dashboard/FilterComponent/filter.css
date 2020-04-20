@@ -1,0 +1,95 @@
+.filterWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.filterWrapper * {
+  font-size: 0.8rem;
+}
+
+.filterWrapper input {
+  display: block;
+  width: 200px;
+  height: 40px;
+  margin-right: 10px;
+  background-color: transparent;
+  border: 1px solid var(--lightBlack);
+}
+
+.filterWrapper .filterItemContainer {
+  width: 150px;
+  height: 40px;
+  position: relative;
+}
+
+.filterWrapper .filterItemContainer .filterComponent {
+  background-color: var(--lightBlack);
+  padding: 0 1em;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  cursor: pointer;
+}
+
+.filterWrapper .filterItemContainer .filterComponent .filterStatus {
+  text-transform: capitalize;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.filterWrapper .filterItemContainer .filterComponent img {
+  width: 20px;
+  height: 20px;
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+.filterWrapper .filterItemContainer .filterItemsWrapper {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 100%;
+  height: auto;
+  z-index: 10;
+  background-color: var(--black);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.filterWrapper .filterItemContainer .filterItemsWrapper span {
+  width: 100%;
+  height: 40px;
+  padding: 0 1em;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+  text-transform: capitalize;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.filterWrapper .filterItemContainer .filterItemsWrapper span:hover {
+  background-color: var(--lightBlack);
+}
+/*# sourceMappingURL=filter.css.map */

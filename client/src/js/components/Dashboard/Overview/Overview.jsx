@@ -2,6 +2,7 @@ import React from 'react';
 
 // Components
 import CreatedEventList from '../CreatedEvent/CreatedEventList';
+import Filter from '../FilterComponent/Filter';
 
 // Icons and images
 import options from '../../../../icons/keyboard_arrow_down-24px.svg';
@@ -37,7 +38,10 @@ const Overview = () => {
 
             {/* All the createdEvents Of User/Organization */}
             <div className='allCreatedEvents'>
-                <div className='TitleWrapper'><h4>created events</h4> </div>
+                <div className='titleWrapper'>
+                    <h4>created events</h4>
+                    <Filter />
+                </div>
                 {list.map((event) => {
                     return <CreatedEventList />;
                 })}

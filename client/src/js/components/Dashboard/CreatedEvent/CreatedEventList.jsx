@@ -21,9 +21,15 @@ const CreatedEventList = () => {
                 />
                 {optionIsActive && (
                     <div className='options'>
-                        <p className='optionItems'>Edit event</p>
-                        <p className='optionItems'>Delete event</p>
-                        <p className='optionItems'>Transfer event</p>
+                        <p className='optionItems' onClick={() => setOptionIsActive(false)}>
+                            Edit event
+                        </p>
+                        <p className='optionItems' onClick={() => setOptionIsActive(false)}>
+                            Delete event
+                        </p>
+                        <p className='optionItems' onClick={() => setOptionIsActive(false)}>
+                            Transfer event
+                        </p>
                     </div>
                 )}
             </div>
