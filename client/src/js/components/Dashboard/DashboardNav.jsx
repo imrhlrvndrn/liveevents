@@ -10,7 +10,6 @@ const DashboardNav = (props) => {
             <a href='/' className='dashboardLogo'>
                 EventsLive
             </a>
-
             <ul>
                 <div className='navItemsWrapper'>
                     <a className='navItems' href='#' onClick={() => setDashboardNav('overview')}>

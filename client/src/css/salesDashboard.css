@@ -15,6 +15,7 @@
   height: 100%;
   padding: 2em 1em;
   background-color: var(--lightBlack);
+  position: relative;
 }
 
 #salesDashboard #dashboardNav a {
@@ -120,20 +121,7 @@
   margin-bottom: 10px;
 }
 
-#salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics .subtleTitle {
-  text-transform: uppercase;
-  color: var(--grey);
-  font-size: 0.8rem;
-}
-
-#salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics .mainTitle {
-  font-size: 2rem;
-  font-weight: 700;
-}
-
 #salesDashboard #mainDashboard .overviewAnalyticsWrapper .globalAnalytics .percentageTag {
-  font-size: 0.8rem;
-  font-weight: 700;
   color: var(--brightPink);
 }
 

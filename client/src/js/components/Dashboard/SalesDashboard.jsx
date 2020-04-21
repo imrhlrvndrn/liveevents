@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 // Components
 import DashboardNav from './DashboardNav';
 import Overview from './Overview/Overview';
+import Analytics from './Analytics/Analytics';
 import BookedEvents from './BookedEvents/BookedEvents';
 
 const SalesDashboard = () => {
-    const [dashboardNav, setDashboardNav] = useState('overview');
+    const [dashboardNav, setDashboardNav] = useState('analytics');
 
     return (
         <section id='salesDashboard'>
@@ -16,6 +17,8 @@ const SalesDashboard = () => {
                     <Overview />
                 ) : dashboardNav === 'booked events' ? (
                     <BookedEvents />
+                ) : dashboardNav === 'analytics' ? (
+                    <Analytics />
                 ) : null}
             </section>
         </section>

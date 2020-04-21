@@ -190,4 +190,22 @@ h6 {
   letter-spacing: 2px;
   font-weight: 400;
 }
-/*# sourceMappingURL=reset.css.map */
+
+.basicAnalyticsWrapper {
+  width: 100%;
+  height: auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(250px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: auto;
+  grid-gap: 20px;
+}
+
+.basicAnalyticsWrapper .eventAnalytics {
+  text-align: center;
+  padding: 1em;
+  border-radius: 5px;
+  background-color: var(--lightBlack);
+}
+/*# sourceMappingURL=basicanalytics.css.map */

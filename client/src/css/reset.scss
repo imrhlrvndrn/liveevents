@@ -125,6 +125,28 @@ img {
     transition: 0.4s ease-in-out !important;
 }
 
+.subtleTitle {
+    text-transform: uppercase;
+    // opacity: 0.6;
+    color: var(--grey);
+    font-size: 0.8rem;
+}
+
+.mainTitle {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.annotation {
+    font-size: 1rem;
+}
+
+.percentageTag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--brightPink);
+}
+
 h1 {
     font-size: 5em;
     margin-bottom: 20px;

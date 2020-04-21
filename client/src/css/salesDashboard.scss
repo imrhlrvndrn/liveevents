@@ -12,6 +12,7 @@
         height: 100%;
         padding: 2em 1em;
         background-color: var(--lightBlack);
+        position: relative;
 
         a {
             color: var(--lightGrey);
@@ -91,21 +92,7 @@
                     margin-bottom: 10px;
                 }
 
-                .subtleTitle {
-                    text-transform: uppercase;
-                    // opacity: 0.6;
-                    color: var(--grey);
-                    font-size: 0.8rem;
-                }
-
-                .mainTitle {
-                    font-size: 2rem;
-                    font-weight: 700;
-                }
-
                 .percentageTag {
-                    font-size: 0.8rem;
-                    font-weight: 700;
                     color: var(--brightPink);
                 }
 

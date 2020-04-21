@@ -1,0 +1,15 @@
+@import '../../../../../css/reset.scss';
+@import '../../../../../css/mixins.scss';
+
+.basicAnalyticsWrapper {
+    width: 100%;
+    height: auto;
+    @include gridContainer(250px, auto);
+
+    .eventAnalytics {
+        text-align: center;
+        padding: 1em;
+        border-radius: 5px;
+        background-color: var(--lightBlack);
+    }
+}
