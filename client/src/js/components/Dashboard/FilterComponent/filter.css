@@ -60,12 +60,12 @@
 
 .filterWrapper .filterItemContainer .filterItemsWrapper {
   position: absolute;
-  top: 100%;
+  top: 110%;
   right: 0;
   width: 100%;
   height: auto;
   z-index: 10;
-  background-color: var(--black);
+  background-color: var(--lightBlack);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -92,6 +92,6 @@
 }
 
 .filterWrapper .filterItemContainer .filterItemsWrapper span:hover {
-  background-color: var(--lightBlack);
+  background-color: var(--black);
 }
 /*# sourceMappingURL=filter.css.map */

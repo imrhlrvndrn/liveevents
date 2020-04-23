@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // Components
 import Nav from './Nav';
 
-const Events = () => {
+const AllEvents = () => {
     return (
         <>
             <Nav />
@@ -160,4 +160,4 @@ const Events = () => {
     );
 };
 
-export default Events;
+export default AllEvents;
