@@ -3,27 +3,56 @@
 .speakerSection {
     min-height: 100vh;
     height: auto;
-    padding: 4em;
+    padding: 4em 8em;
 
     h1 {
         text-align: center;
     }
 
     .speakerGridContainer {
-        margin-top: 60px;
-        @include gridContainer(250px, auto);
+        margin-top: 4em;
+        @include gridContainer(200px, auto);
+        grid-gap: 0px;
 
         .speaker {
+            width: 100%;
+            height: 100%;
             position: relative;
+
+            img {
+                width: 100%;
+                height: 100%;
+                filter: grayscale(1);
+            }
+
+            .speakerInfo {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                padding: 1em 0 0 1em;
+                background: linear-gradient(rgba(black, 0.8), rgba(black, 0));
+
+                p {
+                    opacity: 1;
+                    color: var(--green);
+                    font-weight: 400;
+                    font-size: 0.8em;
+                }
+            }
 
             .socialLinks {
                 @include flexDirectionColumn();
                 position: absolute;
-                bottom: 5%;
+                top: 60%;
                 left: -5%;
-                transform: translateX(-100%);
+                display: none;
+                transform: translate(-100%, -50%);
 
                 a {
+                    margin-bottom: 20px;
+
                     svg {
                         width: 20px;
                         height: 20px;

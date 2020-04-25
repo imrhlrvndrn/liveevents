@@ -5,7 +5,7 @@ import './herosection.scss';
 
 const HeroSection = (props) => {
     return (
-        <div className='eventPageHeroSection'>
+        <section className='eventPageHeroSection'>
             {/* Display a hero image or video */}
             <h1>{props.title || 'GraphQL Asia 2020'}</h1>
 
@@ -15,7 +15,7 @@ const HeroSection = (props) => {
                     {props.date || 'April 24, 2020'}
                 </p>
             </div>
-        </div>
+        </section>
     );
 };
 
