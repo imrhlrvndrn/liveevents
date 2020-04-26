@@ -1,16 +1,16 @@
 import React from 'react';
 
 // Components
+import EventNav from './EventNav/EventNav';
 import HeroSection from './HeroSection/HeroSection';
 import EventSpeakers from './EventSpeakers/EventSpeakers';
-import Schedule from './Schedule/Schedule';
 
 const EventPage = () => {
     return (
         <>
+            <EventNav />
             <HeroSection />
             <EventSpeakers />
-            <Schedule />
         </>
     );
 };

@@ -14,8 +14,8 @@ const EventSpeakers = (props) => {
                 <div className='speaker'>
                     <img src={woman} alt='' />
                     <div className='speakerInfo'>
-                        <p>{props.designation || 'Speaker designation'}</p>
-                        <h4>{props.name || 'Speaker name'}</h4>
+                        <p>{props.designation || 'full-stack developer'}</p>
+                        <h4>{props.name || 'Rahul Ravindran'}</h4>
                     </div>
                     <div className='socialLinks'>
                         <a href='https://instagram.com/rahul_ravindran_14'>

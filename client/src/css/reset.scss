@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap');
 
@@ -11,8 +11,7 @@
     font-size: 1rem;
     font-weight: 400;
     letter-spacing: 1.5px;
-    font-family: 'Bungee Hairline', sans-serif;
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;
 }
 
@@ -174,7 +173,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Anton', sans-serif !important;
-    letter-spacing: 2px;
-    font-weight: 400;
+    font-family: 'Bungee Hairline', sans-serif !important;
+    line-height: 1.2em;
+    font-weight: 700;
 }

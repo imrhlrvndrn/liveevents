@@ -1,6 +1,21 @@
+@import '../../../../css/mixins.scss';
+
 .eventSchedule {
-    padding: 4em 8em;
     width: 100%;
-    min-height: 100vh;
     height: auto;
+    min-height: 100vh;
+
+    h1 {
+        margin: 0;
+        height: 60vh;
+        color: var(--lightBlack);
+        background-color: var(--lightGrey);
+        @include flexCentered();
+    }
+
+    .eventScheduleContainer {
+        p {
+            padding: 4.5em;
+        }
+    }
 }

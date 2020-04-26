@@ -22,12 +22,9 @@ const AllEvents = () => {
                         </h1>{' '}
                         Find your event
                     </h1>
-                    <p className='d'>Find all the events near you</p>
                 </div>
             </section>
             <section className='eventsList'>
-                <h2>Feeling adventurous ?</h2>
-
                 <form>
                     <input
                         placeholder='Location'
@@ -49,103 +46,24 @@ const AllEvents = () => {
 
                 <div className='eventsList_eventsContainer'>
                     <div className='eventsList_eventsContainer_event'>
-                        <p className='eventsList_eventsContainer_event_date'>27 apr - 01 may</p>
+                        <span className='priceTag'>Free</span>
+
                         <img
                             className='eventsList_eventsContainer_event_image'
                             src='https://images.pexels.com/photos/1387174/pexels-photo-1387174.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
                             alt=''
                         />
-                        <div className='eventsList_eventsContainer_event_details'>
-                            <h4>GraphQL Asia 2020. The megaevent in India</h4>
-                            <span>
-                                Category: <strong>Coding Talk</strong>
-                                <span className='country'>India</span>
-                            </span>
-                            <p>Wakande Stadium and Auditorium, Churchgate</p>
-                        </div>
-                        <div className='eventsList_eventsContainer_event_CTA'>
-                            <Link to={`/events/dskjf`}>event details</Link>
-                            <Link to={`/events/dskjf`}>remind me</Link>
-                        </div>
-                    </div>
-                    <div className='eventsList_eventsContainer_event'>
-                        <p className='eventsList_eventsContainer_event_date'>27 apr - 01 may</p>
-                        <img
-                            className='eventsList_eventsContainer_event_image'
-                            src='https://images.pexels.com/photos/1387174/pexels-photo-1387174.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                            alt=''
-                        />
-                        <div className='eventsList_eventsContainer_event_details'>
-                            <h4>Event title</h4>
-                            <span>
-                                Category: <strong>category</strong>
-                                <span className='country'>country</span>
-                            </span>
-                            <p>address</p>
-                        </div>
-                        <div className='eventsList_eventsContainer_event_CTA'>
-                            <Link to={`/events/dskjf`}>event details</Link>
-                            <Link to={`/events/dskjf`}>remind me</Link>
-                        </div>
-                    </div>
-                    <div className='eventsList_eventsContainer_event'>
-                        <p className='eventsList_eventsContainer_event_date'>27 apr - 01 may</p>
-                        <img
-                            className='eventsList_eventsContainer_event_image'
-                            src='https://images.pexels.com/photos/1387174/pexels-photo-1387174.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                            alt=''
-                        />
-                        <div className='eventsList_eventsContainer_event_details'>
-                            <h4>Event title</h4>
-                            <span>
-                                Category: <strong>category</strong>
-                                <span className='country'>country</span>
-                            </span>
-                            <p>address</p>
-                        </div>
-                        <div className='eventsList_eventsContainer_event_CTA'>
-                            <Link to={`/events/dskjf`}>event details</Link>
-                            <Link to={`/events/dskjf`}>remind me</Link>
-                        </div>
-                    </div>
-                    <div className='eventsList_eventsContainer_event'>
-                        <p className='eventsList_eventsContainer_event_date'>27 apr - 01 may</p>
-                        <img
-                            className='eventsList_eventsContainer_event_image'
-                            src='https://images.pexels.com/photos/1387174/pexels-photo-1387174.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                            alt=''
-                        />
-                        <div className='eventsList_eventsContainer_event_details'>
-                            <h4>Event title</h4>
-                            <span>
-                                Category: <strong>category</strong>
-                                <span className='country'>country</span>
-                            </span>
-                            <p>address</p>
-                        </div>
-                        <div className='eventsList_eventsContainer_event_CTA'>
-                            <Link to={`/events/dskjf`}>event details</Link>
-                            <Link to={`/events/dskjf`}>remind me</Link>
-                        </div>
-                    </div>
-                    <div className='eventsList_eventsContainer_event'>
-                        <p className='eventsList_eventsContainer_event_date'>27 apr - 01 may</p>
-                        <img
-                            className='eventsList_eventsContainer_event_image'
-                            src='https://images.pexels.com/photos/1387174/pexels-photo-1387174.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                            alt=''
-                        />
-                        <div className='eventsList_eventsContainer_event_details'>
-                            <h4>Event title</h4>
-                            <span>
-                                Category: <strong>category</strong>
-                                <span className='country'>country</span>
-                            </span>
-                            <p>address</p>
-                        </div>
-                        <div className='eventsList_eventsContainer_event_CTA'>
-                            <Link to={`/events/dskjf`}>event details</Link>
-                            <Link to={`/events/dskjf`}>remind me</Link>
+
+                        <div className='eventsList_eventsContainer_event_info'>
+                            <p className='eventsList_eventsContainer_event_info_date'>
+                                apr <br /> 20
+                            </p>
+                            <div className='eventsList_eventsContainer_event_info_details'>
+                                <h4>
+                                    <a href='/event/graphql-asia-2020'>GraphQL Asia 2020</a>
+                                </h4>
+                                <p>Wakande Stadium and Auditorium, Churchgate, India</p>
+                            </div>
                         </div>
                     </div>
                 </div>

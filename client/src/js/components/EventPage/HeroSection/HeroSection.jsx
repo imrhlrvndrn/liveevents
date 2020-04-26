@@ -1,4 +1,5 @@
 import React from 'react';
+import GlitchClip from 'react-glitch-effect/core/Clip';
 
 // SCSS
 import './herosection.scss';
@@ -7,7 +8,9 @@ const HeroSection = (props) => {
     return (
         <section className='eventPageHeroSection'>
             {/* Display a hero image or video */}
-            <h1>{props.title || 'GraphQL Asia 2020'}</h1>
+            <GlitchClip>
+                <h1>{props.title || 'GraphQL Asia 2020'}</h1>
+            </GlitchClip>
 
             <div className='heroSectionContent'>
                 <p>

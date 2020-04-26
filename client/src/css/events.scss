@@ -12,6 +12,7 @@
     height: auto;
     background-color: var(--white);
     padding: 6em 0;
+    position: relative;
 
     * {
         color: var(--black);
@@ -23,23 +24,30 @@
     }
 
     form {
-        width: 60%;
+        width: 80%;
         margin: 0 auto;
-        height: 50px;
+        height: auto;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--mediumBlue);
+        padding: 1em;
+        border-radius: 10px;
         @include flexAlignCenterSpaceBetween();
 
         input {
             padding: 0 1em;
             width: 20%;
             height: 100%;
+            min-height: 45px;
             background-color: transparent;
-            border: 2px solid var(--lightGrey);
-            color: var(--black);
+            border-bottom: 2px solid var(--white);
+            color: var(--white);
             transition: 0.4s all;
 
-            &:focus {
-                border: 2px solid var(--white);
-                box-shadow: 5px 5px 5px 0 var(--grey);
+            &::placeholder {
+                color: var(--white);
             }
         }
 
@@ -47,91 +55,87 @@
             display: block;
             height: 100%;
             line-height: 60px;
+            color: var(--white);
         }
 
         button {
             height: 100%;
             padding: 1em 2em;
-            color: var(--white);
-            background-color: var(--mediumBlue);
+            border-radius: 10px;
+            color: var(--black);
+            background-color: var(--white);
         }
     }
 
     &_eventsContainer {
-        display: flex;
-        flex-direction: column;
-        width: 60%;
-        max-width: 800px;
-        height: 400px;
-        margin: 60px auto 0 auto;
-        padding-right: 20px;
-        overflow-y: scroll;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-gap: 20px;
+        width: 80%;
+        min-width: 300px;
+        height: auto;
+        margin: 60px auto;
 
         &_event {
+            @include flexDirectionColumn();
             width: 100%;
             height: auto;
-            padding: 2em 0;
-            display: grid;
-            grid-template-columns: 100px 170px 1fr 170px;
-            grid-gap: 20px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
 
-            &_date {
-                text-transform: capitalize;
-                color: var(--white);
-                font-size: 1rem;
-                padding: 1em;
-                @include flexCentered();
-                font-weight: 700;
-                background-color: var(--mediumBlue);
-                @include lowerCut();
+            .priceTag {
+                position: absolute;
+                top: 1em;
+                left: 1em;
+                padding: 0.5em 1em;
+                font-weight: 800;
+                border-radius: 10px;
+                color: var(--black);
+                background-color: var(--lightGrey);
             }
 
-            &_details {
-                h4 {
-                    font-size: 1.2rem;
-                    margin-bottom: 10px;
-                }
-
-                span {
-                    font-size: 0.8em;
-                    margin-bottom: 30px;
-                    display: block;
-
-                    strong,
-                    .country {
-                        font-size: 1em;
-                        text-transform: capitalize;
-                        font-weight: 700;
-                    }
-
-                    .country {
-                        display: inline;
-                        margin-left: 20px;
-                    }
-                }
+            &_image {
+                height: 200px;
             }
 
-            &_CTA {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
+            &_info {
+                background-color: var(--lightGrey);
+                padding: 1em 0.5em;
+                @include flexAlignCenterSpaceBetween();
 
-                a {
-                    display: block;
-                    width: 100%;
-                    padding: 1em 2em;
-                    text-transform: uppercase;
-                    background-color: var(--mediumBlue);
-                    font-size: 0.8rem;
+                &_date {
+                    width: 20%;
+                    height: 100%;
+                    text-transform: capitalize;
+                    color: var(--mediumBlue);
+                    font-size: 1rem;
                     font-weight: 700;
-                    color: var(--white);
-                    text-align: center;
+                    @include flexCentered();
+                }
 
-                    &:nth-child(2) {
-                        margin-top: 20px;
-                        background-color: transparent;
-                        color: var(--black);
+                &_details {
+                    padding: 1em;
+                    width: 80%;
+                    height: 100%;
+
+                    h4 {
+                        margin-bottom: 10px;
+
+                        a {
+                            font-family: 'Anton', sans-serif !important;
+                            font-weight: 400;
+                            font-size: 1.2rem;
+                            transition: 0.4s all ease-in-out;
+
+                            &:hover {
+                                color: var(--mediumBlue);
+                            }
+                        }
+                    }
+
+                    p {
+                        font-size: 0.8rem;
                     }
                 }
             }

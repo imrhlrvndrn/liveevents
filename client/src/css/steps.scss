@@ -1,0 +1,62 @@
+@import './mixins.scss';
+
+.homepage_steps {
+    height: auto;
+    padding: 6em 0;
+
+    h2 {
+        font-family: 'Anton', sans-serif !important;
+        font-weight: 400;
+        text-transform: capitalize;
+    }
+
+    &_details {
+        margin-top: 100px;
+        @include gridContainer(300px, 600px);
+
+        &_step {
+            position: relative;
+
+            img {
+                transition: 0.4s all;
+                // filter: grayscale(1);
+            }
+
+            &_overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transition: 0.4s;
+                padding: 3em;
+                background-color: rgba(0, 0, 0, 0.5);
+
+                h3 {
+                    font-family: 'Anton', sans-serif !important;
+                    font-weight: 400;
+                    text-transform: capitalize;
+                    margin-bottom: 40px;
+                }
+
+                span {
+                    display: block;
+                    writing-mode: vertical-lr;
+                    font-weight: 700;
+                    transform: rotate(180deg);
+                    margin-bottom: 60px;
+                }
+
+                p {
+                    line-height: 1.5em;
+                }
+            }
+
+            &:hover {
+                img {
+                    filter: grayscale(0);
+                }
+            }
+        }
+    }
+}
