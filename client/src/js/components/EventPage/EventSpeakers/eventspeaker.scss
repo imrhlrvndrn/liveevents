@@ -11,7 +11,7 @@
 
     .speakerGridContainer {
         margin-top: 4em;
-        @include gridContainer(200px, auto);
+        @include gridContainer(250px, 300px);
         grid-gap: 0px;
 
         .speaker {
