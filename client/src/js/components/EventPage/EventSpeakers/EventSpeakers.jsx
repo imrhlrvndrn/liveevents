@@ -4,7 +4,7 @@ import React from 'react';
 import './eventspeaker.scss';
 
 // Images
-import woman from 'C:/Users/Rahul/Pictures/design-team-img-2.jpg';
+// import woman from 'C:/Users/Rahul/Pictures/design-team-img-2.jpg';
 
 const EventSpeakers = (props) => {
     return (
@@ -12,7 +12,10 @@ const EventSpeakers = (props) => {
             <h1>Meet our speakers</h1>
             <div className='speakerGridContainer'>
                 <div className='speaker'>
-                    <img src={woman} alt='' />
+                    <img
+                        src='https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                        alt=''
+                    />
                     <div className='speakerInfo'>
                         <p>{props.designation || 'full-stack developer'}</p>
                         <h4>{props.name || 'Rahul Ravindran'}</h4>
@@ -75,7 +78,10 @@ const EventSpeakers = (props) => {
                     </div>
                 </div>
                 <div className='speaker'>
-                    <img src={woman} alt='' />
+                    <img
+                        src='https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                        alt=''
+                    />
                     <div className='speakerInfo'>
                         <p>{props.designation || 'Speaker designation'}</p>
                         <h4>{props.name || 'Speaker name'}</h4>
@@ -138,7 +144,10 @@ const EventSpeakers = (props) => {
                     </div>
                 </div>
                 <div className='speaker'>
-                    <img src={woman} alt='' />
+                    <img
+                        src='https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                        alt=''
+                    />
                     <div className='speakerInfo'>
                         <p>{props.designation || 'Speaker designation'}</p>
                         <h4>{props.name || 'Speaker name'}</h4>
@@ -201,7 +210,10 @@ const EventSpeakers = (props) => {
                     </div>
                 </div>
                 <div className='speaker'>
-                    <img src={woman} alt='' />
+                    <img
+                        src='https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                        alt=''
+                    />
                     <div className='speakerInfo'>
                         <p>{props.designation || 'Speaker designation'}</p>
                         <h4>{props.name || 'Speaker name'}</h4>
@@ -264,7 +276,10 @@ const EventSpeakers = (props) => {
                     </div>
                 </div>
                 <div className='speaker'>
-                    <img src={woman} alt='' />
+                    <img
+                        src='https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                        alt=''
+                    />
                     <div className='speakerInfo'>
                         <p>{props.designation || 'Speaker designation'}</p>
                         <h4>{props.name || 'Speaker name'}</h4>
@@ -327,7 +342,10 @@ const EventSpeakers = (props) => {
                     </div>
                 </div>
                 <div className='speaker'>
-                    <img src={woman} alt='' />
+                    <img
+                        src='https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                        alt=''
+                    />
                     <div className='speakerInfo'>
                         <p>{props.designation || 'Speaker designation'}</p>
                         <h4>{props.name || 'Speaker name'}</h4>
@@ -390,7 +408,10 @@ const EventSpeakers = (props) => {
                     </div>
                 </div>
                 <div className='speaker'>
-                    <img src={woman} alt='' />
+                    <img
+                        src='https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                        alt=''
+                    />
                     <div className='speakerInfo'>
                         <p>{props.designation || 'Speaker designation'}</p>
                         <h4>{props.name || 'Speaker name'}</h4>
