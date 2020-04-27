@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 // Components
 import EventNav from './EventNav/EventNav';
 import HeroSection from './HeroSection/HeroSection';
@@ -11,6 +12,7 @@ const EventPage = () => {
             <EventNav />
             <HeroSection />
             <EventSpeakers />
+            
         </>
     );
 };
