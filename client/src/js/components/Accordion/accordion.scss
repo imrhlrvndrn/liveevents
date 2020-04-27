@@ -68,6 +68,9 @@
 
     .accordionContent {
         overflow: hidden;
-        // max-height: 0;
+        background-color: lighten(#0f0f0f, 20%);
+        background-color: var(--lightGreen);
+        color: var(--black);
+        transition: 0.4s all ease-in-out;
     }
 }

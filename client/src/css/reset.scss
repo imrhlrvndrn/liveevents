@@ -177,3 +177,13 @@ h6 {
     line-height: 1.2em;
     font-weight: 700;
 }
+
+.rotate {
+    transition: 0.4s all ease-in-out;
+    transform: rotate(180deg);
+}
+
+.rotateBack {
+    transition: 0.4s all ease-in-out;
+    transform: rotate(0deg);
+}
