@@ -1,0 +1,21 @@
+#eventAboutPage {
+    padding: 5em 4.5em 2em 4.5em;
+
+    * {
+        color: var(--grey);
+    }
+
+    h2 {
+        color: var(--lightGrey);
+        margin-bottom: 0.5em;
+    }
+
+    .aboutWrapper {
+        width: 70%;
+        height: max-content;
+
+        p {
+            padding: 1.5em 0;
+        }
+    }
+}

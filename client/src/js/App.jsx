@@ -6,6 +6,7 @@ import Home from './components/Home';
 import About from './components/About';
 import AllEvents from './components/AllEvents';
 import EventPage from './components/EventPage/EventPage';
+import EventAbout from './components/EventPage/About/About';
 import Schedule from './components/EventPage/Schedule/Schedule';
 import Auth from './components/Auth/Auth';
 import SalesDashboard from './components/Dashboard/SalesDashboard';
@@ -29,7 +30,7 @@ function App() {
                 <Route path='/about' exact component={About} />
                 <Route path='/events' exact component={AllEvents} />
                 <Route path='/event/:slug' exact component={EventPage} />
-                <Route path='/event/:slug/about' exact component={EventPage} />
+                <Route path='/event/:slug/about' exact component={EventAbout} />
                 <Route path='/event/:slug/schedule' exact component={Schedule} />
                 <Route path='/event/:slug/venue' exact component={EventPage} />
                 <Route path='/auth' exact component={Auth} />
