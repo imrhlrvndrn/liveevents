@@ -12,7 +12,7 @@ const Accordion = (props) => {
 
     const contentRef = useRef(null);
 
-    const toggleAccordion = () => {
+    const handleAccordionToggle = () => {
         setActive(!active);
         setContentHeight(active ? '0px' : `${contentRef.current.scrollHeight + 32}px`);
         setRotate(active ? 'accordion__icon rotateBack' : 'accordion__icon rotate');
@@ -21,7 +21,7 @@ const Accordion = (props) => {
 
     return (
         <div className='accordion'>
-            <div className='accordionTitle' onClick={toggleAccordion}>
+            <div className='accordionTitle' onClick={handleAccordionToggle}>
                 <div className='timing'>{props.timing || 'timing from - timing to'}</div>
                 <div className='speakerInfo'>
                     <img src={props.speakerImage || ''} alt='speaker image' />
