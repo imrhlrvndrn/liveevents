@@ -6,6 +6,7 @@ import Home from './components/Home';
 import About from './components/About';
 import AllEvents from './components/AllEvents';
 import EventPage from './components/EventPage/EventPage';
+import Venue from './components/EventPage/Venue/Venue';
 import EventAbout from './components/EventPage/About/About';
 import Schedule from './components/EventPage/Schedule/Schedule';
 import Auth from './components/Auth/Auth';
@@ -32,7 +33,7 @@ function App() {
                 <Route path='/event/:slug' exact component={EventPage} />
                 <Route path='/event/:slug/about' exact component={EventAbout} />
                 <Route path='/event/:slug/schedule' exact component={Schedule} />
-                <Route path='/event/:slug/venue' exact component={EventPage} />
+                <Route path='/event/:slug/venue' exact component={Venue} />
                 <Route path='/auth' exact component={Auth} />
                 <Route path='/dashboard' exact component={SalesDashboard} />
             </Router>
