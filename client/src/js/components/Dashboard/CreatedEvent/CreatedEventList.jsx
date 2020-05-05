@@ -17,7 +17,6 @@ const CreatedEventList = () => {
                     onClick={() => {
                         setOptionIsActive(!optionIsActive);
                     }}
-                    onBlur={() => setOptionIsActive(false)}
                 />
                 {optionIsActive && (
                     <div className='options'>
