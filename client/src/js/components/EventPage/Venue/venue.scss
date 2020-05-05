@@ -1,0 +1,36 @@
+#eventVenuePage {
+    padding: 5em 4em 4em 4em;
+    width: 100%;
+    height: max-content;
+    min-height: 100vh;
+
+    .eventVenueWrapper {
+        position: relative;
+        margin-left: auto;
+        width: 80%;
+        height: max-content;
+
+        .eventVenueDetails {
+            padding: 2em;
+            background-color: var(--lightGrey);
+            width: 600px;
+            height: max-content;
+            min-height: 400px;
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            transform: translate(-50%, -50%);
+
+            * {
+                color: var(--lightBlack);
+            }
+
+            .getDirectionsBtn {
+                margin-top: 30px;
+                background-color: var(--lightBlack);
+                border-radius: 5px;
+                color: var(--lightGrey);
+            }
+        }
+    }
+}
